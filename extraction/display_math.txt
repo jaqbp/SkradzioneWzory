@@ -1,0 +1,18 @@
+
+    \hat{H}\Psi(\mathbf{r}, t) = E\Psi(\mathbf{r}, t)
+
+
+    G_{\mu\nu} = 8\pi GT_{\mu\nu}
+
+
+    G_{\mu\nu} = 8\pi GT_{\mu\nu}
+
+
+    \hat{H}\Psi(\mathbf{r}, t) = E\Psi(\mathbf{r}, t)
+
+
+    G_{\mu\nu} = 8\pi GT_{\mu\nu}
+
+
+    \hat{H}\Psi(\mathbf{r}, t) = E\Psi(\mathbf{r}, t)
+
