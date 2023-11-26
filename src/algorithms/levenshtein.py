@@ -4,7 +4,7 @@ import re
 
 
 # File paths for LaTeX files
-file_path1 = "tex_files/document1.tex"
+file_path1 = "tex_files/example2.tex"
 file_path2 = "tex_files/document2.tex"
 
 # Token definitions for mathematical formulas and LaTeX commands
