@@ -71,7 +71,7 @@ def main(argv=sys.argv) -> int:
     return 0
 
 
-if __name__ == "__cosine_similarity__":
+if __name__ == "__main__":
     raise SystemExit(main())
 
 # TODO: https://en.wikipedia.org/wiki/Tf%E2%80%93idf
