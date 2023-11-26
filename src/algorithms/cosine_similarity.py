@@ -60,9 +60,7 @@ def main(argv=sys.argv) -> int:
 
     # https://en.wikipedia.org/wiki/Cosine_similarity
     numerator = sum(
-        count * words2[word]
-        for word, count in words1.items()
-        if word in words2
+        count * words2[word] for word, count in words1.items() if word in words2
     )
     denominator = (
         sum(count**2 for count in words1.values()) ** 0.5
@@ -73,7 +71,7 @@ def main(argv=sys.argv) -> int:
     return 0
 
 
-if __name__ == "__main__":
+if __name__ == "__cosine_similarity__":
     raise SystemExit(main())
 
 # TODO: https://en.wikipedia.org/wiki/Tf%E2%80%93idf
