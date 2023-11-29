@@ -2,58 +2,6 @@ from ply import lex
 import os
 import re
 
-class L_LatexAnalyser:
-    def __init__(self):
-        # Token definitions for mathematical formulas and LaTeX commands
-        self.tokens = (
-            "MATH_MODE_INLINE",
-            "MATH_MODE_DISPLAY",
-            "EQUATION_ENVIRONMENT",
-            "COMMAND",
-            "OTHER",
-        )
-
-        self.t_MATH_MODE_INLINE = r"\$[^\$]*\$"
-        self.t_MATH_MODE_DISPLAY = r"\\\[[^\]]*\\\]"
-        self.t_EQUATION_ENVIRONMENT = r"\\begin\{equation\}.*?\\end\{equation\}"
-        self.t_COMMAND = r"\\[a-zA-Z]+"
-        self.t_ignore_OTHER = r"."  # Ignore other characters
-
-        self.lexer = lex.lex()
-
-    def t_error(t):
-        t.lexer.skip(1)
-
-    def extract_math(self, latex_content):
-        self.lexer.input(latex_content)
-        math_expressions = []
-        while True:
-            tok = self.lexer.token()
-            if not tok:
-                break
-            if tok.type in [
-                "MATH_MODE_INLINE",
-                "MATH_MODE_DISPLAY",
-                "EQUATION_ENVIRONMENT",
-            ]:
-                cleaned_expression = tok.value
-                if cleaned_expression.startswith("\\["):
-                    cleaned_expression = cleaned_expression[2:]
-                if cleaned_expression.endswith("\\]"):
-                    cleaned_expression = cleaned_expression[:-2]
-                math_expressions.append(cleaned_expression.strip())
-        return math_expressions
-
-# Extracting mathematical formulas
-# file_path1 = os.path.join(os.path.dirname(__file__), "tex_files/example2.tex")
-# with open(file_path1, "r") as file:
-#     latex_content1 = file.read()
-# math1 = extract_math(latex_content1)
-
-# file_path2 = os.path.join(os.path.dirname(__file__), "tex_files/document2.tex")
-# with open(file_path2, "r") as file:
-#     latex_content2 = file.read()
-# math2 = extract_math(latex_content2)
 
 class L_FormulaComparer:
     @staticmethod
@@ -101,14 +49,3 @@ class L_FormulaComparer:
         if max_length == 0:
             return 100.0
         return (1 - distance / max_length) * 100
-
-
-    # print("Formulas from the first document:", math1)
-    # print("Formulas from the second document:", math2)
-
-    # for i, formula1 in enumerate(math1):
-    #     for j, formula2 in enumerate(math2):
-    #         similarity = compare_formulas(formula1, formula2)
-    #         print(
-    #             f"Similarity percentage between formula {i+1} from document 1 and formula {j+1} from document 2: {similarity:.2f}%"
-    #         )
