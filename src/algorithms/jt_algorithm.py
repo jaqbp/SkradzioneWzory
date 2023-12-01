@@ -1,18 +1,20 @@
 from ply import lex
 import os
+from tokenizer import LatexTokenizer
 
 
 class JT_LatexSimilarityAnalyser:
-    @staticmethod
+    def __init__(self):
+        self.tokenizer = LatexTokenizer()
+
     def jaccard_tanimoto_similarity(self, set1, set2):
         intersection = len(set1.intersection(set2))
         union = len(set1.union(set2))
         return intersection / union if union != 0 else 0
 
-    @staticmethod
     def calculate_similarity(self, latex_content1, latex_content2):  # self
-        math_expression1 = set(self.extract_math(latex_content1))
-        math_expression2 = set(self.extract_math(latex_content2))
+        math_expression1 = set(self.tokenizer.extract_math(latex_content1))
+        math_expression2 = set(self.tokenizer.extract_math(latex_content2))
 
         similarity = []
         for i, expr1 in enumerate(math_expression1, start=1):
@@ -24,10 +26,9 @@ class JT_LatexSimilarityAnalyser:
         average_similarity = sum(similarity) / len(similarity) if similarity else 0
         return average_similarity
 
-    @staticmethod
     def generate_report(self, latex_content1, latex_content2):  # self
-        math_expression1 = set(self.extract_math(latex_content1))
-        math_expression2 = set(self.extract_math(latex_content2))
+        math_expression1 = set(self.tokenizer.extract_math(latex_content1))
+        math_expression2 = set(self.tokenizer.extract_math(latex_content2))
 
         similarity = []
         with open("report.txt", "w") as report_file:

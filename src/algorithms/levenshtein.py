@@ -4,8 +4,7 @@ import re
 
 
 class L_FormulaComparer:
-    @staticmethod
-    def levenshtein(a, b):
+    def levenshtein(self, a, b):
         if not a:
             return len(b)
         if not b:
@@ -36,11 +35,9 @@ class L_FormulaComparer:
 
         return matrix[-1][-1]
 
-    @staticmethod
-    def normalize_formula(formula):
+    def normalize_formula(self, formula):
         return formula.replace(" ", "")
 
-    @staticmethod
     def compare_formulas(self, formula1, formula2):
         formula1_norm = self.normalize_formula(formula1)
         formula2_norm = self.normalize_formula(formula2)

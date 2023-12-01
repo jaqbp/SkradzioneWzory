@@ -67,13 +67,13 @@ if __name__ == "__main__":
     similarity_values = []
     for token_set1 in tokens1:
         for token_set2 in tokens2:
-            similarity = JT_LatexSimilarityAnalyser.calculate_similarity(
+            similarity = jt_latex_similarity_analyser.calculate_similarity(
                 token_set1, token_set2
             )
             similarity_values.append(similarity)
 
     average_similarity = sum(similarity_values) / len(similarity_values)
-    JT_LatexSimilarityAnalyser.generate_report(average_similarity)
+    # jt_latex_similarity_analyser.generate_report(tokens1, tokens2)
 
     # Levenshtein
 
@@ -87,14 +87,14 @@ if __name__ == "__main__":
         latex_content2 = file.read()
     math2 = latex_tokenizer.extract_math(latex_content2)
 
-    formula_comparer = L_FormulaComparer()
+    l_formula_comparer = L_FormulaComparer()
 
     print("Formulas from the first document:", math1)
     print("Formulas from the second document:", math2)
 
     for i, formula1 in enumerate(math1):
         for j, formula2 in enumerate(math2):
-            similarity = L_FormulaComparer.compare_formulas(formula1, formula2)
+            similarity = l_formula_comparer.compare_formulas(formula1, formula2)
             print(
                 f"Similarity percentage between formula {i+1} from document 1 and formula {j+1} from document 2: {similarity:.2f}%"
             )
