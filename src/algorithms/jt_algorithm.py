@@ -45,7 +45,7 @@ class JT_LatexSimilarityAnalyser:
                     similarity_between = self.jaccard_tanimoto_similarity(
                         tokens1, tokens2
                     )
-                    if similarity_between > 0.49:
+                    if similarity_between > 0.01:
                         report_file.write(
                             f"Similarity between Formula {i} in File 1 and Formula {j} in File 2: {similarity_between}\n"
                         )

@@ -50,7 +50,7 @@ if __name__ == "__main__":
     print(f"Podobieństwo kosinusowe: {similarity}")
 
     # Jaccard-Tanimoto
-
+    print("Jaccard-Tanimoto")
     jt_latex_similarity_analyser = JT_LatexSimilarityAnalyser()
     latex_tokenizer = LatexTokenizer()
 
@@ -73,10 +73,10 @@ if __name__ == "__main__":
             similarity_values.append(similarity)
 
     average_similarity = sum(similarity_values) / len(similarity_values)
-    # jt_latex_similarity_analyser.generate_report(tokens1, tokens2)
+    jt_latex_similarity_analyser.generate_report(latex_content1, latex_content2)
 
     # Levenshtein
-
+    print("Levenshtein")
     file_path1 = os.path.join(os.path.dirname(__file__), "tex_files/example2.tex")
     with open(file_path1, "r") as file:
         latex_content1 = file.read()
@@ -88,9 +88,6 @@ if __name__ == "__main__":
     math2 = latex_tokenizer.extract_math(latex_content2)
 
     l_formula_comparer = L_FormulaComparer()
-
-    print("Formulas from the first document:", math1)
-    print("Formulas from the second document:", math2)
 
     for i, formula1 in enumerate(math1):
         for j, formula2 in enumerate(math2):
