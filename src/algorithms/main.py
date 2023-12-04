@@ -1,5 +1,4 @@
 import os
-from ply import lex
 from jt_algorithm import JT_LatexSimilarityAnalyser
 from cosine_similarity import CSTextProcessor, CosineSimilarity
 from levenshtein import L_FormulaComparer

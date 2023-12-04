@@ -12,7 +12,6 @@ class CSTextProcessor:
     def prepare_text(self, text: str) -> str:
         punctuation_regex = re.compile(r"[\.,:;!\?]")
         noise_regex = re.compile(rf"\b({'|'.join(self.noise)})\b", re.IGNORECASE)
-        multispace_regex = re.compile(r"\s+")
 
         cleaned_text = punctuation_regex.sub("", text)
         cleaned_text = noise_regex.sub("", cleaned_text)

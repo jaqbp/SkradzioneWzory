@@ -1,8 +1,3 @@
-from ply import lex
-import os
-import re
-
-
 class L_FormulaComparer:
     def levenshtein(self, a, b):
         if not a:
