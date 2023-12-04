@@ -16,7 +16,7 @@ class LatexTokenizer:
         self.t_MATH_MODE_DISPLAY = r"\\\[[^\]]*\\\]"
         self.t_EQUATION_ENVIRONMENT = r"\\begin\{equation\}.*?\\end\{equation\}"
         self.t_COMMAND = r"\\[a-zA-Z]+"
-        self.t_ignore_OTHER = r"."  # Ignore other characters
+        self.t_ignore_OTHER = r"."
 
         self.lexer = lex.lex(module=self)
 
