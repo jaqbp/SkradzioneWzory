@@ -1,5 +1,3 @@
-from ply import lex
-import os
 from tokenizer import LatexTokenizer
 
 
