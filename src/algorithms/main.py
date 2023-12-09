@@ -43,7 +43,7 @@ if __name__ == "__main__":
     with open(file_path1, "r") as file:
         latex_content1 = "".join(file.readlines())
 
-    file_path2 = os.path.join(os.path.dirname(__file__), "tex_files", "document2.tex")
+    file_path2 = os.path.join(os.path.dirname(__file__), "tex_files", "document1.tex")
     with open(file_path2, "r") as file:
         latex_content2 = "".join(file.readlines())
 
@@ -69,8 +69,11 @@ if __name__ == "__main__":
             )
             similarity_values.append(similarity)
 
-    average_similarity = sum(similarity_values) / len(similarity_values)
     jt_latex_similarity_analyser.generate_report(latex_content1, latex_content2)
+
+    average_similarity = jt_latex_similarity_analyser.calculate_similarity(latex_content1, latex_content2)
+    print(f"Average Similarity: {average_similarity}")
+
 
     # Levenshtein
     print("Levenshtein")

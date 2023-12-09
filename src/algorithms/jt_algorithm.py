@@ -35,15 +35,10 @@ class JT_LatexSimilarityAnalyser:
                     tokens1 = set(expr1)
                     tokens2 = set(expr2)
 
-                    similarity.append(
-                        self.jaccard_tanimoto_similarity(tokens1, tokens2)
-                    )
-                    average_similarity = sum(similarity) / len(similarity)
-
-                    similarity_between = self.jaccard_tanimoto_similarity(
-                        tokens1, tokens2
-                    )
-                    if similarity_between > 0.01:
-                        report_file.write(
-                            f"Similarity between Formula {i} in File 1 and Formula {j} in File 2: {similarity_between}\n"
-                        )
+            for expr1 in math_expression1:
+                for expr2 in math_expression2:
+                    tokens1 = set(expr1)
+                    tokens2 = set(expr2)
+                    similarity.append(self.jaccard_tanimoto_similarity(tokens1, tokens2))
+            average_similarity = sum(similarity) / len(similarity) if similarity else 0
+            report_file.write(f"\nAverage Similarity: {average_similarity}")
