@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
     # Levenshtein
     print("Levenshtein")
-    file_path1 = os.path.join(os.path.dirname(__file__), "tex_files/example2.tex")
+    file_path1 = os.path.join(os.path.dirname(__file__), "tex_files/document1.tex")
     with open(file_path1, "r") as file:
         latex_content1 = file.read()
     math1 = latex_tokenizer.extract_math(latex_content1)
