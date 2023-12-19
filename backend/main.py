@@ -30,4 +30,4 @@ async def check_similarity(request: Request):
     text1 = body["text1"]
     text2 = body["text2"]
     # TODO: check similarity between text1 and text2
-    return {"similarity": 0.0}
+    return {"similarity": "not implemented yet"}
