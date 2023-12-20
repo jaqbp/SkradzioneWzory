@@ -7,7 +7,7 @@ $ pip3 install -r requirements.txt
 2. Run the server:
 
 ```
-uvicorn main:app --reload
+python3 -m uvicorn main:app
 ```
 ```
 $ uvicorn main:app --reload
