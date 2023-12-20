@@ -2,7 +2,7 @@
 import re
 from collections import Counter
 from typing import Set
-from math import sqrt
+from pylatexenc.latex2text import LatexNodes2Text
 
 
 class CSTextProcessor:
@@ -12,13 +12,10 @@ class CSTextProcessor:
     def prepare_text(self, text: str) -> str:
         punctuation_regex = re.compile(r"[\.,:;!\?]")
         noise_regex = re.compile(rf"\b({'|'.join(self.noise)})\b", re.IGNORECASE)
-        multispace_regex = re.compile(r"\s+")
 
         cleaned_text = punctuation_regex.sub("", text)
         cleaned_text = noise_regex.sub("", cleaned_text)
-        cleaned_text = multispace_regex.sub(" ", cleaned_text).lower()
-
-        return cleaned_text
+        return LatexNodes2Text().latex_to_text(cleaned_text.lower().strip())
 
     def get_word_counts(self, text: str) -> Counter:
         cleaned_text = self.prepare_text(text)
@@ -33,7 +30,7 @@ class CosineSimilarity:
             count * words2[word] for word, count in words1.items() if word in words2
         )
         denominator = (
-            sqrt(sum(count**2 for count in words1.values())) ** 0.5
-            * sqrt(sum(count**2 for count in words2.values())) ** 0.5
+            sum(count**2 for count in words1.values()) ** 0.5
+            * sum(count**2 for count in words2.values()) ** 0.5
         )
         return numerator / denominator
