@@ -42,8 +42,7 @@ async def check_similarity(request: Request):
     for i, formula1 in enumerate(math1):
         for j, formula2 in enumerate(math2):
             similarity = l_formula_comparer.compare_formulas(formula1, formula2)
-            if similarity > 0.3:
-                result += f"Formula {i+1} and formula {j+1} similarity: {similarity}\n"
+            if similarity > 30:
+                result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą {i+1} z pierwszego dokumentu, a formułą {j+1} z drugiego dokumentu\n\n"
 
-    # TODO: check similarity between text1 and text2
     return {"similarity": result}
