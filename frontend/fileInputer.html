@@ -1,114 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skradzione wzory</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body class="bg-gray-200 p-8 flex items-center justify-center h-screen">
-    <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
-      <h2 class="text-2xl font-semibold mb-4">Skradzione wzory</h2>
 
-      <form id="fileUploadForm" class="mb-4">
-        <div class="mb-4">
-          <label
-            for="fileInput1"
-            class="block text-sm font-medium text-gray-600"
-            >Wybierz 1 plik:</label
-          >
-          <input
-            type="file"
-            id="fileInput1"
-            name="file1"
-            class="mt-1 p-2 border border-gray-300 rounded-md w-full"
-          />
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skradzione wzory</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+</head>
 
-        <div class="mb-4">
-          <label
-            for="fileInput2"
-            class="block text-sm font-medium text-gray-600"
-            >Wybierz 2 plik:</label
-          >
-          <input
-            type="file"
-            id="fileInput2"
-            name="file2"
-            class="mt-1 p-2 border border-gray-300 rounded-md w-full"
-          />
-        </div>
+<body class="bg-gray-200 p-8 flex items-center justify-center h-screen">
+  <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
+    <h2 class="text-2xl font-semibold mb-4">Skradzione wzory</h2>
+    <p class="mb-4">
+      Prześlij dwa pliki, w celu sprawdzenia podobieństwa pomiędzy wzorami
+      matematycznymi w nich się znajdującymi. Pliki powinny być w formacie .tex
+    </p>
+    <form id="fileUploadForm" class="mb-4">
+      <div class="mb-4">
+        <label for="fileInput1" class="block text-sm font-medium text-gray-600">Wybierz 1 plik:</label>
+        <input type="file" id="fileInput1" name="file1" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+      </div>
 
-        <button
-          type="button"
-          onclick="submitForm()"
-          class="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
-        >
-          Porównaj
-        </button>
-      </form>
-      <div id="resultContainer" class="mt-8"></div>
-    </div>
+      <div class="mb-4">
+        <label for="fileInput2" class="block text-sm font-medium text-gray-600">Wybierz 2 plik:</label>
+        <input type="file" id="fileInput2" name="file2" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+      </div>
 
-    <script>
-      async function submitForm() {
-        const fileInput1 = document.getElementById("fileInput1");
-        const fileInput2 = document.getElementById("fileInput2");
+      <button type="button" onclick="submitForm()" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
+        Porównaj
+      </button>
+    </form>
+    <div id="resultContainer" class="mt-8"></div>
+  </div>
 
-        if (fileInput1.files[0] && fileInput2.files[0]) {
-          const reader1 = new FileReader();
-          reader1.onload = function () {
-            const text1 = reader1.result;
+  <script>
+    async function submitForm() {
+      const fileInput1 = document.getElementById("fileInput1");
+      const fileInput2 = document.getElementById("fileInput2");
 
-            const reader2 = new FileReader();
-            reader2.onload = function () {
-              const text2 = reader2.result;
+      if (fileInput1.files[0] && fileInput2.files[0]) {
+        const reader1 = new FileReader();
+        reader1.onload = function () {
+          const text1 = reader1.result;
 
-              const data = {
-                text1: text1,
-                text2: text2,
-              };
+          const reader2 = new FileReader();
+          reader2.onload = function () {
+            const text2 = reader2.result;
 
-              sendData(data);
+            const data = {
+              text1: text1,
+              text2: text2,
             };
 
-            reader2.readAsText(fileInput2.files[0]);
+            sendData(data);
           };
 
-          reader1.readAsText(fileInput1.files[0]);
-        } else {
-          console.error("Please select both files before submitting.");
-        }
+          reader2.readAsText(fileInput2.files[0]);
+        };
+
+        reader1.readAsText(fileInput1.files[0]);
+      } else {
+        console.error("Please select both files before submitting.");
       }
+    }
 
-      async function sendData(data) {
-        const baseURL = "http://127.0.0.1:8000/api";
-        const response = await fetch(`${baseURL}/check-similarity`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        });
+    async function sendData(data) {
+      const baseURL = "http://127.0.0.1:8000/api";
+      const response = await fetch(`${baseURL}/check-similarity`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-        if (response.ok) {
-          const result = await response.json();
-          displayResult(result);
-        } else {
-          console.error("Error:", response.statusText);
-        }
+      if (response.ok) {
+        const result = await response.json();
+        displayResult(result);
+      } else {
+        console.error("Error:", response.statusText);
       }
+    }
 
-      function displayResult(result) {
-        const resultContainer = document.getElementById("resultContainer");
-        resultContainer.innerHTML = `
+    function displayResult(result) {
+      const resultContainer = document.getElementById("resultContainer");
+      resultContainer.innerHTML = `
           <h3 class="text-xl font-semibold mb-2">Wynik:</h3>
           <p>${result.similarity}</p>
         `;
-      }
-    </script>
-  </body>
+    }
+  </script>
+</body>
+
 </html>

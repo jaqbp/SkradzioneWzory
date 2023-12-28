@@ -1,3 +1,6 @@
+from algorithms.tokenizer import LatexTokenizer
+
+
 class L_FormulaComparer:
     def levenshtein(self, a, b):
         if not a:
@@ -41,3 +44,22 @@ class L_FormulaComparer:
         if max_length == 0:
             return 100.0
         return (1 - distance / max_length) * 100
+
+    def compare_formulas_list(self, formulas1, formulas2):
+        result = []
+        for formula1 in formulas1:
+            for formula2 in formulas2:
+                result.append(self.compare_formulas(formula1, formula2))
+        return result
+
+    def generate_report(self, latex_content1, latex_content2):
+        latex_tokenizer = LatexTokenizer()
+        math1 = latex_tokenizer.extract_math(latex_content1)
+        math2 = latex_tokenizer.extract_math(latex_content2)
+        result = ""
+        for i, formula1 in enumerate(math1):
+            for j, formula2 in enumerate(math2):
+                similarity = self.compare_formulas(formula1, formula2)
+                if similarity > 30:
+                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą {i+1} z pierwszego dokumentu, a formułą {j+1} z drugiego dokumentu\n\n"
+        return result
