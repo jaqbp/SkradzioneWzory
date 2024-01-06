@@ -71,27 +71,13 @@ if __name__ == "__main__":
 
     jt_latex_similarity_analyser.generate_report(latex_content1, latex_content2)
 
-    average_similarity = jt_latex_similarity_analyser.calculate_similarity(latex_content1, latex_content2)
+    average_similarity = jt_latex_similarity_analyser.calculate_similarity(
+        latex_content1, latex_content2
+    )
     print(f"Average Similarity: {average_similarity}")
-
 
     # Levenshtein
     print("Levenshtein")
-    file_path1 = os.path.join(os.path.dirname(__file__), "tex_files/document1.tex")
-    with open(file_path1, "r") as file:
-        latex_content1 = file.read()
-    math1 = latex_tokenizer.extract_math(latex_content1)
-
-    file_path2 = os.path.join(os.path.dirname(__file__), "tex_files/document2.tex")
-    with open(file_path2, "r") as file:
-        latex_content2 = file.read()
-    math2 = latex_tokenizer.extract_math(latex_content2)
 
     l_formula_comparer = L_FormulaComparer()
-
-    for i, formula1 in enumerate(math1):
-        for j, formula2 in enumerate(math2):
-            similarity = l_formula_comparer.compare_formulas(formula1, formula2)
-            print(
-                f"Similarity percentage between formula {i+1} from document 1 and formula {j+1} from document 2: {similarity:.2f}%"
-            )
+    print(l_formula_comparer.generate_report(latex_content1, latex_content2))
