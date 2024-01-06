@@ -31,11 +31,12 @@ async def check_similarity(request: Request):
     body = await request.json()
     text1 = body["text1"]
     text2 = body["text2"]
+    threshold = body["threshold"] if "threshold" in body else "0.3"
 
     latex_tokenizer = LatexTokenizer()
     l_formula_comparer = L_FormulaComparer()
 
     result = ""
-    result = l_formula_comparer.generate_report(text1, text2)
+    result = l_formula_comparer.generate_report(text1, text2, threshold)
 
     return {"similarity": result}
