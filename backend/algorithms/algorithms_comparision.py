@@ -1,14 +1,18 @@
 import os
-from jt_algorithm import JT_LatexSimilarityAnalyser
-from cosine_similarity import CSTextProcessor, CosineSimilarity
 from levenshtein import L_FormulaComparer
 from tokenizer import LatexTokenizer
 
 
+# here we define the class for the algorithm comparision which
+# will be used in the main.py file it uses all of the algorithms
+# which we have implemented
 class AlgorithmComparision:
     def __init__(self, noise_words):
-        self.noise_words = noise_words
-        self.cs_text_processor = CSTextProcessor(self.noise_words)
         self.latex_tokenizer = LatexTokenizer()
-        self.jt_latex_similarity_analyser = JT_LatexSimilarityAnalyser()
         self.l_formula_comparer = L_FormulaComparer()
+        # initialize objects of other algorithms which we have implemented
+
+    def compare(self, latex_content1, latex_content2):
+        # here we use the algorithms which we have implemented
+        # and return the result
+        pass
