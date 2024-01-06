@@ -6,9 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Skradzione wzory</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
 </head>
 
-<body class="bg-gray-200 p-8 flex items-center justify-center h-screen">
+<body class="bg-gray-900 p-8 flex items-center justify-center h-screen">
   <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
     <h2 class="text-2xl font-semibold mb-4">Skradzione wzory</h2>
     <p class="mb-4">
@@ -26,6 +28,17 @@
         <input type="file" id="fileInput2" name="file2" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
       </div>
 
+      <div class="mb-4">
+        <label for="valueInput" class="block text-sm font-medium text-black-700">Wprowadź próg procentowy akceptowalnego
+          podobieństwa 0-100%, gdzie: 0% każde, nawet najmniejsze, podobieństwo zostanie wykryte; 100% tylko identyczne
+          wzory zostaną wykryte.</label>
+        <input type="number" id="valueInput" name="value" class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+          min="0" max="100" value="30" />
+        <label id="warning-treshold" class="hidden text-sm font-medium text-black-700"> Wprowadź wartość progu
+          procentowego z zakresu
+          0-100.</label>
+      </div>
+
       <button type="button" onclick="submitForm()" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
         Porównaj
       </button>
@@ -37,8 +50,18 @@
     async function submitForm() {
       const fileInput1 = document.getElementById("fileInput1");
       const fileInput2 = document.getElementById("fileInput2");
+      const valueInput = document.getElementById("valueInput");
 
-      if (fileInput1.files[0] && fileInput2.files[0]) {
+      const numericValue = parseFloat(valueInput.value);
+
+      if (isNaN(numericValue) || numericValue < 0 || numericValue > 100) {
+        console.error("Please enter a numeric value within the range of 0-100.");
+        const label = document.getElementById("warning-treshold");
+        label.classList.remove("hidden");
+        return;
+      }
+
+      if (fileInput1.files[0] && fileInput2.files[0] && valueInput.value) {
         const reader1 = new FileReader();
         reader1.onload = function () {
           const text1 = reader1.result;
@@ -50,6 +73,7 @@
             const data = {
               text1: text1,
               text2: text2,
+              value: valueInput.value,
             };
 
             sendData(data);
@@ -60,7 +84,7 @@
 
         reader1.readAsText(fileInput1.files[0]);
       } else {
-        console.error("Please select both files before submitting.");
+        console.error("Proszę dodać oba pliki przed kontynuacją.");
       }
     }
 
