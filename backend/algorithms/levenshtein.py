@@ -56,14 +56,13 @@ class L_FormulaComparer:
         latex_tokenizer = LatexTokenizer()
         math1 = latex_tokenizer.extract_math(latex_content1)
         math2 = latex_tokenizer.extract_math(latex_content2)
-        result = ""
+        result = "Wykryto podobieństwa dla wzorów z podanych dokumentów: <br>"
         for i, formula1 in enumerate(math1):
             for j, formula2 in enumerate(math2):
                 similarity = self.compare_formulas(formula1, formula2)
-                print(threshold)
-                if similarity >= float(threshold):
-                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą {i+1} z pierwszego dokumentu, a formułą {j+1} z drugiego dokumentu\n\n"
-        if result == "":
+                if similarity >= float(threshold) - 0.01:
+                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą numer {i+1} postaci: {math1[i]} z pierwszego dokumentu, a formułą numer {j+1} postaci: {math2[j]} z drugiego dokumentu <br>"
+        if result == "Wykryto podobieństwa dla wzorów z podanych dokumentów: <br>":
             result = (
                 "Nie wykryto podobieństw dla wzorów z podanych dokumentów przy progu: "
                 + str(threshold)
