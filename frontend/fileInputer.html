@@ -29,7 +29,9 @@
       </div>
 
       <div class="mb-4">
-        Opcje zaawansowane:
+        <h3 class="text-l font-semibold"> Opcje zaawansowane (w celu regularnej analizy plików, pozostaw poniższe opcje
+          bez zmian)
+          <h3>
       </div>
 
       <div class="mb-4">
@@ -48,6 +50,8 @@
             <label for="algorithm3">Podobieństwo Cosinusowe</label>
           </div>
         </div>
+        <label id="warning-algorithms" class="hidden text-sm font-medium text-black-700"> Wybierz przynajmniej jeden
+          algorytm do analizy</label>
       </div>
 
       <div class="mb-4">
@@ -75,8 +79,10 @@
       const fileInput1 = document.getElementById("fileInput1");
       const fileInput2 = document.getElementById("fileInput2");
       const valueInput = document.getElementById("valueInput");
+      const warningAlgorithms = document.getElementById("warning-algorithms");
+      const warningTreshold = document.getElementById("warning-treshold");
 
-      //selected algorithms from checkboxes
+      //selecting algorithms from checkboxes
       let checkboxes = document.querySelectorAll('input[type=checkbox][name^="algorithm"]');
       let selectedAlgorithms = [];
 
@@ -86,14 +92,18 @@
         }
       }
 
-      console.log(selectedAlgorithms);
+      if (selectedAlgorithms.length == 0) {
+        warningAlgorithms.classList.remove("hidden");
+        return
+      }
 
+      console.log(selectedAlgorithms);
 
       const numericValue = parseFloat(valueInput.value);
 
       if (isNaN(numericValue) || numericValue < 0 || numericValue > 100) {
         console.error("Please enter a numeric value within the range of 0-100.");
-        const label = document.getElementById("warning-treshold");
+        warningTreshold.classList.remove("hidden");
         label.classList.remove("hidden");
         return;
       }
@@ -111,7 +121,7 @@
               text1: text1,
               text2: text2,
               threshold: valueInput.value,
-              //send selected algorithms as array
+              //sending selected algorithms as array
               algorithms: selectedAlgorithms,
             };
 
