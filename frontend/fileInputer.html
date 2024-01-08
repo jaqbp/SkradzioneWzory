@@ -76,6 +76,19 @@
       const fileInput2 = document.getElementById("fileInput2");
       const valueInput = document.getElementById("valueInput");
 
+      //selected algorithms from checkboxes
+      let checkboxes = document.querySelectorAll('input[type=checkbox][name^="algorithm"]');
+      let selectedAlgorithms = [];
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          selectedAlgorithms.push(checkboxes[i].value);
+        }
+      }
+
+      console.log(selectedAlgorithms);
+
+
       const numericValue = parseFloat(valueInput.value);
 
       if (isNaN(numericValue) || numericValue < 0 || numericValue > 100) {
@@ -98,6 +111,8 @@
               text1: text1,
               text2: text2,
               threshold: valueInput.value,
+              //send selected algorithms as array
+              algorithms: selectedAlgorithms,
             };
 
             sendData(data);
