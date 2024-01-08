@@ -38,10 +38,5 @@ async def check_similarity(request: Request):
 
     result = ""
     result = l_formula_comparer.generate_report(text1, text2, threshold)
-    if result == "":
-        return {
-            "similarity": "Nie wykryto podobieństw dla wzorów z podanych dokumentów przy progu: "
-            + str(threshold)
-            + "%"
-        }
+
     return {"similarity": result}

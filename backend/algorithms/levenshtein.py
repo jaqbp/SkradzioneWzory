@@ -63,4 +63,11 @@ class L_FormulaComparer:
                 print(threshold)
                 if similarity > float(threshold):
                     result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą {i+1} z pierwszego dokumentu, a formułą {j+1} z drugiego dokumentu\n\n"
+        if result == "":
+            result = (
+                "Nie wykryto podobieństw dla wzorów z podanych dokumentów przy progu: "
+                + str(threshold)
+                + "%"
+            )
+
         return result
