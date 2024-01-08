@@ -29,6 +29,28 @@
       </div>
 
       <div class="mb-4">
+        Opcje zaawansowane:
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-black-700">Wybierz algorytmy, którymi chcesz zbadać pliki</label>
+        <div id="algorithm" name="algorithm" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+          <div>
+            <input type="checkbox" id="algorithm1" name="algorithm1" value="algorithm1" checked>
+            <label for="algorithm1">Levenshtein</label>
+          </div>
+          <div>
+            <input type="checkbox" id="algorithm2" name="algorithm2" value="algorithm2" checked>
+            <label for="algorithm2">Jaccard-Tanimoto</label>
+          </div>
+          <div>
+            <input type="checkbox" id="algorithm3" name="algorithm3" value="algorithm3" checked>
+            <label for="algorithm3">Podobieństwo Cosinusowe</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-4">
         <label for="valueInput" class="block text-sm font-medium text-black-700">Wprowadź próg procentowy akceptowalnego
           podobieństwa 0-100%, gdzie: 0% każde, nawet najmniejsze, podobieństwo zostanie wykryte; 100% tylko identyczne
           wzory zostaną wykryte.</label>
@@ -38,6 +60,8 @@
           procentowego z zakresu
           0-100.</label>
       </div>
+
+
 
       <button type="button" onclick="submitForm()" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
         Porównaj
