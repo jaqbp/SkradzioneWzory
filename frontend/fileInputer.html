@@ -29,6 +29,32 @@
       </div>
 
       <div class="mb-4">
+        <h3 class="text-l font-semibold"> Opcje zaawansowane (w celu regularnej analizy plików, pozostaw poniższe opcje
+          bez zmian)
+          <h3>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-black-700">Wybierz algorytmy, którymi chcesz zbadać pliki</label>
+        <div id="algorithm" name="algorithm" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+          <div>
+            <input type="checkbox" id="algorithm1" name="algorithm1" value="algorithm1" checked>
+            <label for="algorithm1">Levenshtein</label>
+          </div>
+          <div>
+            <input type="checkbox" id="algorithm2" name="algorithm2" value="algorithm2" checked>
+            <label for="algorithm2">Jaccard-Tanimoto</label>
+          </div>
+          <div>
+            <input type="checkbox" id="algorithm3" name="algorithm3" value="algorithm3" checked>
+            <label for="algorithm3">Podobieństwo Cosinusowe</label>
+          </div>
+        </div>
+        <label id="warning-algorithms" class="hidden text-sm font-medium text-black-700"> Wybierz przynajmniej jeden
+          algorytm do analizy</label>
+      </div>
+
+      <div class="mb-4">
         <label for="valueInput" class="block text-sm font-medium text-black-700">Wprowadź próg procentowy akceptowalnego
           podobieństwa 0-100%, gdzie: 0% każde, nawet najmniejsze, podobieństwo zostanie wykryte; 100% tylko identyczne
           wzory zostaną wykryte.</label>
@@ -38,6 +64,8 @@
           procentowego z zakresu
           0-100.</label>
       </div>
+
+
 
       <button type="button" onclick="submitForm()" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
         Porównaj
@@ -51,12 +79,31 @@
       const fileInput1 = document.getElementById("fileInput1");
       const fileInput2 = document.getElementById("fileInput2");
       const valueInput = document.getElementById("valueInput");
+      const warningAlgorithms = document.getElementById("warning-algorithms");
+      const warningTreshold = document.getElementById("warning-treshold");
+
+      //selecting algorithms from checkboxes
+      let checkboxes = document.querySelectorAll('input[type=checkbox][name^="algorithm"]');
+      let selectedAlgorithms = [];
+
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          selectedAlgorithms.push(checkboxes[i].value);
+        }
+      }
+
+      if (selectedAlgorithms.length == 0) {
+        warningAlgorithms.classList.remove("hidden");
+        return
+      }
+
+      console.log(selectedAlgorithms);
 
       const numericValue = parseFloat(valueInput.value);
 
       if (isNaN(numericValue) || numericValue < 0 || numericValue > 100) {
         console.error("Please enter a numeric value within the range of 0-100.");
-        const label = document.getElementById("warning-treshold");
+        warningTreshold.classList.remove("hidden");
         label.classList.remove("hidden");
         return;
       }
@@ -74,6 +121,8 @@
               text1: text1,
               text2: text2,
               threshold: valueInput.value,
+              //sending selected algorithms as array
+              algorithms: selectedAlgorithms,
             };
 
             sendData(data);
