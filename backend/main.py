@@ -4,6 +4,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from algorithms.levenshtein import L_FormulaComparer
 from algorithms.tokenizer import LatexTokenizer
+from read_tex_files import ReadTexFiles
+import os
 
 app = FastAPI()
 report = ""
@@ -27,9 +29,56 @@ def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
 
 
+# checking similarity between every formula in the first file with formulas in files in the documents directory
 @app.post("/api/check-similarity-base")
 async def check_similarity_base(request: Request):
+    global report
+    body = await request.json()
+    text1 = body["text1"]
+    threshold = body["threshold"]
+    algorithms = body["algorithms"]
+    script_directory = os.path.dirname(os.path.abspath(__file__))
+    documents_directory = os.path.join(script_directory, "documents")
+    tex_contents = ReadTexFiles.load_tex_files(documents_directory)
+
+    report = """
+    <html>
+    <head>
+        <style>
+            body {font-family: Arial, sans-serif;}
+            h1 {color: #333;}
+            p {font-size: 1.1em;}
+        </style>
+    </head>
+    <body>
+        <h1>Raport podobieństwa między wzorami z podanego pliku a wzorami z dokumentów znajdujących się w bazie: </h1>
+    """
+
+    if "algorithm1" in algorithms:
+        l_formula_comparer = L_FormulaComparer()
+        for index, content in enumerate(tex_contents, start=1):
+            result = l_formula_comparer.generate_report(
+                text1, content, index, threshold
+            )
+            if result != "":
+                report += f"<h2> Wyniki dla algorytmu levenshtein'a dla pliku {index}: </h2> <p> {result}</p>"
+
+    if "algorithm2" in algorithms:
+        # TODO: add Jaccard similarity to the html report
+        pass
+    if "algorithm3" in algorithms:
+        # TODO: add Cosine similarity to the html report
+        pass
+
     return {"message": "Report generated successfully"}
+
+
+# checking similarity between every formula in the first file with formulas in the second file
+@app.get("/api/report-base", response_class=HTMLResponse)
+def get_report():
+    global report
+    print("Accessing /report-base endpoint")
+    return HTMLResponse(content=report)
 
 
 @app.post("/api/check-similarity-two-files")
@@ -58,7 +107,7 @@ async def check_similarity(request: Request):
     result = ""
     if "algorithm1" in algorithms:
         l_formula_comparer = L_FormulaComparer()
-        result = l_formula_comparer.generate_report(text1, text2, threshold)
+        result = l_formula_comparer.generate_report_two_files(text1, text2, threshold)
         report += f"<h2> Wyniki dla algorytmu levenshtein'a: </h2> <p> {result}</p>"
     if "algorithm2" in algorithms:
         # TODO: add Jaccard similarity to the html report
@@ -71,9 +120,8 @@ async def check_similarity(request: Request):
     return {"message": "Report generated successfully"}
 
 
-@app.get("/api/report", response_class=HTMLResponse)
+@app.get("/api/report-two-files", response_class=HTMLResponse)
 def get_report():
     global report
-    print("Accessing /report endpoint")
-    print("Report content:", report)
+    print("Accessing /report-two-files endpoint")
     return HTMLResponse(content=report)
