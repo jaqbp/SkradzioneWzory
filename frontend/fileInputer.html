@@ -13,17 +13,30 @@
 <body class="bg-gray-900 p-8 flex items-center justify-center h-screen">
   <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
     <h2 class="text-2xl font-semibold mb-4">Skradzione wzory</h2>
-    <p class="mb-4">
-      Prześlij dwa pliki, w celu sprawdzenia podobieństwa pomiędzy wzorami
-      matematycznymi w nich się znajdującymi. Pliki powinny być w formacie .tex
+    <p class="mb-4 font-semibold">
+      Prześlij plik w formacie .tex w celu sprawdzenia podobieństwa wzorów, które się w
+      nim znajdują z innymi plikami .tex w naszej bazie.
     </p>
     <form id="fileUploadForm" class="mb-4">
+
       <div class="mb-4">
-        <label for="fileInput1" class="block text-sm font-medium text-gray-600">Wybierz 1 plik:</label>
-        <input type="file" id="fileInput1" name="file1" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+        <h3 class="text-l font-semibold">Wybierz jedną z opcji analizy pliku:</h3>
+        <div>
+          <input type="radio" id="option1" name="option" value="option1" checked>
+          <label for="option1">Porównanie i analiza w odniesieniu do całej bazy</label>
+        </div>
+        <div>
+          <input type="radio" id="option2" name="option" value="option2">
+          <label for="option2">Porównanie i analiza w odniesieniu do jednego pliku przesłanego przez użytkownika</label>
+        </div>
       </div>
 
       <div class="mb-4">
+        <label for="fileInput1" class="block text-sm font-medium text-gray-600">Wybierz plik do analizy:</label>
+        <input type="file" id="fileInput1" name="file1" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+      </div>
+
+      <div class="mb-4" id="fileInput2Div">
         <label for="fileInput2" class="block text-sm font-medium text-gray-600">Wybierz 2 plik:</label>
         <input type="file" id="fileInput2" name="file2" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
       </div>
@@ -35,7 +48,8 @@
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm font-medium text-black-700">Wybierz algorytmy, którymi chcesz zbadać pliki</label>
+        <label class="block text-sm font-medium text-black-700">Wybierz algorytmy, którymi chcesz przebadać
+          pliki</label>
         <div id="algorithm" name="algorithm" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
           <div>
             <input type="checkbox" id="algorithm1" name="algorithm1" value="algorithm1" checked>
@@ -75,6 +89,18 @@
   </div>
 
   <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const option2 = document.getElementById('option2');
+      const fileInput2Div = document.getElementById('fileInput2Div');
+
+      document.querySelectorAll('input[name="option"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+          fileInput2Div.style.maxHeight = option2.checked ? fileInput2Div.scrollHeight + "px" : "0";
+        });
+      });
+    });
+
     async function submitForm() {
       const fileInput1 = document.getElementById("fileInput1");
       const fileInput2 = document.getElementById("fileInput2");
@@ -149,6 +175,8 @@
 
       if (response.ok) {
         const result = await response.json();
+        console.log(result)
+        window.location.href = `${baseURL}/report`;
         displayResult(result);
       } else {
         console.error("Error:", response.statusText);
