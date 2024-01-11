@@ -52,7 +52,21 @@ class L_FormulaComparer:
                 result.append(self.compare_formulas(formula1, formula2))
         return result
 
-    def generate_report(self, latex_content1, latex_content2, threshold):
+    def generate_report(self, latex_content1, latex_content2, file_number, threshold):
+        latex_tokenizer = LatexTokenizer()
+        math1 = latex_tokenizer.extract_math(latex_content1)
+        math2 = latex_tokenizer.extract_math(latex_content2)
+        result = "Wykryto podobieństwa dla wzorów: <br>"
+        for i, formula1 in enumerate(math1):
+            for j, formula2 in enumerate(math2):
+                similarity = self.compare_formulas(formula1, formula2)
+                if similarity >= float(threshold) - 0.01:
+                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą numer {i+1} postaci: {math1[i]}, a formułą numer {j+1} postaci: {math2[j]} <br>"
+        if result == "Wykryto podobieństwa dla wzorów: <br>":
+            result = ""
+        return result
+
+    def generate_report_two_files(self, latex_content1, latex_content2, threshold):
         latex_tokenizer = LatexTokenizer()
         math1 = latex_tokenizer.extract_math(latex_content1)
         math2 = latex_tokenizer.extract_math(latex_content2)
