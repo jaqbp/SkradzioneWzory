@@ -90,6 +90,7 @@
 
   <script>
 
+    //showing fileInput2Div if option2 is checked
     document.addEventListener('DOMContentLoaded', function () {
       const option2 = document.getElementById('option2');
       const fileInput2Div = document.getElementById('fileInput2Div');
@@ -101,10 +102,15 @@
       });
     });
 
+
     async function submitForm() {
       const fileInput1 = document.getElementById("fileInput1");
       const fileInput2 = document.getElementById("fileInput2");
       const valueInput = document.getElementById("valueInput");
+      const radioOption1 = document.getElementById("option1");
+      const radioOption2 = document.getElementById("option2");
+      console.log(radioOption1.checked)
+      console.log(radioOption2.checked)
       const warningAlgorithms = document.getElementById("warning-algorithms");
       const warningTreshold = document.getElementById("warning-treshold");
 
@@ -133,12 +139,28 @@
         label.classList.remove("hidden");
         return;
       }
-
-      if (fileInput1.files[0] && fileInput2.files[0] && valueInput.value) {
+      //if option1 is checked and main file is sent
+      if (fileInput1.files[0] && radioOption1.checked && valueInput.value) {
         const reader1 = new FileReader();
         reader1.onload = function () {
           const text1 = reader1.result;
 
+          const data = {
+            text1: text1,
+            threshold: valueInput.value,
+            //sending selected algorithms as array
+            algorithms: selectedAlgorithms,
+          };
+          sendDataToBaseAnalysis(data);
+        };
+
+        reader1.readAsText(fileInput1.files[0]);
+
+        //if option2 is checked and both files are sent
+      } else if (fileInput1.files[0] && fileInput2.files[0] && radioOption2.checked && valueInput.value) {
+        const reader1 = new FileReader();
+        reader1.onload = function () {
+          const text1 = reader1.result;
           const reader2 = new FileReader();
           reader2.onload = function () {
             const text2 = reader2.result;
@@ -151,21 +173,44 @@
               algorithms: selectedAlgorithms,
             };
 
-            sendData(data);
+            sendDataTwoFilesAnlalysis(data);
           };
 
           reader2.readAsText(fileInput2.files[0]);
         };
 
         reader1.readAsText(fileInput1.files[0]);
-      } else {
+      }
+      else {
         console.error("Proszę dodać oba pliki przed kontynuacją.");
       }
     }
 
-    async function sendData(data) {
+    //sending data to backend 
+    async function sendDataToBaseAnalysis(data) {
       const baseURL = "http://127.0.0.1:8000/api";
-      const response = await fetch(`${baseURL}/check-similarity`, {
+      const response = await fetch(`${baseURL}/check-similarity-base`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result)
+        //window.location.href = `${baseURL}/report-base`;
+        //displayResult(result); 
+      } else {
+        console.error("Error:", response.statusText);
+      }
+    }
+
+    //sending data to backend 
+    async function sendDataTwoFilesAnlalysis(data) {
+      const baseURL = "http://127.0.0.1:8000/api";
+      const response = await fetch(`${baseURL}/check-similarity-two-files`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

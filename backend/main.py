@@ -27,7 +27,12 @@ def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
 
 
-@app.post("/api/check-similarity")
+@app.post("/api/check-similarity-base")
+async def check_similarity_base(request: Request):
+    return {"message": "Report generated successfully"}
+
+
+@app.post("/api/check-similarity-two-files")
 async def check_similarity(request: Request):
     global report
     body = await request.json()
