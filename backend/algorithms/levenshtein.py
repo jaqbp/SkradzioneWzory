@@ -61,7 +61,7 @@ class L_FormulaComparer:
             for j, formula2 in enumerate(math2):
                 similarity = self.compare_formulas(formula1, formula2)
                 if similarity >= float(threshold) - 0.01:
-                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą numer {i+1} postaci: {math1[i]}, a formułą numer {j+1} postaci: {math2[j]} <br>"
+                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą numer {i+1} z pliku pliku użytkownika postaci:  {math1[i]} , a formułą numer {j+1} z dokumentu z bazy postaci: {math2[j]}  <br>"
         if result == "Wykryto podobieństwa dla wzorów: <br>":
             result = ""
         return result
@@ -75,7 +75,7 @@ class L_FormulaComparer:
             for j, formula2 in enumerate(math2):
                 similarity = self.compare_formulas(formula1, formula2)
                 if similarity >= float(threshold) - 0.01:
-                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą numer {i+1} postaci: {math1[i]} z pierwszego dokumentu, a formułą numer {j+1} postaci: {math2[j]} z drugiego dokumentu <br>"
+                    result += f"Wykryto podobieństwo na poziomie {'%.2f'%(similarity)}% między formułą numer {i+1} postaci {math1[i]} z pierwszego dokumentu, a formułą numer {j+1} postaci: {math2[j]}  z drugiego dokumentu <br>"
         if result == "Wykryto podobieństwa dla wzorów z podanych dokumentów: <br>":
             result = (
                 "Nie wykryto podobieństw dla wzorów z podanych dokumentów przy progu: "

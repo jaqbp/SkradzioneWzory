@@ -1,13 +1,20 @@
 from typing import Union
 from fastapi import FastAPI, Request, Response
-from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from algorithms.levenshtein import L_FormulaComparer
 from algorithms.tokenizer import LatexTokenizer
 from read_tex_files import ReadTexFiles
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+
+
 import os
 
 app = FastAPI()
+app.mount("/templates", StaticFiles(directory="templates"), name="templates")
+templates = Jinja2Templates(directory="templates")
+
 report = ""
 
 app.add_middleware(
@@ -75,10 +82,11 @@ async def check_similarity_base(request: Request):
 
 # checking similarity between every formula in the first file with formulas in the second file
 @app.get("/api/report-base", response_class=HTMLResponse)
-def get_report():
-    global report
+def get_report(request: Request):
     print("Accessing /report-base endpoint")
-    return HTMLResponse(content=report)
+    return templates.TemplateResponse(
+        "report_template.html", {"request": request, "report": report}
+    )
 
 
 @app.post("/api/check-similarity-two-files")
