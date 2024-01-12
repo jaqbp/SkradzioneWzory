@@ -32,15 +32,23 @@
         </div>
       </div>
 
-      <div class="mb-4">
+      <div class="mb-2">
         <label for="fileInput1" class="block text-sm font-medium text-gray-600">Wybierz dokument do analizy:</label>
         <input type="file" id="fileInput1" name="file1" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
       </div>
+
+      <label id="document1-warning" class="hidden text-sm font-medium text-black-700"> Prześlij dokument .tex do
+        analizy, aby
+        móc kontynuować
+      </label>
 
       <div class="mb-4" id="fileInput2Div">
         <label for="fileInput2" class="block text-sm font-medium text-gray-600">Wybierz drugi dokument:</label>
         <input type="file" id="fileInput2" name="file2" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
       </div>
+
+      <label id="document2-warning" class="hidden text-sm font-medium text-black-700"> Prześlij drugi dokument .tex, aby
+        kontynuować</label>
 
       <div class="mb-4">
         <h3 class="text-l font-semibold"> Opcje zaawansowane (w celu regularnej analizy dokumentów, pozostaw poniższe
@@ -114,10 +122,10 @@
       const valueInput = document.getElementById("valueInput");
       const radioOption1 = document.getElementById("option1");
       const radioOption2 = document.getElementById("option2");
-      console.log(radioOption1.checked)
-      console.log(radioOption2.checked)
       const warningAlgorithms = document.getElementById("warning-algorithms");
       const warningTreshold = document.getElementById("warning-treshold");
+      const warningDocument1 = document.getElementById("document1-warning");
+      const warningDocument2 = document.getElementById("document2-warning");
 
       //selecting algorithms from checkboxes
       let checkboxes = document.querySelectorAll('input[type=checkbox][name^="algorithm"]');
@@ -131,6 +139,16 @@
 
       if (selectedAlgorithms.length == 0) {
         warningAlgorithms.classList.remove("hidden");
+        return
+      }
+
+      if (!fileInput1.files[0] || !fileInput1.value.endsWith('.tex')) {
+        warningDocument1.classList.remove("hidden");
+        return
+      }
+
+      if (!fileInput2.files[0] && radioOption2.checked || !fileInput2.value.endsWith('.tex')) {
+        warningDocument2.classList.remove("hidden");
         return
       }
 
