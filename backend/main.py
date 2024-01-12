@@ -129,7 +129,8 @@ async def check_similarity(request: Request):
 
 
 @app.get("/api/report-two-files", response_class=HTMLResponse)
-def get_report():
-    global report
+def get_report(request: Request):
     print("Accessing /report-two-files endpoint")
-    return HTMLResponse(content=report)
+    return templates.TemplateResponse(
+        "report_template.html", {"request": request, "report": report}
+    )
