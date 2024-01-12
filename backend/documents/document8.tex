@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Dowód Matematyczny 4}
+\author{Autor J}
+\date{Sierpień 2024}
+
+\usepackage{amsmath, amssymb, amsthm}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Twierdzenie}
+
+\begin{document}
+
+\maketitle
+
+\section{Wprowadzenie}
+
+W tym artykule przedstawimy dowód nierówności Cauchy'ego-Schwarza.
+
+\section{Twierdzenie}
+
+\begin{theorem}
+Dla dowolnych wektorów $\mathbf{u}$ i $\mathbf{v}$ w przestrzeni euklidesowej, nierówność Cauchy'ego-Schwarza wyraża się wzorem:
+\[ |\langle \mathbf{u}, \mathbf{v} \rangle|^2 \leq \langle \mathbf{u}, \mathbf{u} \rangle \cdot \langle \mathbf{v}, \mathbf{v} \rangle \]
+\end{theorem}
+
+\begin{proof}
+Rozważmy wektory $\mathbf{u}$ i $\mathbf{v}$ w przestrzeni euklidesowej. Możemy utworzyć funkcję:
+\[ f(t) = \langle t\mathbf{u} + \mathbf{v}, t\mathbf{u} + \mathbf{v} \rangle \]
+
+Obliczmy pochodną drugiego rzędu tej funkcji względem $t$:
+\[ f''(t) = 2 \langle \mathbf{u}, \mathbf{u} \rangle \]
+
+Ponieważ $f''(t)$ jest zawsze nieujemne, funkcja $f(t)$ ma minimum globalne. Zatem, dla dowolnej wartości $t$, zachodzi nierówność:
+\[ \langle t\mathbf{u} + \mathbf{v}, t\mathbf{u} + \mathbf{v} \rangle \geq 0 \]
+
+Rozwijając tę nierówność, otrzymujemy:
+\[ t^2 \langle \mathbf{u}, \mathbf{u} \rangle + 2t \langle \mathbf{u}, \mathbf{v} \rangle + \langle \mathbf{v}, \mathbf{v} \rangle \geq 0 \]
+
+To jest równoważne:
+\[ |\langle \mathbf{u}, \mathbf{v} \rangle|^2 \leq \langle \mathbf{u}, \mathbf{u} \rangle \cdot \langle \mathbf{v}, \mathbf{v} \rangle \]
+
+Co kończy dowód.
+\end{proof}
+
+\end{document}

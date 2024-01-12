@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Dowód Matematyczny 3}
+\author{Autor I}
+\date{Lipiec 2024}
+
+\usepackage{amsmath, amssymb, amsthm}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Twierdzenie}
+
+\begin{document}
+
+\maketitle
+
+\section{Wprowadzenie}
+
+W tym artykule przedstawimy dowód wzoru sumy szeregowej.
+
+\section{Twierdzenie}
+
+\begin{theorem}
+Dla każdej liczby całkowitej dodatniej $n$, suma szeregowa $\sum_{k=1}^{n} k$ wynosi $\frac{n(n+1)}{2}$.
+\end{theorem}
+
+\begin{proof}
+Rozważmy szereg arytmetyczny:
+\[ S_n = 1 + 2 + 3 + \ldots + n \]
+
+Możemy odwrócić kolejność elementów w drugiej połowie tego szeregu:
+\[ S_n = 1 + 2 + 3 + \ldots + n \]
+\[ S_n = n + (n-1) + (n-2) + \ldots + 1 \]
+
+Teraz dodajmy obie formy szeregów:
+\[ 2S_n = (n+1) + (n+1) + (n+1) + \ldots + (n+1) \]
+
+Istnieje $n$ sumowanych wyrazów równych $(n+1)$, zatem:
+\[ 2S_n = n(n+1) \]
+
+Podzielmy przez $2$ obie strony:
+\[ S_n = \frac{n(n+1)}{2} \]
+
+Co kończy dowód.
+\end{proof}
+
+\end{document}
