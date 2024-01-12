@@ -147,7 +147,7 @@
         return
       }
 
-      if (!fileInput2.files[0] && radioOption2.checked || !fileInput2.value.endsWith('.tex')) {
+      if ((!fileInput2.files[0] && radioOption2.checked) || (fileInput2.files[0] && !fileInput2.value.endsWith('.tex'))) {
         warningDocument2.classList.remove("hidden");
         return
       }
