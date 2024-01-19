@@ -76,7 +76,8 @@ async def check_similarity_base(request: Request):
     if "algorithm3" in algorithms:
         # TODO: add Cosine similarity to the html report
         pass
-
+    report += "</body></html>"
+    report = report.replace("$", "")
     return {"message": "Report generated successfully"}
 
 
@@ -124,7 +125,7 @@ async def check_similarity(request: Request):
         # TODO: add Cosine similarity to the html report
         pass
     report += "</body></html>"
-
+    report = report.replace("$", "")
     return {"message": "Report generated successfully"}
 
 
