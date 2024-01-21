@@ -1,4 +1,3 @@
-from algorithms.tokenizer import LatexTokenizer
 import os
 
 

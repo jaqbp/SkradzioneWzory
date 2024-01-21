@@ -1,8 +1,7 @@
 from typing import Union
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from algorithms.levenshtein import L_FormulaComparer
-from algorithms.tokenizer import LatexTokenizer
 import uvicorn
 from algorithms.cosine_similarity import CosineSimilarity
 from read_tex_files import ReadTexFiles
