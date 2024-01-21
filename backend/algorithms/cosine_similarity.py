@@ -77,4 +77,3 @@ class CosineSimilarity:
                 + "%"
             )
         return result
-

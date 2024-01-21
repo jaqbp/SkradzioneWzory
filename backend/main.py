@@ -78,9 +78,7 @@ async def check_similarity_base(request: Request):
     if "algorithm3" in algorithms:
         cosine_similarity = CosineSimilarity()
         for index, content in enumerate(tex_contents, start=1):
-            result = cosine_similarity.generate_report(
-                text1, content, index, threshold
-            )
+            result = cosine_similarity.generate_report(text1, content, index, threshold)
             if result != "":
                 report += f"<h2> Wyniki dla algorytmu podobieństwa cosinusowego dla pliku {index}: </h2> <p> {result}</p>"
     report += "</body></html>"
@@ -143,6 +141,7 @@ def get_report(request: Request):
     return templates.TemplateResponse(
         "report_template.html", {"request": request, "report": report}
     )
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
