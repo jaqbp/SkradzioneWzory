@@ -9,6 +9,7 @@ $ pip3 install -r requirements.txt
 ```
 python3 -m uvicorn main:app
 ```
+
 ```
 $ uvicorn main:app --reload
 ```

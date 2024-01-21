@@ -1,8 +1,9 @@
 from typing import Union
-from fastapi import FastAPI, Request, Response
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from algorithms.levenshtein import L_FormulaComparer
-from algorithms.tokenizer import LatexTokenizer
+import uvicorn
+from algorithms.cosine_similarity import CosineSimilarity
 from read_tex_files import ReadTexFiles
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -11,7 +12,7 @@ from fastapi.staticfiles import StaticFiles
 
 import os
 
-app = FastAPI()
+app = FastAPI(debug=True)
 app.mount("/templates", StaticFiles(directory="templates"), name="templates")
 templates = Jinja2Templates(directory="templates")
 
@@ -74,8 +75,11 @@ async def check_similarity_base(request: Request):
         # TODO: add Jaccard similarity to the html report
         pass
     if "algorithm3" in algorithms:
-        # TODO: add Cosine similarity to the html report
-        pass
+        cosine_similarity = CosineSimilarity()
+        for index, content in enumerate(tex_contents, start=1):
+            result = cosine_similarity.generate_report(text1, content, index, threshold)
+            if result != "":
+                report += f"<h2> Wyniki dla algorytmu podobieństwa cosinusowego dla pliku {index}: </h2> <p> {result}</p>"
     report += "</body></html>"
     report = report.replace("$", "")
     return {"message": "Report generated successfully"}
@@ -122,8 +126,9 @@ async def check_similarity(request: Request):
         # TODO: add Jaccard similarity to the html report
         pass
     if "algorithm3" in algorithms:
-        # TODO: add Cosine similarity to the html report
-        pass
+        cosine_similarity = CosineSimilarity()
+        result = cosine_similarity.generate_report_two_files(text1, text2, threshold)
+        report += f"<h2> Wyniki dla algorytmu podobieństwa cosinusowego: </h2> <p> {result}</p>"
     report += "</body></html>"
     report = report.replace("$", "")
     return {"message": "Report generated successfully"}
@@ -135,3 +140,7 @@ def get_report(request: Request):
     return templates.TemplateResponse(
         "report_template.html", {"request": request, "report": report}
     )
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
