@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[mathscr]{eucal}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage{amsfonts}
+
+
+
+\begin{document}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\lub}{\vee}
+\newcommand{\roz}{\setminus}
+\newcommand{\zbp}{\emptyset}
+\newcommand{\zbpot}{\mathcal{P}}
+\newcommand{\troj}{\bigtriangleup}
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\rze}{\mathbb{R}}
+\newcommand{\wegde}{\wedge}
+\newcommand{\eps}{\varepsilon}
+\maketitle
+Nad zadaniami myślałem sam.
+\section*{Zadanie 1.}
+\subsection*{Dowód $(A \times B) \roz \{\langle x,y\rangle\} \subseteq (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})$}
+Weźmy takie $m,n$ że: $\langle m,n \rangle \in (A \times B) \roz \{\langle x,y\rangle\} $.\\ Wtedy: \[ m \in A \wedge n \in  B \wedge \lnot (m = x \wedge  n = y)\]
+Po użyciu prawa de Morgana mamy: \[ m \in A \wedge n \in  B \wedge  (m \neq x \vee  n \neq y)\]
+Korzystając z rozdzielności koniunkcji względem alternatywy otrzymujemy: 
+\[ (m \in A \wedge m \neq x \wedge n \in  B  ) \vee ( m \in A \wedge n \in  B \wedge n \neq y)\]
+Zamieniając na iloczyn kartezjański otrzymujemy:
+\[\langle m,n \rangle \in (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})\]
+Co oznacza, że $(A \times B) \roz \{\langle x,y\rangle\} \subseteq (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})$
+
+
+\subsection*{Dowód $(A \times B) \roz \{\langle x,y\rangle\} \supseteq (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})$}
+Weźmy takie $m,n$ że $\langle m,n\rangle \in ((A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})$\\
+Wtedy:\[ (m \in A \wedge m \neq x \wedge n \in  B  ) \vee ( m \in A \wedge n \in  B \wedge n \neq y)\]
+Używając rozdzielności koniunkcji względem alternatywy otrzymujemy:
+\[ m \in A \wedge n \in  B \wedge  (m \neq x \vee  n \neq y)\]
+Po zastosowaniu prawa de Morgana zostaje:
+\[ m \in A \wedge n \in  B \wedge \lnot (m = x \wedge  n = y)\]
+Zamieniając na iloczyn kartezjański mamy:\[\langle m,n \rangle \in (A \times B) \roz \{\langle x,y\rangle\}\]
+Czyli $(A \times B) \roz \{\langle x,y\rangle\} \supseteq (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})$
+\subsection*{Podsumowanie}
+Ponieważ mamy następujące zawierania: \[(A \times B) \roz \{\langle x,y\rangle\} \subseteq (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})\] i \[(A \times B) \roz \{\langle x,y\rangle\} \supseteq (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})\] prawdziwa jest równość \[(A \times B) \roz \{\langle x,y\rangle\} = (( A\roz  \{x\}) \times B) \cup (A\times (B\roz\{y\})\]
+\blacksquare
+
+\section*{Zadanie 2.}
+\subsection*{(a)}
+Ponieważ funkcje $f$($x$) $=$ $\frac{1}{x+1}$  i $g$ ($x$) $= 1-x$ są malejące, to największa wartość wyrażenia $1 - \frac{1}{n+1}$ jest dla najmniejszej wartości  $\frac{1}{n+1}$, czyli największej wartości $n$.\\
+
+
+Wobec tego \[\forall_{n\in \nat} \ 1 - \frac{1}{n+1} \leq \lim_{n\to\infty} 1 - \frac{1}{n+1} = 1 - 0 = 1\]
+
+Z drugiej strony, ponieważ funkcja $f$ ($x$) $= 1+x$ jest rosnąca, to najmniejsza wartość wyrażenia $1+n$ jest dla najmniejszych $n$.
+
+Wobec tego \[\forall_{n\in \nat} \ 1+n \geq 1+0 = 1 \]
+
+Korzystając z dwóch powyższych faktów mamy:
+\[A_n = \{ x\in \rze : \ \frac{1}{n+1} \leq 1 \leq x \leq 1 \leq 1+n\} \]
+Czyli:
+\[\bigcap_{n=0}^{\infty}A_n \in [1,1] = 1\]
+
+\subsection*{(b)}
+
+Ponieważ funkcje $f$($x$) $=$ $\frac{1}{x+1}$  i $g$ ($x$) $= 1-x$ są malejące, to najmniejsza wartość wyrażenia $1 - \frac{1}{n+1}$ jest dla największej wartości  $\frac{1}{n+1}$, czyli najmniejszej $n$.\\
+
+
+
+Wobec tego \[\forall_{n\in \nat} \ 1 - \frac{1}{n+1} \geq 1 - \frac{1}{1+1} = \frac{1}{2}\]
+
+Z drugiej strony, ponieważ funkcja $f$ ($x$) $= 1+x$ jest rosnąca, to największa wartość wyrażenia $1+n$ jest dla największych $n$.
+
+Wobec tego \[\forall_{n\in \nat} \ 1+n \leq 1+31 = 32 \]
+
+Korzystając z dwóch powyższych faktów mamy:
+\[A_n = \{ x\in \rze : \frac{1}{2} \leq \frac{1}{n+1} \leq x  \leq 1+n \leq 32\} \]
+Czyli:
+\[\bigcup_{n\in I}A_n \in [\frac{1}{2},32] \]
+
+\section*{Zadanie 3.}
+\subsection*{Dowód "$\Rightarrow$"}
+
+Wiedząc, że $A$ jest sumą pewnej rodziny odcinków otwartych, weźmy odcinek, należący do rodziny, której sumą jest $A$. Nazwijmy go $y$. Ponieważ $y$ jest odncinkiem otwartym, to ma swój początek i koniec, które oznaczymy odpowiednio $y_a$, $y_b$.\\
+Zauważmy, wobec tego, że \[\forall_{k\in \rze  \wegde k\in y} \ y_a < k < y_b\]
+Niech $\eps$ = min\{$\frac{k - y_a}{2}, \frac{y_b - k}{2}$\} , jest ono oczywiście dodatnie, możemy je przypisać każdej liczbie $k$ ponieważ między dwoma liczbami rzeczywistymi jest nieskończenie wiele liczb rzeczywistych.
+Wtedy: 
+\[y_a < k-\eps < k < k+\eps < y_b\]
+Więc \[\forall_{x\in A} \exists_{\eps > 0} (x-\eps,x+\eps) \subset A\]
+
+\subsection*{Dowód "\Leftarrow"}
+Wiedząc, że $\forall_{x\in A} \exists_{\eps > 0} (x-\eps,x+\eps) \subset A$ rozpatrzmy sumę wszystkich tych odcinków. Suma ta jest jest równa zbiorowi $A$. Wobec tego zbiór $A$ jest sumą pewnej rodziny odcinków otwartych 
+
+\subsection*{Podsumowanie}
+Z implikacji $"\Rightarrow" \ $ oraz $\ "\Leftarrow"$ wynika, że $A \subset R$ jest sumą pewnej rodziny odcinków otwartych wtedy i tylko wtedy, gdy $\forall_{x\in A} \exists_{\eps > 0} (x-\eps,x+\eps) \subset A$
+
+\blacksquare
+
+\end{document}
