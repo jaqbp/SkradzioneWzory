@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[mathscr]{eucal}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage{amsfonts}
+
+
+
+
+\begin{document}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\lub}{\vee}
+\newcommand{\roz}{\setminus}
+\newcommand{\zbp}{\emptyset}
+\newcommand{\zbpot}{\mathcal{P}}
+\newcommand{\troj}{\bigtriangleup}
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\calk}{\mathbb{Z}}
+\newcommand{\rze}{\mathbb{R}}
+\newcommand{\wegde}{\wedge}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\con}{\mathfrak{c}}
+\maketitle
+Nad zadaniami myślałem sam. 
+\section*{Zadanie 1.}
+\subsection*{(a)}
+\subsubsection*{Zwrotność}
+Ponieważ $max\{n,m\} = max\{n,m\}$, to $\langle n,m \rangle \approx \langle n,m \rangle$, więc relacja jest zwrotna.
+\subsubsection*{Symetryczność}
+Niech $\langle n,m \rangle \approx \langle n',m' \rangle$, wtedy $max\{n,m\} = max\{n',m'\}$. 
+Równoważnie $max\{n',m'\} = max\{n,m\}$, więc $\langle n',m' \rangle \approx \langle n,m \rangle$, więc relacja jest symetryczna.
+\subsubsection*{Przechodniość}
+Niech $\langle n,m \rangle \approx \langle n',m' \rangle$ i $\langle n',m' \rangle \approx \langle n'',m'' \rangle$, wtedy $max\{n,m\} = max\{n',m'\}$ i $max\{n',m'\} = max\{n'',m''\}$. 
+Wobec tego $max\{n,m\} = max\{n'',m''\}$, czyli $\langle n,m \rangle \approx \langle n'',m'' \rangle$. Więc relacja jest przechodnia.
+\\\\
+Ponieważ relacja $\approx$ jest zwrotna, symetryczna i przechodnia, to jest ona relacją równoważności.
+
+\subsection*{(b)}
+$\langle 0,20 \rangle \approx \langle n,m \rangle \Leftrightarrow max\{0,20\} = 20 = max\{n,m\}$.
+\\\\
+Więc $[\langle 0,20 \rangle ]_{\approx} = \{\langle n,m \rangle : max\{n,m\} = 20 \}$.
+\\\\
+Zauważmy, że jeżeli $max\{n,m\} = 20$, to co najmniej jedna z liczb $n,m$ musi równać się 20.
+\subsubsection*{$n=20$}
+Mamy 21 możliwości wyboru $m$, tak żeby $max\{20,m\} = 20$ (są to liczby 0,1,2...,20)
+
+\subsubsection*{$m=20$}
+Mamy 20 możliwości wyboru $n$, tak żeby $max\{20,m\} = 20$ (są to liczby 0,1,2...,19, bo para $\langle 20,20 \rangle $ została już policzona)
+\\\\
+Wobec tego klasa abstracji $[\langle 0,20 \rangle ]_{\approx}$ ma $21+20 = 41$ elementów
+
+\section*{Zadanie 2.}
+\subsection*{(a)}
+Weźmy funkcję $f: [h]_{\sim} \rightarrow \{0,1\}^\nat$. Określoną wzorem \[f(g)(n) = \left\{\begin{array}{cc} 0
+     \ \mbox{dla} \  g(n) = 0  &  \\
+     1 \ \mbox{dla} \ g(n) = 1 & 
+\end{array}\right.\]
+Gdzie $g \in [h]_\sim$.
+\\\\
+Udowodnijmy różnowartościowość funkcji $f$. Niech $g\neq k$. Wtedy niech $x$, będzie pierszym elementem różniącym te funkcje. Zauważmy, że $f(g)(n) \neq f(h)(n)$, więc funkcja jest różnowartościowa.
+\\\\
+Udowodnijmy, że $f$ jest "na". Niech $a(n): \nat \rightarrow \{0,1\}^\nat$ będzie dowolnym ciągiem zerojedynkowym. Wtedy $ \forall_{n \in \nat} \\ f(a)(n) = a(n)$, więc możemy otrzymać każdy ciąg zerojedynkowy. Wobec tego $f$ jest "na".
+\\\\
+Ponieważ $f$ jest różnowartościowa i "na", to jest bijekcją. Stąd $\vert [h]_{\sim} \vert = \vert \{0,1\}^\nat \vert = \con$.
+\subsection*{(b)}
+Niech $g \in \nat^\nat$
+\subsubsection*{rng($g$)=1}
+Wtedy $g$ jest stała. Ponieważ $\forall_{n \in \nat} \ g(n) = g(0)$ to w jej klasie abstrakcji jest tylko jeden element (ona sama).
+
+\subsubsection*{rng($g$)$\geq 2$, lecz skończone} 
+Przez różnowartościowy ciąg $(a_n)$ oznaczmy wartości przyjmowane przez funkcję $g$. Niech rng($g$) $= m$. 
+Weźmy funkcję $f: [g]_{\sim} \rightarrow  \nat ^ {m-2} \cup \{0,1\}^\nat$. Określoną wzorem \[f(h)(n) = \left\{\begin{array}{cc}  a_{n+2}
+     \ \mbox{dla} \  n\leq m-2  &  \\
+     0
+     \ \mbox{dla} \  h(n) = a_0  &  \\
+     1 \ \mbox{dla} \ h(n) = a_1 & 
+\end{array}\right.\]
+Gdzie $h \in [g]_\sim$.
+\\\\
+Teraz weźmy funkcję $k:  \nat^{m-2} \cup \{0,1\}^\nat \rightarrow \{0,1\}^\nat  $
+\\\
+Określoną wzorem: $k(h)(n) = h(n+m-1)$.
+\\\\
+Każdy ciąg zerojedynkowy można otrzymać z funkcji $f\circ k$ poprzez odpowiednie ustawienie liczb $a_0, a_1$, więc funkcja ta jest "na".
+\\\\
+Stąd $\vert [g]_\sim \vert \geq \vert \{0,1\}^\nat = \con$
+Ponieważ $[g]_\sim \subseteq \nat^\nat$, więc $\vert [g]_\sim \vert \leq \vert \nat^\nat = \con$
+\\\\
+Z twierdzenia Cantora - Bernsteina $\vert [g]_\sim \vert = \con$.
+
+
+\subsubsection*{rng($g$) nieskończone}
+W tym wypadku $[g]_\sim$ to każda permutacja zbioru liczb naturalnych.
+\\\\
+Jest ich tyle co $\nat^\nat$, czyli $\vert [g]_\sim \vert = \con$.
+\\\\
+Więc każda klasa abstrakcji relacji $\sim$ jest albo jednoelementowa, albo ma moc continuum.
+\section*{Zadanie 3.}
+\subsection*{(a)}
+$E \equiv A \Leftrightarrow \forall_{n \in \nat} \ 2n \in A$. Stąd klasą abstrakcji zbioru $E$ będą te podzbiory liczb naturalnych, które zawierają wszystkie liczby parzyste.
+\subsection*{(b)}
+Przez $E$ oznaczmy zbiór liczb parzystych, przez $\mathcal{E} (A)$ oznaczmy zbiór wszystkich liczb parzystych zbioru $A$. 
+Niech $A,B$ będą podzbiorami liczb naturalnych, oraz niech $\lnot(A \equiv B) \Leftrightarrow \mathcal{E} (A) \neq \mathcal{E} (B)$. Stąd $\vert \zbpot (\nat)\backslash_\equiv \vert$ = $\vert \mathcal{E} (\nat) \vert = \vert \zbpot(E) \vert$.
+\\\\
+Ponieważ $E$ jest równoliczny ze zbiorem liczb naturalnych, to
+$\vert \zbpot (\nat)\backslash_\equiv \vert = \vert \zbpot(E) \vert = \vert \zbpot(\nat) \vert = \con$.
+\\\\
+Więc zbiór ilorazowy $\zbpot (\nat)\backslash_\equiv$ jest mocy continuum.
+
+
+\end{document}

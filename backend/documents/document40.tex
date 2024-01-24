@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\section*{Kolejne 10 Różnych Wzorów Matematycznych}
+
+\subsection*{Wzór 41: Prawo Ohma}
+
+Dla obwodu elektrycznego z rezystorem, natężenie prądu \(I\) jest proporcjonalne do napięcia \(V\) i rezystancji \(R\), zgodnie z prawem Ohma:
+\[ V = IR \]
+
+\subsection*{Wzór 42: Własności pierwiastków n-tego stopnia}
+
+Dla dowolnej liczby rzeczywistej \(x\) i liczb całkowitych dodatnich \(n\), pierwiastki n-tego stopnia liczby \(x^n\) to:
+\[ \sqrt[n]{x^n} = |x| \]
+
+\subsection*{Wzór 43: Równanie transportu}
+
+Dla funkcji \(u(x, t)\) opisującej transport pewnej wielkości, równanie transportu w jednym wymiarze to:
+\[ \frac{\partial u}{\partial t} + c \frac{\partial u}{\partial x} = 0 \]
+
+\subsection*{Wzór 44: Nierówność Jensena}
+
+Dla funkcji wypukłej \(f(x)\), dla dowolnej liczby rzeczywistej \(x_1, x_2, \ldots, x_n\) i wag \(w_1, w_2, \ldots, w_n\) spełniona jest nierówność Jensena:
+\[ f\left(\sum_{i=1}^{n} w_i x_i\right) \leq \sum_{i=1}^{n} w_i f(x_i) \]
+
+\subsection*{Wzór 45: Wzór na gradient funkcji skalarnej}
+
+Dla funkcji skalarnych \(f(x, y, z)\), gradient tej funkcji to wektor:
+\[ \nabla f = \frac{\partial f}{\partial x} \mathbf{i} + \frac{\partial f}{\partial y} \mathbf{j} + \frac{\partial f}{\partial z} \mathbf{k} \]
+
+\subsection*{Wzór 46: Szereg Dirichleta}
+
+Szereg Dirichleta to szereg postaci:
+\[ \sum_{n=1}^{\infty} \frac{\sin(nx)}{n} \]
+
+\subsection*{Wzór 47: Twierdzenie Greena}
+
+Dla obszaru \(D\) ograniczonego krzywą zamkniętą \(C\), twierdzenie Greena mówi, że:
+\[ \oint_C (Pdx + Qdy) = \iint_D \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right) dA \]
+
+\subsection*{Wzór 48: Nierówność Minkowskiego}
+
+Dla dowolnych liczb rzeczywistych \(p \geq 1\), \(x_i\), \(y_i\) spełniających warunek \(\sum_{i=1}^{n} |x_i|^p < \infty\) i \(\sum_{i=1}^{n} |y_i|^p < \infty\), nierówność Minkowskiego mówi, że:
+\[ \left(\sum_{i=1}^{n} |x_i + y_i|^p\right)^{\frac{1}{p}} \leq \left(\sum_{i=1}^{n} |x_i|^p\right)^{\frac{1}{p}} + \left(\sum_{i=1}^{n} |y_i|^p\right)^{\frac{1}{p}} \]
+
+\subsection*{Wzór 49: Funkcja Ackermanna}
+
+Funkcję Ackermanna \(A(m, n)\) można zdefiniować rekurencyjnie:
+\[
+A(m, n) =
+\begin{cases}
+  n+1 & \text{jeśli } m = 0, \\
+  A(m-1, 1) & \text{jeśli } m > 0 \text{ i } n = 0, \\
+  A(m-1, A(m, n-1)) & \text{jeśli } m > 0 \text{ i } n > 0.
+\end{cases}
+\]
+
+\subsection*{Wzór 50: Równanie Laplace'a dla potencjału elektrostatycznego}
+
+W elektrostatyce, potencjał elektrostatyczny \(\phi\) związany jest z ładunkiem \(\rho\) poprzez równanie Laplace'a:
+\[ \nabla^2 \phi = -\frac{\rho}{\varepsilon_0} \]
+
+\end{document}

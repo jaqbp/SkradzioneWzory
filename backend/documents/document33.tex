@@ -1,0 +1,105 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[mathscr]{eucal}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage{amsfonts}
+
+
+
+
+\begin{document}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\lub}{\vee}
+\newcommand{\roz}{\setminus}
+\newcommand{\zbp}{\emptyset}
+\newcommand{\zbpot}{\mathcal{P}}
+\newcommand{\troj}{\bigtriangleup}
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\rze}{\mathbb{R}}
+\newcommand{\wegde}{\wedge}
+\newcommand{\eps}{\varepsilon}
+\maketitle
+Nad zadaniami myślałem sam. W rozwiązaniu założyłem, że 0 należy do zbioru liczb naturalnych.
+\section*{Zadanie 1.}
+Niech $\forall_{ n \in \nat }$ $A_n = \{n\}$ , $B_n = \{n+1\}$
+\\ Zauważmy, że $A_n \cap B_n = \zbp$  ponieważ $n\neq n+1$
+\\Wobec tego: 
+\[\bigcup_{n \in \nat} ( A_n \cap B_n ) = \zbp \]
+
+Z drugiej strony: 
+\[ \bigcup_{n \in \nat } A_n = \nat  \]
+\[ \bigcup_{n \in \nat } B_n = \nat \roz \{0\}  \]
+
+Więc:
+\[ \bigcup_{n \in \nat } A_n \cap \bigcup_{n \in \nat } B_n = \nat \roz \{0\}  \]
+
+Wobec tego: 
+\[ \bigcup_{n \in \nat} ( A_n \cap B_n ) \neq \bigcup_{n \in \nat } A_n \cap \bigcup_{n \in \nat } B_n   \]
+
+\section*{Zadanie 2.}
+
+
+\subsection*{$\bigcup_{n \in \nat} \bigcap_{m \in \nat} A_{n,m}$}  
+
+Ustalmy n. Niech $B_n = \bigcap_{m \in \nat} A_{n,m}$
+
+Można zauważyć, że $A_{n,m} = [n^2,m^2]$
+
+Rozważmy dwa przypadki:
+\subsubsection*{1. $n=0$}
+\[A_{n,m} = [0,m^2]\]
+Więc: \[B_n = \bigcap_{m \in \nat} A_{n,m} = \{0\}\]
+
+\subsubsection*{2. $n>0$}
+Jeśli weżmiemy $m = 0$, to $A_{n,m}= [n^2,0] = \zbp$
+Wobec tego:
+
+\[	B_n = \bigcap_{m \in \nat} A_{n,m} = \zbp	\]
+
+Oznacza to, że:
+\[	\bigcup_{n \in \nat} \bigcap_{m \in \nat} A_{n,m} = \bigcup_{n \in \nat} B_n = \{0\}	\]
+
+\subsection*{$\bigcap_{n \in \nat} \bigcup_{m \in \nat} A_{n,m}$}
+
+Ustalmy n. Weźmy $B_n = \bigcup_{m \in \nat} A_{n,m}$
+Ponieważ $A_{n,m} = [n^2,m^2]$ 
+
+\[	B_n = \bigcup_{m \in \nat} A_{n,m} = [n^2,\infty]\	\] 
+
+Stąd:
+\[	\bigcap_{n \in \nat} \bigcup_{m \in \nat} A_{n,m} = \bigcap_{n \in \nat} B_n = \zbp	\]
+
+
+
+\section*{Zadanie 3.}
+
+\subsection*{(a)}
+Niech  $x \in \zbpot (\rze)$, żeby $x = f(\langle A_i : i \in \nat \rangle) = \bigcap_{i \in \nat} A_i$
+wystarczy, że 
+
+\[\forall_{i \in \nat} A_i = x\]
+
+Zawsze możemy tak zrobić, ponieważ skoro $x \in \zbpot(\rze)$ to \\
+$\{x,x,x,...,x\} \in \zbpot(\rze)^{\nat}$
+
+Więc $f$ jest „na”. 
+
+\subsection*{(b)}
+Niech $A_i = \{0\}$
+$B_i = \left\{ \begin{array}{rcl}
+\{0\} & \mbox{dla}
+& i = 0\\ \{0,1\} & \mbox{dla} & i>0  
+\end{array}\right.$
+
+\[f(\langle A_i : i \in \nat \rangle) = \bigcap_{i \in \nat} A_i = \{0\}\]
+
+\[f(\langle B_i : i \in \nat \rangle) = \bigcap_{i \in \nat} B_i = \{0\}\]
+
+Wobec tego $f$ nie jest różnowartościowa, ponieważ dla różnych argumentów przyjmuje tę samą wartość
+
+
+
+\end{document}

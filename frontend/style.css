@@ -1,5 +1,17 @@
 #fileInput2Div {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease-out;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+.advancedSettings {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.advancedSettings.active {
+    max-height: 500px;
+}
+#toggleAdvancedOptions{
+  cursor: pointer;
 }

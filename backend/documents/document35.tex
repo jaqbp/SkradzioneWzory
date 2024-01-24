@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[mathscr]{eucal}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage{amsfonts}
+
+
+
+
+\begin{document}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\lub}{\vee}
+\newcommand{\roz}{\setminus}
+\newcommand{\zbp}{\emptyset}
+\newcommand{\zbpot}{\mathcal{P}}
+\newcommand{\troj}{\bigtriangleup}
+
+\maketitle
+Nad zadaniami myślałem sam.
+\section*{Zadanie 1.}
+
+\subsection*{$(\zbpot ( X \cap Y)) \cup (X \roz Y)$}
+Zacznijmy od prostych rachunków na zbiorach $X$ i $Y$
+
+\[X\cap Y = \{0,1\}\]
+\[X\roz Y = \{2\}\]
+
+Wobec tego:
+
+\[\zbpot ( X \cap Y) = \{\zbp, \{0\}, \{1\}, \{0,1\}\} \]
+
+\[(\zbpot ( X \cap Y)) \cup (X \roz Y) = \{\zbp, \{0\}, \{1\}, \{0,1\}\} \cup \{2\} \]
+
+Czyli:
+
+\[(\zbpot ( X \cap Y)) \cup (X \roz Y) = \{\zbp, 2, \{0\}, \{1\}, \{0,1\}\}  \]
+
+\subsection*{$\zbpot (\zbpot(X\roz Y)$}
+
+\[X\roz Y = \{2\}\]
+
+\[\zbpot (X\roz Y) = \{\zbp,\{2\}\}\]
+
+\[\zbpot (\zbpot (X\roz Y)) = \{\zbp, \{\zbp\},\{\{2\}\}, \{\zbp,\{2\}\}\}\]
+
+
+\section*{Zadanie 2.}
+
+Niech:
+
+\[A = \{0\}\]
+\[B = \{1\}\]
+
+Wtedy:
+
+\[\zbpot (A) = \{\zbp,\{0\}\}\]
+\[\zbpot (B) = \{\zbp,\{1\}\}\]
+
+Więc:
+\[ \zbpot (A) \troj \zbpot (B) = \{\{0\},\{1\}\} \]
+
+Z drugiej strony:
+\[A \troj B = \{0,1\}\]
+\[\zbpot (A\troj B) = \{\zbp,\{0\},\{1\},\{0,1\}\}\]
+
+Wobec tego równość $ \zbpot (A) \troj \zbpot (B) = \zbpot (A\troj B) $ jest fałszywa, ponieważ zbiory te mają różne elementy. $\blacksquare$
+
+
+\section*{Zadanie 3.}
+
+\subsection*{Dowód $\bigcup \zbpot(A) \subseteq A$:}
+
+Weźmy $x$ takie, że $x \in \bigcup \zbpot(A)$. Ponieważ $\bigcup \zbpot(A)$ to suma podzbiorów $A$, to $x$ musi być elementem jednego z tych podzbiorów. Wobec tego $\exists(B \subseteq A) \ x\in B$.
+\\
+$B \subseteq A$, oznacza, że $\forall(y\in B)\ y\in A$. Jest to prawdą w szczególności dla $x$, co oznacza, że $x\in A$, czyli  $\bigcup \zbpot(A) \subseteq A$
+
+\subsection*{Dowód $\bigcup \zbpot(A) \supseteq A$:}
+
+Weźmy $x \in A$. Zauważmy, że $x$ jest w szczególności podzbiorem $A$. Wobec tego $x$ należy do sumy podzbiorów $A$, czyli $x \in \bigcup \zbpot(A)$
+
+Oznacza to, że $A \subseteq \bigcup \zbpot(A)$
+\\\\
+Z zawierania $\bigcup \zbpot(A) \subseteq A$ i $\bigcup \zbpot(A) \supseteq A$ wynika, że $\bigcup \zbpot(A) = A$\\
+$\blacksquare$
+\end{document}

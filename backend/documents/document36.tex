@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{polski}
+\usepackage[mathscr]{eucal}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{MnSymbol}
+\usepackage{amsfonts}
+
+
+
+
+\begin{document}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\lub}{\vee}
+\newcommand{\roz}{\setminus}
+\newcommand{\zbp}{\emptyset}
+
+
+
+\maketitle
+Nad zadaniami myślałem sam.
+\section*{Zadanie 1.}
+Dowód zostanie poprowadzony przez sprzeczność. Załóżmy, że implikacja jest fałszywa. Dzieje się to jednak, wyłącznie w jednym przypadku: kiedy poprzednik jest prawdziwy, a następnik fałszywy. Wobec tego: $(p \wedge ( p \imp q ))$ jest prawdą, oraz $q$ jest fałszem. Koniunkcja $(p \wedge ( p \imp q ))$ jest prawdziwa wtedy i tylko wtedy gdy, wszystkie jej części są prawdziwe. Wobec tego $p$ jest prawdziwe, tak samo jak $p\imp q$. Jednak gdyby rzeczywiście, $p$ było prawdą, a $q$ fałszem, to implikacja $ p \imp q $ nie byłaby prawdziwa, co jest sprzeczne z poprzednim zdaniem. Uzyskana sprzeczność udowadnia, że $(p \wedge ( p \imp q )) \imp q $ jest tautologią. \blacksquare
+\section*{Zadanie 2.}
+Weźmy $x$ takie że:
+
+\[ x \in A \roz(B\roz C)\]
+
+Wtedy: 
+
+\[ x \in A  \wedge \lnot ( x \in B \wedge x \notin C) \]
+
+Korzystając z prawa de Mograna:
+
+\[ x \in A  \wedge ( x \notin B \lub x \in C) \]
+
+Z rozdzielności koniunkcji względem alternatywy otrzymujemy:
+
+\[(x \in A \wedge x \notin B) \lub (x\in A \wedge x \in C)\]
+
+Co upraszcza się do:
+
+\[x \in A \roz B \lub x \in A \cap C\]
+
+Lub innymi słowy:
+
+\[x \in (A \roz B) \cup (A \cap C)\]
+
+Zbiory $A  \roz ( B \roz C)$ i $ (A \roz B) \cup (A \cap C)$ są sobie równe, ponieważ każdy element jednego z nich, jest też elementem drugiego. \blacksquare
+
+\section*{Zadanie 3.}
+
+Niech \[A = \{0\}\]
+\[B=\{0\}\]
+\[C= \{0\}\]
+
+Wtedy $ A \cup B = \{0\}$, więc $(A\cup B)\roz C = \zbp$
+
+Z drugiej strony $A \roz C = \zbp$, więc  $(A \roz C)\cap B = \zbp$
+
+Istotnie, dla wyżej podanych zbiorów A,B,C, równość \[ (A\cup B)\roz C = (A\roz C)\cap B\] 
+
+jest prawdziwa
+\end{document}
