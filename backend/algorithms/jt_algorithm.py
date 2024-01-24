@@ -1,4 +1,4 @@
-from tokenizer import LatexTokenizer
+from backend.algorithms.tokenizer import LatexTokenizer
 
 
 class JT_LatexSimilarityAnalyser:

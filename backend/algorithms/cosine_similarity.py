@@ -3,7 +3,7 @@ import re
 from collections import Counter
 from typing import Set
 from pylatexenc.latex2text import LatexNodes2Text
-from algorithms.tokenizer import LatexTokenizer
+from backend.algorithms.tokenizer import LatexTokenizer
 
 
 class CSTextProcessor:
@@ -36,9 +36,7 @@ class CosineSimilarity:
             sum(count**2 for count in words1.values()) ** 0.5
             * sum(count**2 for count in words2.values()) ** 0.5
         )
-        if denominator == 0:
-            return 0
-        return numerator / denominator * 100
+        return numerator / denominator * 100 if denominator != 0 else 0
 
     def generate_report(self, latex_content1, latex_content2, file_number, threshold):
         latex_tokenizer = LatexTokenizer()
