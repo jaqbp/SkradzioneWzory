@@ -2,7 +2,9 @@
 import re
 from collections import Counter
 from typing import Set
+
 from pylatexenc.latex2text import LatexNodes2Text
+
 from backend.algorithms.tokenizer import LatexTokenizer
 
 

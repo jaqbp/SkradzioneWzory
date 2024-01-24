@@ -3,7 +3,6 @@ import os
 from backend.algorithms.levenshtein import L_FormulaComparer
 from backend.algorithms.tokenizer import LatexTokenizer
 
-
 directory = os.path.abspath(os.path.dirname(__file__))
 documents_directory = os.path.join(directory, "..", "documents")
 
@@ -22,11 +21,10 @@ def test_same_formulas() -> None:
     score = levenshtein.compare_formulas(formula1, formula2)
     assert score == 100.0
 
+
 def test_not_related_formulas() -> None:
     formula1 = "a * h / 2"
     formula2 = "sin^2(x) + cos^2(x)"
     levenshtein = L_FormulaComparer()
     score = levenshtein.compare_formulas(formula1, formula2)
     assert score < 10
-
-

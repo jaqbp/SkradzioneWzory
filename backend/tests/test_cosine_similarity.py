@@ -1,7 +1,7 @@
 import os
 
-from backend.algorithms.cosine_similarity import CSTextProcessor, CosineSimilarity
-
+from backend.algorithms.cosine_similarity import (CosineSimilarity,
+                                                  CSTextProcessor)
 
 directory = os.path.abspath(os.path.dirname(__file__))
 documents_directory = os.path.join(directory, "..", "documents")
@@ -22,6 +22,7 @@ def test_same_files() -> None:
     words2 = text_processor.get_word_counts(file2)
     score = CosineSimilarity.calculate_cosine_similarity(words1, words2)
     assert score == 100.0
+
 
 def test_not_related_files() -> None:
     file1 = DOCUMENTS[0]

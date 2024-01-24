@@ -1,6 +1,8 @@
 import os
+
+from backend.algorithms.cosine_similarity import (CosineSimilarity,
+                                                  CSTextProcessor)
 from backend.algorithms.jt_algorithm import JT_LatexSimilarityAnalyser
-from backend.algorithms.cosine_similarity import CSTextProcessor, CosineSimilarity
 from backend.algorithms.levenshtein import L_FormulaComparer
 from backend.algorithms.tokenizer import LatexTokenizer
 

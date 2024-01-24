@@ -1,16 +1,15 @@
+import os
 from typing import Union
-from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-from algorithms.levenshtein import L_FormulaComparer
+
 import uvicorn
 from algorithms.cosine_similarity import CosineSimilarity
-from read_tex_files import ReadTexFiles
+from algorithms.levenshtein import L_FormulaComparer
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-
-
-import os
+from fastapi.templating import Jinja2Templates
+from read_tex_files import ReadTexFiles
 
 app = FastAPI(debug=True)
 app.mount("/templates", StaticFiles(directory="templates"), name="templates")
