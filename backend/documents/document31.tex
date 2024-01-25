@@ -1,81 +1,53 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{polski}
-\usepackage[mathscr]{eucal}
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{MnSymbol}
-\usepackage{amsfonts}
-\usepackage{graphicx}
-
-
-
-
 
 \begin{document}
-\newcommand{\imp}{\Rightarrow}
-\newcommand{\lub}{\vee}
-\newcommand{\roz}{\setminus}
-\newcommand{\zbp}{\emptyset}
-\newcommand{\zbpot}{\mathcal{P}}
-\newcommand{\troj}{\bigtriangleup}
-\newcommand{\nat}{\mathbb{N}}
-\newcommand{\calk}{\mathbb{Z}}
-\newcommand{\rze}{\mathbb{R}}
-\newcommand{\wegde}{\wedge}
-\newcommand{\eps}{\varepsilon}
-\maketitle
-Nad zadaniami myślałem sam.
-\section*{Zadanie 1.}
-Wiedząc, że $y=x-1$ mamy: 
-\[f(x,y) = \langle x + x - 1, x^2 - (x-1)^2\rangle\]
-Redukując otrzymujemy:
-\[f(x,y) = \langle 2x - 1, 2x - 1\rangle\]
-Zauważmy, że obie współrzędne są takie same. Wobec tego $f[A]$ to zbiór punktów o dwóch tych samych współrzędnych, czyli taki, który zawiera się w prostej $f(x)=x$. Wygląda on tak:
-\[\includegraphics[width=5cm]{zadanie 1.png}\]
 
+\section*{Wzory z analizy matematycznej}
 
-\section*{Zadanie 2.}
+\subsection*{Granice}
 
-$f^{-1}[B]$ oznacza, że szukamy takich $\langle x,y\rangle$, że $x+y \in [0,1]\ \wedge \ x^2 - y^2 >0 $ Wobec tego:
-\[x+y \geq 0 \ \wegde \ x + y \leq 1 \ \wegde  \ (x-y)(x+y) >0 \]
-Czyli:
-\[ y\geq -x \ \wegde \ y \leq 1-x \ \wegde \ ((x>y \wegde x > -y)  \lub (x<-y \wedge x<y)) \]
-Co po zredukowaniu daje:
-\[ y\geq -x \ \wegde \ y \leq 1-x \ \wegde \ ((x>y \wegde -x < y)  \lub (-x>y \wedge x<y)) \]
-Po narysowaniu w płaszczyźnie, zbiór wygląda tak:
-\[\includegraphics[width=5cm]{zadanie 2.png}\]
+\[
+    \lim_{x \to 0} \frac{\sin x}{x} = 1
+\]
+\[
+    \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e
+\]
+\[
+    \lim_{n \to \infty} \left(1 + \frac{x}{n}\right)^n = e^x
+\]
 
+\subsection*{Pochodne}
 
-\section*{Zadanie 3.}
+\[
+    \frac{d}{dx} e^x = e^x
+\]
+\[
+    \frac{d}{dx} \ln x = \frac{1}{x}
+\]
+\[
+    \frac{d}{dx} \tan x = \sec^2 x
+\]
 
-\subsection*{Dowód "$\Rightarrow$"}
-Ponieważ $|X| = |Y|$, to istnieje bijekcyjna funkcja $f: X \rightarrow Y$. Wobec tego:
-\[\forall_{y \in Y} \exists!_{x \in X} \ f(x) = y \]
-Niech $\forall_{x \in X} \ A_x = \{ x,f(x)\} $. Weźmy $\mathcal{F}: \forall_{x \in X} A_x \in \mathcal{F} $. Wtedy dla każdego $A \in \mathcal{F}$ do zbioru $A$ należy jeden element ze zbioru $X$ i jeden element ze zbioru $Y$. Ponieważ $f$ jest różnowartościowa, zbiory $A_x$ są parami rozłączne. Ponadto: 
-\[\bigcup \mathcal{F} = \bigcup_{x\in X} A_x= \bigcup_{x\in X} \{x,f(x)\} =  (\bigcup_{x\in X} \{x\} \cup \bigcup_{x\in X} \{f(x)\}) \]
-Ponieważ zbiory $X$,$Y$ są rozłączne, $f(x) \in Y$ oraz $f$ jest "na" (z bijekcji) to $\bigcup_{x\in X} \{f(x)\} = \bigcup_{y\in Y} \{y\}$.  Wówczas:
-\[ \bigcup \mathcal{F} = (\bigcup_{x\in X} \{x\} \cup \bigcup_{x\in X} \{f(x)\})= (\bigcup_{x\in X} \{x\} \cup \bigcup_{y\in Y} \{y\}) = X\cup Y\]
-Kończy to dowód implikacji "$\Rightarrow$". 
-\subsection*{Dowód "$\Leftarrow$"}
-\subsubsection*{Dowód $|X|\geq |Y|$}
-Weźmy funkcję $f: X \rightarrow Y$. Niech $\forall_{A_x \in \mathcal{F}} \ A_x = \{x,f(x)\}$. Wiemy, że \[\bigcup \mathcal{F} = \bigcup_{x \in X} A_x = \bigcup_{x\in X} \{x,f(x)\} =  (\bigcup_{x\in X} \{x\} \cup \bigcup_{x\in X} \{f(x)\}) = X \cup Y\]
-Ponieważ $X$,$Y$ są rozłączne, to: \[\bigcup_{x\in X} \{f(x)\} = Y\]
-Wobec tego funkcja $f: X \rightarrow Y$ jest "na". Czyli istotnie $|X|\geq |Y|$.
+\subsection*{Całki}
 
-\subsubsection*{Dowód $|X|\leq |Y|$}
-Weźmy funkcję $g: Y \rightarrow X$. Niech $\forall_{A_y \in \mathcal{F}} \ A_y = \{g(y),y\}$. Wiemy, że \[\bigcup \mathcal{F} = \bigcup_{y \in Y} A_y = \bigcup_{y\in Y} \{g(y),y\} =  (\bigcup_{y\in Y} \{g(y)\} \cup \bigcup_{y\in Y} \{y\}) = X \cup Y\]
-Ponieważ $X$,$Y$ są rozłączne, to: \[\bigcup_{y\in Y} \{g(y)\} = X\]
-Wobec tego funkcja $g: Y \rightarrow X$ jest "na". Czyli istotnie $|X|\leq |Y|$. \\\
-Ponieważ $|X|\geq |Y|$ i $|X|\leq |Y|$, to z twierdzenia Cantora-Bernsteina $|X| = |Y|$, co kończy dowód implikacji "$\Leftarrow$".
+\[
+    \int e^x \,dx = e^x + C
+\]
+\[
+    \int \frac{1}{x} \,dx = \ln |x| + C
+\]
+\[
+    \int \sec^2 x \,dx = \tan x + C
+\]
 
-Z implikacji  "$\Rightarrow$" oraz "$\Leftarrow$" wynika, że  dla zbiorów rozłącznych $X$ i $Y$  $|X| = |Y |$ wtedy i tylko wtedy,
-gdy istnieje taka rodzina $\mathcal{F}$ zbiorów dwuelementowych parami rozłącznych, że są spełnione następujące
-dwa warunki:
-\\\
-(i) Dla każdego $A \in  \mathcal{F}$ do zbioru A należy jeden element ze zbioru $X$ i jeden element ze zbioru $Y$ 
-\\\
-(ii) 
-$\bigcup \mathcal{F} = X \cup Y$
+\subsection*{Równania różniczkowe}
+
+\[
+    y' + P(x)y = Q(x)
+\]
+\[
+    \frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}
+\]
 
 \end{document}

@@ -1,86 +1,53 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{polski}
-\usepackage[mathscr]{eucal}
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{MnSymbol}
-\usepackage{amsfonts}
-
-
-
-%\date{}
 
 \begin{document}
-\newcommand{\imp}{\Rightarrow}
-\newcommand{\lub}{\vee}
-\newcommand{\roz}{\setminus}
-\newcommand{\zbp}{\emptyset}
-\newcommand{\zbpot}{\mathcal{P}}
-\newcommand{\troj}{\bigtriangleup}
-\newcommand{\nat}{\mathbb{N}}
-\newcommand{\calk}{\mathbb{Z}}
-\newcommand{\rze}{\mathbb{R}}
-\newcommand{\wegde}{\wedge}
-\newcommand{\eps}{\varepsilon}
-\maketitle
-Nad zadaniami myślałem sam. 
-\section*{Zadanie 1.}
-Ponieważ, $|A|\leq|B|$, to istnieje surjekcyjna funkcja $f: B \rightarrow A$. Weźmy funkcję $\phi: \zbpot(A) \rightarrow \zbpot(B)$ zadaną wzorem $\phi (X) = f^{-1} (X)$. Niech $X,Y \subseteq \zbpot(A) $ takie, że $X\neq Y$. Wtedy:
-\[ \phi (X) = f^{-1}(X) = \{b\in B: f(b)\in X \}\]
-\[ \phi (Y) = f^{-1}(Y) = \{b\in B: f(b)\in Y \}\]
-$f$ jest surjekją, więc \[\forall_{x \in X} \ \exists_{b\in B} \ f(b) = x\]
-Czyli:
-\[ \phi (X) = f^{-1}(X) = \{b\in B: f(b)\in X \} = \{b\in B: f(b)=x \wegde x\in X\}\]
-\[ \phi (Y) = f^{-1}(Y) = \{b\in B: f(b)\in Y \} = \{b\in B: f(b)=y \wegde y\in Y\}\]
-Ponieważ $X \neq Y$, to istnieje element który je różni: $\exists_{z\in X \cup Y} \ z \notin X \cap Y$. Czyli $b \in B$ takie, że $f(b) = z$ istnieje w dokładnie jednym z $ \phi(X), \phi(Y)$. Funkcja $\phi : \zbpot(A) \rightarrow \zbpot(B)$ dla różnych argumentów przyjmuje różne wartości, więc jest różnowartościowa. Oznacza to, że $|\zbpot(A)|\leq|\zbpot(B)|$.
-\\\
-\\\
-Jeżeli zbiory $A$ i $B$ są równoliczne, to z twierdzenia Cantora - Bernsteina $|A|\leq|B|$ i $|A|\geq|B|$, więc z lematu udowodnionego wyżej $|\zbpot(A)|\leq|\zbpot(B)|$ i $|\zbpot(A)|\geq|\zbpot(B)|$
-Z twierdzenia Cantora - Bernsteina $|\zbpot(A)| = |\zbpot(B)|$. Zbiory $|\zbpot(A)|$ i $|\zbpot(B)|$ wtedy są równoliczne.
 
+\section*{Wzory z analizy matematycznej}
 
+\subsection*{Granice}
 
-\section*{Zadanie 2.}
-Niech $Z = \{1+ \frac{1}{n} : n \in \{1,2, ... ,2020\}\}$. Wtedy $Y = X\roz Z$.
-Pokażmy istnienie różnowartościowej funkcji $f: Y \rightarrow X$. Niech $f$ będzie zadana wzorem $f(x) = x$. $f[Y] = Y = X \roz Z \in X$ Weźmy teraz $x,y$ takie, że $x,y \in Y \wedge x\neq y$.
-Wtedy $f(x) = x$, $f(y) = y$, czyli $f(x) \neq f(y)$. Więc $f$ jest różnowartościowa. Stąd $|X|\geq|Y|$.
-\\\
-\\\
-Niech funkcja $g:Y\rightarrow X$ będzie zadana wzorem:
-\[g(x) = \left\{\begin{array}{cc}
-   1 + \frac{1}{n-2020}  \ \mbox{dla} \ x = 1 + \frac{1}{n} \wedge n\in \nat \wegde n\geq 2021 &  \\
-    x  \ \mbox{w przeciwnym przypaku} & 
-\end{array}\right.\]
-Zdefiniujmy zbiór $A = \{1 + \frac{1}{n} : n\in \nat\}$.
-\[g[Y] = A \cup (X \roz A) = X\]
-Stąd $g$ jest surjekcją , więc $|X|\leq|Y|$.
-\\\
-\\\
-Z twierdzenia Cantora-Bernsteina, ponieważ $|X|\geq|Y|$ i $|X|\leq|Y|$ to $|X|=|Y|$, czyli zbiory te są równoliczne
+\[
+    \lim_{x \to 0} \frac{\sin x}{x} = 1
+\]
+\[
+    \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e
+\]
+\[
+    \lim_{n \to \infty} \left(1 + \frac{x}{n}\right)^n = e^x
+\]
 
+\subsection*{Pochodne}
 
-\section*{Zadanie 3.}
-Ponieważ $|A| = |A \cup C|$, to istnieje bijekcyjna funkcja $f: A \rightarrow A \cup C$. Pokażmy, że istnieje surjekcyjna funkcja $g: B \rightarrow B\cup C$. Niech $g$ będzie zadana wzorem:
-\[g(x) = \left\{\begin{array}{cc}
-   f(x) \ \mbox{dla} \ x \in A &  \\
-    x  \ \mbox{dla} \ x\in B\roz A& 
-\end{array}\right.\]
-Zauważmy, że 
-\[g[B] = f[A] \cup (B\roz A) = A \cup C \cup (B\roz A) = B \cup C\]
-Więc $g$ jest surjekcją.
-Wobec tego $|B|\geq|B \cup C|$.
-\\\
-\\\
-Pokażmy teraz, że istnieje różnowartościowa funkcja $h: B \rightarrow B\cup C$. Niech $h$ będzie zadana wzorem:
-$h(x) = x$.
-\\\
-Wtedy $h[B] = B \in B\cup C$. Weźmy teraz $x.y$ takie, że $x,y \in B \wedge x\neq y$.
-Wtedy $h(x) = x$, $h(y) = y$, czyli $h(x) \neq h(y)$. Więc $h$ jest różnowartościowa.
-Wobec tego $|B|\leq|B\cup C|$.
-\\\
-\\\
-Z twierdzenia Cantora-Bernsteina, ponieważ $|B|\geq|B \cup C|$ i $|B|\leq|B
-\cup C|$, to $|B|=|B \cup C|$
+\[
+    \frac{d}{dx} e^x = e^x
+\]
+\[
+    \frac{d}{dx} \ln x = \frac{1}{x}
+\]
+\[
+    \frac{d}{dx} \tan x = \sec^2 x
+\]
+
+\subsection*{Całki}
+
+\[
+    \int e^x \,dx = e^x + C
+\]
+\[
+    \int \frac{1}{x} \,dx = \ln |x| + C
+\]
+\[
+    \int \sec^2 x \,dx = \tan x + C
+\]
+
+\subsection*{Równania różniczkowe}
+
+\[
+    y' + P(x)y = Q(x)
+\]
+\[
+    \frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}
+\]
 
 \end{document}

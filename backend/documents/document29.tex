@@ -1,90 +1,44 @@
 \documentclass{article}
-\usepackage[utf8]{inputenc}
-\usepackage{polski}
-\usepackage[mathscr]{eucal}
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{MnSymbol}
-\usepackage{amsfonts}
-
-
-
-
 
 \begin{document}
-\newcommand{\imp}{\Rightarrow}
-\newcommand{\lub}{\vee}
-\newcommand{\roz}{\setminus}
-\newcommand{\zbp}{\emptyset}
-\newcommand{\zbpot}{\mathcal{P}}
-\newcommand{\troj}{\bigtriangleup}
-\newcommand{\nat}{\mathbb{N}}
-\newcommand{\calk}{\mathbb{Z}}
-\newcommand{\rze}{\mathbb{R}}
-\newcommand{\wegde}{\wedge}
-\newcommand{\eps}{\varepsilon}
-\newcommand{\con}{\mathfrak{c}}
-\maketitle
-Nad zadaniami myślałem sam. 
-\section*{Zadanie 1.}
-\subsection*{(a)}
-Niech $\mathcal{A}$ będzie taką rodziną indeksowaną, że $\mathcal{A}_m = \{\langle m,r\rangle : r \in \rze \}$ dla $m\in \rze \setminus \mathbb{Q}$ (będzie to rodzina pionowych prostych o pierwszej współrzędnej niewymiernej) 
-Oczywiście $\mathcal{A}$ jest rodziną zbiorów parami rozłącznych.\\\
-$\vert \mathcal{A}_m \vert = \vert \rze \vert = \con $ (ze względu na wybór drugiej współrzędnej)\\\
-$\vert \mathcal{A} \vert = \vert \rze \setminus \mathbb{Q}\vert  = \con$ (ze względu na ilość $m$)\\\\
-Ponieważ $\langle m,r\rangle \notin (\mathbb{Q} \times \mathbb{Q})$ dla $m$ niewymiernego to $\langle m,r\rangle \in (\rze \times \rze) \setminus ( \mathbb{Q} \times \mathbb{Q}) $.
-Wobec tego istnieje rodzina mocy continuum podzbiorów mocy continuum, parami rozłącznych w $(\rze \times \rze) \setminus ( \mathbb{Q} \times \mathbb{Q})$
 
-\subsection*{(b)}
-\subsubsection*{$A$ skończony}
-Jeśli zbiór $A$ jest skończony, to niech $n$ będzie pierwszą współrzędną punktu o najwyższej pierwszej wspołrzędnej. \\\
-Przez $\mathcal{B}$ oznaczmy rodzinę indeksowaną taką,że $\mathcal{B}_m = \{\langle r,m\rangle : r \in \rze \wedge r\geq n+1\}$ dla $m\in \rze$ (będzie to zbiór półprostych poziomych o początku w punkcie $\langle n+1,m \rangle$) $\langle r,m \rangle \in (\rze \times \rze)\roz A$, bo $\langle r,m \rangle \notin A$
-\\\
-$\vert \mathcal{B}_m \vert = \vert [n+1, \infty) \vert =\con $\\\
-$\vert \mathcal{B} \vert = \vert \rze \vert = \con $\\\
-Więc istnieje rodzina mocy continuum podzbiorów mocy continuum, parami rozłącznych w $(\rze \times \rze) \setminus A$
-\subsubsection*{$A$ nieskończony}
-Skoro $A$ jest nieskończony i przeliczalny, to musi być równoliczny z $\nat$. Stąd istnieje bijekcja $f:(\mathbb{Q} \times \mathbb{Q}) \rightarrow A$. Rodziną mocy continuum podzbiorów mocy continuum, parami rozłącznych w $(\rze \times \rze) \setminus A$ będzie wobec tego $f[\mathcal{A}]$ ( $\mathcal{A}$ z podpunktu (a)) Będzie ona parami rozłączna ze względu na bijektywność $f$. Więc istnieje taka rodzina.
-\section*{Zadanie 2.}
-Z należenia $f\in \nat^\nat$, wynika, że $A \subseteq \nat^\nat$, wobec tego $\vert A \vert \leq \vert \nat ^ \nat \vert = \con  $. Stąd $\vert A \vert \leq \con$. Ponieważ $\vert f(n)- f(n+1)\vert = 1$, to $f(n) - f(n+1) = 1 \lub f(n) - f(n+1) = -1$.
-Weźmy zbiór \[B = \{g \in \nat ^ \nat: \forall_{n\geq 1} \ (g(n) = 1 \lub g(n)= -1)  \}\]
-Niech $\psi: B \rightarrow \{-1,1\}^\nat$ będzie zadana wzorem $\psi(g)(n) = g(n+1)$. Łatwo zauważyć, że $\psi$ jest surjekcją (bo $g(n)$ to ciąg $\{-1,1\}^\nat$ dla $n\geq 1$), więc    
-$\vert B \vert \geq \vert \{-1,1\}^\nat \vert = \vert \{0,1\}^\nat \vert = \con $\\\
-Niech $\phi: A \rightarrow B$, będzie zadana wzorem \[\phi(f)(n) = \left\{\begin{array}{cc} f(n)
-     \ \mbox{dla} \  n = 0  &  \\
-     f(n-1)-f(n) \ \mbox{dla} \ n>0 & 
-\end{array}\right.\]
-Udowodnijmy, że $\phi$ jest surjekcją.  Weźmy dowolny ciąg $g \in B$. Pokażmy, że da się skonstuować taki ciąg $f \in A$, że $ g = \phi(f)$. Niech \[f(n) = \left\{\begin{array}{cc} g(n)
-     \ \mbox{dla} \  n = 0  &  \\
-     f(n-1)-g(n) \ \mbox{dla} \ n>0 & 
-\end{array}\right.\] 
-$f\in A$, ponieważ $\forall_{n \in \nat} \  \vert f(n) - f(n+1) \vert = \vert g(n+1) \vert = 1$. \\\
-Zauważmy, poniższe zależności \[\phi(f)(0) = g(0)\] oraz \[\phi(f)(n) =f(n-1) - f(n) =f(n-1) - (f(n-1) - g(n))= f(n-1) - f(n-1) + g(n) = g(n)\] dla każdego $n>0$. Wobec tego $\forall_{n \in \nat} \ \phi(f)(n) = g(n)$, więc $\phi(f) = g$.\\\ Skoro $\forall_{g \in B} \exists_{f \in A} \ \phi(f) = g$, to $\phi: A \rightarrow B$ jest surjekcją, więc $\vert A \vert \geq \vert B \vert \geq \con$. \\\
-Z twierdzenia Cantora - Bernsteina ponieważ 
-$\vert A \vert \geq  \con$ i $\vert A \vert \leq  \con$ to $\vert A \vert =  \con$. Więc zbiór $A$ jest mocy continuum.
+\section*{Wzory z analizy matematycznej}
 
+\subsection*{Granice}
 
-\section*{Zadanie 3.}
-\subsection*{(a)}
-Niech $X = \{1,2,3\}$, $R=\{\langle 1,1 \rangle,\langle 2,2 \rangle,\langle 3,3 \rangle,\langle 1,2 \rangle,\langle 2,1\rangle\}$, $S=\{\langle 1,1 \rangle,\langle 2,2 \rangle,\langle 3,3 \rangle,\langle 1,3 \rangle,\langle 3,1\rangle\}$.
-\\\\ Relacje $R,S$ są zwrotne, symetryczne, oraz przechodnie(prawdą jest, że $\forall_{x,y,z \in X} xRy \wedge yRz \imp xRz$, dlatego że poprzednik implikacji jest fałszywy dla parami różnych $x,y,z$ (nie ma takich)).
- \[R \cup S = \{\langle 1,1 \rangle,\langle 2,2 \rangle,\langle 3,3 \rangle,\langle 1,2 \rangle,\langle 2,1\rangle,\langle 1,3 \rangle,\langle 3,1\rangle\} \]
- Zauważmy, że $2 \ R \cup S \ 1, \  1 \ R \cup S \ 3 $, ale $\lnot (2 \ R \cup S \ 3)$. Wobec tego relacja $R \cup S$ nie jest przechodnia, czyli nie jest relacją równoważności.
+\[
+    \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e
+\]
+\[
+    \lim_{h \to 0} \frac{\sin(h)}{h} = 1
+\]
+\[
+    \lim_{n \to \infty} \left(1 + \frac{x}{n}\right)^n = e^x
+\]
 
-\subsection*{(b)}
-Dowiedźmy, że $R\cap S$ jest relacją równoważności, jeżeli $R,S$ są relacjami równoważności.
-\subsubsection*{Zwrotność}
-Ponieważ $R,S$ są zwrotne, to $\forall_{x \in X} \ xRx \wedge xSx$. Stąd wynika, że $\forall_{x\in X} \  x R\cap S x$, więc relacja $R\cap S$ jest zwrotna
-\subsubsection*{Symetryczność}
-Niech $x,y \in X$. Jeśli $x R\cap S y$, to $xRy \ \wedge \ xSy$. Relacje $R,S$ są relacjami równoważności, więc są symetryczne. Stąd $yRx \ \wedge \ ySx$, czyli $y R\cap S x$. Ponieważ z $x R\cap S y$ wynika $y R\cap S x$, to relacja $R \cap S$ jest symetryczna.
-\subsubsection*{Przechodniość}
-Niech $x,y,z \in X$. Jeżeli $x R\cap S y \  \wedge \ y R\cap S z$, to $xRy\wedge \ yRz \ \wegde \ xSy \ \wedge \ ySz$. Ponieważ $R,S$ są relacjami równoważności, to są przechodnie. Stąd wynika, że $xRz \wedge xSz$, więc $x R\cap S z$. Ponieważ z $x R\cap S y \wedge y R\cap S z$ wynika $x R\cap S z$, to relacja $R \cap S$ jest przechodnia.
-\\\\
-\\\\
-Ponieważ relacja $R \cap S$ jest zwrotna, symetryczna i przechodnia, to jest ona relacją równoważności. 
+\subsection*{Szereg funkcyjny}
 
+\[
+    f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n
+\]
 
-\subsection*{(c)}
-Niech $X = {1}$, $R=S=\{\langle 1,1 \rangle\}$. Łatwo zauważyć, że $R,S$ są zwrotne, symetryczne i przechodnie, więc są one relacjami równoważności. $R\setminus S = \zbp$, $1 \in X$
- oraz \\ $\lnot(1 \  R\roz S \ 1) $, stąd relacja $R\roz S$ nie jest zwrotna, więc nie jest relacją równoważności.
+\subsection*{Pochodne cząstkowe}
+
+\[
+    \frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}
+\]
+\[
+    \frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right)
+\]
+
+\subsection*{Równania różniczkowe}
+
+\[
+    \frac{dy}{dx} + P(x)y = Q(x)
+\]
+\[
+    \frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}
+\]
+
 \end{document}
