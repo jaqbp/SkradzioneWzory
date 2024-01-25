@@ -58,7 +58,8 @@ async def check_similarity_base(request: Request):
         </style>
     </head>
     <body>
-        <h1>Raport podobieństwa między wzorami z podanego pliku a wzorami z dokumentów znajdujących się w bazie: </h1>
+        <h1>Raport podobieństwa między wzorami z podanego pliku, a wzorami z dokumentów znajdujących się w bazie </h1>
+        <h2> Poniżej znajdują się wyniki dla poszczególnym algorytmów: </h2>
     """
 
     if "algorithm1" in algorithms:

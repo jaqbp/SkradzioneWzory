@@ -11,7 +11,7 @@ class ReadTexFiles:
             return tex_contents
 
         # Loop through all files in the directory
-        for filename in os.listdir(directory):
+        for filename in sorted(os.listdir(directory)):
             if filename.endswith(".tex"):
                 file_path = os.path.join(directory, filename)
 
