@@ -4,6 +4,7 @@ from typing import Union
 import uvicorn
 from algorithms.cosine_similarity import CosineSimilarity
 from algorithms.levenshtein import L_FormulaComparer
+from algorithms.jt_algorithm import JT_LatexSimilarityAnalyser
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
@@ -72,8 +73,13 @@ async def check_similarity_base(request: Request):
                 report += f"<h2> Wyniki dla algorytmu levenshtein'a dla pliku {index}: </h2> <p> {result}</p>"
 
     if "algorithm2" in algorithms:
-        # TODO: add Jaccard similarity to the html report
-        pass
+        jaccard_tanimoto = JT_LatexSimilarityAnalyser()
+        for index, content in enumerate(tex_contents, start=1):
+            result = jaccard_tanimoto.generate_report(
+                text1, content, index, threshold
+            )
+            if result != "":
+                report += f"<h2> Wyniki dla algorytmu jaccarda-tanimoto dla pliku {index}: </h2> <p> {result}</p>"
     if "algorithm3" in algorithms:
         cosine_similarity = CosineSimilarity()
         for index, content in enumerate(tex_contents, start=1):
@@ -123,8 +129,9 @@ async def check_similarity(request: Request):
         result = l_formula_comparer.generate_report_two_files(text1, text2, threshold)
         report += f"<h2> Wyniki dla algorytmu levenshtein'a: </h2> <p> {result}</p>"
     if "algorithm2" in algorithms:
-        # TODO: add Jaccard similarity to the html report
-        pass
+        jaccard_tanimoto = JT_LatexSimilarityAnalyser()
+        result = jaccard_tanimoto.generate_report(text1, text2)
+        report += f"<h2> Wyniki dla algorytmu jaccarda-tanimoto: </h2> <p> {result}</p>"
     if "algorithm3" in algorithms:
         cosine_similarity = CosineSimilarity()
         result = cosine_similarity.generate_report_two_files(text1, text2, threshold)
