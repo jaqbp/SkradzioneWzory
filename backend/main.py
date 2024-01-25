@@ -76,7 +76,7 @@ async def check_similarity_base(request: Request):
         jaccard_tanimoto = JT_LatexSimilarityAnalyser()
         for index, content in enumerate(tex_contents, start=1):
             result = jaccard_tanimoto.generate_report(
-                text1, content, index, threshold
+                text1, content, threshold
             )
             if result != "":
                 report += f"<h2> Wyniki dla algorytmu jaccarda-tanimoto dla pliku {index}: </h2> <p> {result}</p>"
@@ -130,7 +130,7 @@ async def check_similarity(request: Request):
         report += f"<h2> Wyniki dla algorytmu levenshtein'a: </h2> <p> {result}</p>"
     if "algorithm2" in algorithms:
         jaccard_tanimoto = JT_LatexSimilarityAnalyser()
-        result = jaccard_tanimoto.generate_report(text1, text2)
+        result = jaccard_tanimoto.generate_report(text1, text2, threshold)
         report += f"<h2> Wyniki dla algorytmu jaccarda-tanimoto: </h2> <p> {result}</p>"
     if "algorithm3" in algorithms:
         cosine_similarity = CosineSimilarity()
