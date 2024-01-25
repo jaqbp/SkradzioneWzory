@@ -2,6 +2,53 @@
 \usepackage{amsmath}
 
 \begin{document}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+\maketitle
+Nad zadaniami myślałem sam. 
+\section*{Zadanie 1.}
+Ponieważ, $|A|\leq|B|$, to istnieje surjekcyjna funkcja $f: B \rightarrow A$. Weźmy funkcję $\phi: \zbpot(A) \rightarrow \zbpot(B)$ zadaną wzorem $\phi (X) = f^{-1} (X)$. Niech $X,Y \subseteq \zbpot(A) $ takie, że $X\neq Y$. Wtedy:
+\[ \phi (X) = f^{-1}(X) = \{b\in B: f(b)\in X \}\]
+\[ \phi (Y) = f^{-1}(Y) = \{b\in B: f(b)\in Y \}\]
+$f$ jest surjekją, więc \[\forall_{x \in X} \ \exists_{b\in B} \ f(b) = x\]
+Czyli:
+\[ \phi (X) = f^{-1}(X) = \{b\in B: f(b)\in X \} = \{b\in B: f(b)=x \wegde x\in X\}\]
+\[ \phi (Y) = f^{-1}(Y) = \{b\in B: f(b)\in Y \} = \{b\in B: f(b)=y \wegde y\in Y\}\]
+Ponieważ $X \neq Y$, to istnieje element który je różni: $\exists_{z\in X \cup Y} \ z \notin X \cap Y$. Czyli $b \in B$ takie, że $f(b) = z$ istnieje w dokładnie jednym z $ \phi(X), \phi(Y)$. Funkcja $\phi : \zbpot(A) \rightarrow \zbpot(B)$ dla różnych argumentów przyjmuje różne wartości, więc jest różnowartościowa. Oznacza to, że $|\zbpot(A)|\leq|\zbpot(B)|$.
+\\\
+\\\
+Jeżeli zbiory $A$ i $B$ są równoliczne, to z twierdzenia Cantora - Bernsteina $|A|\leq|B|$ i $|A|\geq|B|$, więc z lematu udowodnionego wyżej $|\zbpot(A)|\leq|\zbpot(B)|$ i $|\zbpot(A)|\geq|\zbpot(B)|$
+Z twierdzenia Cantora - Bernsteina $|\zbpot(A)| = |\zbpot(B)|$. Zbiory $|\zbpot(A)|$ i $|\zbpot(B)|$ wtedy są równoliczne.
+
+
+
+\section*{Zadanie 2.}
+Niech $Z = \{1+ \frac{1}{n} : n \in \{1,2, ... ,2020\}\}$. Wtedy $Y = X\roz Z$.
+Pokażmy istnienie różnowartościowej funkcji $f: Y \rightarrow X$. Niech $f$ będzie zadana wzorem $f(x) = x$. $f[Y] = Y = X \roz Z \in X$ Weźmy teraz $x,y$ takie, że $x,y \in Y \wedge x\neq y$.
+Wtedy $f(x) = x$, $f(y) = y$, czyli $f(x) \neq f(y)$. Więc $f$ jest różnowartościowa. Stąd $|X|\geq|Y|$.
+\\\
+\\\
+Niech funkcja $g:Y\rightarrow X$ będzie zadana wzorem:
+\[g(x) = \left\{\begin{array}{cc}
+   1 + \frac{1}{n-2020}  \ \mbox{dla} \ x = 1 + \frac{1}{n} \wedge n\in \nat \wegde n\geq 2021 &  \\
+    x  \ \mbox{w przeciwnym przypaku} & 
+\end{array}\right.\]
+Zdefiniujmy zbiór $A = \{1 + \frac{1}{n} : n\in \nat\}$.
+\[g[Y] = A \cup (X \roz A) = X\]
+Stąd $g$ jest surjekcją , więc $|X|\leq|Y|$.
+\\\
+\\\
+Z twierdzenia Cantora-Bernsteina, ponieważ $|X|\geq|Y|$ i $|X|\leq|Y|$ to $|X|=|Y|$, czyli zbiory te są równoliczne
+
 
 \section*{Wzory z analizy matematycznej}
 

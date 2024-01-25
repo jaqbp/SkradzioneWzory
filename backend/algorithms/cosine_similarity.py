@@ -20,7 +20,8 @@ class CSTextProcessor:
         cleaned_text = punctuation_regex.sub("", text)
         cleaned_text = noise_regex.sub("", cleaned_text)
         cleaned_text = math_symbols_regex.sub("", cleaned_text)
-        return LatexNodes2Text().latex_to_text(cleaned_text.lower().strip())
+        tokenizer = LatexTokenizer()
+        return "".join(tokenizer.extract_math(cleaned_text.lower().strip()))
 
     def get_word_counts(self, text: str) -> Counter:
         cleaned_text = self.prepare_text(text)
