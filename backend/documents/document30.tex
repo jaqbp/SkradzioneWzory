@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\begin{document}
+
+\section*{Wzory z analizy matematycznej}
+
+\subsection*{Granice}
+
+\[
+    \lim_{x \to \infty} \left(1 + \frac{1}{x}\right)^x = e
+\]
+\[
+    \lim_{h \to 0} \frac{\sin(h)}{h} = 1
+\]
+\[
+    \lim_{n \to \infty} \left(1 + \frac{x}{n}\right)^n = e^x
+\]
+
+\subsection*{Szereg funkcyjny}
+
+\[
+    f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n
+\]
+
+\subsection*{Pochodne cząstkowe}
+
+\[
+    \frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}
+\]
+\[
+    \frac{\partial^2 f}{\partial x^2} = \frac{\partial}{\partial x}\left(\frac{\partial f}{\partial x}\right)
+\]
+
+\subsection*{Równania różniczkowe}
+
+\[
+    \frac{dy}{dx} + P(x)y = Q(x)
+\]
+\[
+    \frac{\partial^2 u}{\partial t^2} = c^2 \frac{\partial^2 u}{\partial x^2}
+\]
+
+\end{document}
