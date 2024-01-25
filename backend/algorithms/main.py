@@ -1,8 +1,10 @@
 import os
-from jt_algorithm import JT_LatexSimilarityAnalyser
-from cosine_similarity import CSTextProcessor, CosineSimilarity
-from levenshtein import L_FormulaComparer
-from tokenizer import LatexTokenizer
+
+from backend.algorithms.cosine_similarity import (CosineSimilarity,
+                                                  CSTextProcessor)
+from backend.algorithms.jt_algorithm import JT_LatexSimilarityAnalyser
+from backend.algorithms.levenshtein import L_FormulaComparer
+from backend.algorithms.tokenizer import LatexTokenizer
 
 if __name__ == "__main__":
     # Cosine Similarity
@@ -39,11 +41,11 @@ if __name__ == "__main__":
 
     text_processor = CSTextProcessor(noise_words)
 
-    file_path1 = os.path.join(os.path.dirname(__file__), "tex_files", "example2.tex")
+    file_path1 = os.path.join(os.path.dirname(__file__), "tex_files", "document1.tex")
     with open(file_path1, "r") as file:
         latex_content1 = "".join(file.readlines())
 
-    file_path2 = os.path.join(os.path.dirname(__file__), "tex_files", "document1.tex")
+    file_path2 = os.path.join(os.path.dirname(__file__), "tex_files", "document3.tex")
     with open(file_path2, "r") as file:
         latex_content2 = "".join(file.readlines())
 
@@ -80,4 +82,4 @@ if __name__ == "__main__":
     print("Levenshtein")
 
     l_formula_comparer = L_FormulaComparer()
-    print(l_formula_comparer.generate_report(latex_content1, latex_content2))
+    print(l_formula_comparer.generate_report(latex_content1, latex_content2, 1, 0.3))

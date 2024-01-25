@@ -1,4 +1,4 @@
-from algorithms.tokenizer import LatexTokenizer
+from backend.algorithms.tokenizer import LatexTokenizer
 
 
 class L_FormulaComparer:
