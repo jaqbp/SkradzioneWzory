@@ -1,0 +1,435 @@
+\documentclass{MathematicaReport}
+
+% PACKAGES
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usetikzlibrary{patterns}
+\begin{document}
+
+\section{Project objective}
+The goal of the project is to explain, present, and compare three methods of
+approximating functions either from a set of given points or by approximating
+the function itself. The methods that we chose are:
+\begin{enumerate}
+	\item Interpolation using Lagrange polynomials
+	\item Fourier series
+	\item The least squares method
+\end{enumerate}
+
+\section{Lagrange polynomials}
+\textbf{Lagrange polynomials} are polynomials \( w(x) \) that interpolate a 
+given set of points
+\( P = \{ (x_0, y_0)\)\(,\ (x_1, y_1)\)\(,\ldots\) \(,\ (x_n, y_n) \} \)
+Which means that they satisfy the following condition:
+
+\[
+	\forall_{(x_i, y_i) \in P}\ w(x_i) = y_i
+\]
+
+In other words, when a polynomial \textbf{interpolates} the dataset, it passes 
+through all of the points in said dataset.
+The Lagrange interpolating polynomial is the unique polynomial of lowest degree 
+that interpolates a given set of data
+
+Langrage polynomials for a given set of data are calculated using the following
+formula
+\[
+	w(x) = \sum_{i=0}^n y_i \cdot \prod_{\begin{smallmatrix}0\le j\le n\\ j\neq i\end{smallmatrix}}
+	 \frac{x-x_j}{x_i-x_j}
+\]
+
+In the next section, I would like to demonstrate how this formula can be
+obtained and that it is actually quite straightforward and intuitive.
+
+\subsection{How to arrive at the formula for Lagrange polynomials?}
+This formula might seem daunting at first, but let us first consider a
+polynomial \( w_i(x) \) that \textbf{goes through only one point \( (x_i, y_i) \) 
+and is equal to 0 for the rest of the points}.
+
+\begin{enumerate}
+	\item For a given pair \( (x_i, y_i) \), it has to be equal to \( y_i \) 
+	\item For each pair \( (x_j, y_j) \) other than \( (x_i, y_i) \), it has to
+	be equal to 0
+\end{enumerate}
+
+Let's start with condition no. 2. It tells us that the polynomial \( w(x) \)
+should be equal to 0 for all \( x_j \) inputs, that are not \( x_i \). That is
+actually quite simple -- all we have to do is construct a polynomial in
+factored form with the roots being all the \( x_j \) values other than \( x_i \).
+\[
+	w_i(x) = \prod_{\begin{smallmatrix}0\le j\le n\\ j\neq i\end{smallmatrix}} (x-x_j)
+\]
+
+Let's now consider a simplified condition no. 1 -- let's find a polynomial that is
+equal to 1 for \( (x_i, x_i) \), but also satisfies condition no. 2. That is
+actually also very simple -- we just have to divide the polynomial that we have 
+already constructed by \((x_i - x_j)\)
+\[
+	w_i(x) = \prod_{\begin{smallmatrix}0\le j\le n\\ j\neq i\end{smallmatrix}} \frac{(x - x_j)}{(x_i - x_j)}
+\]
+Now,
+\[
+	w_i(x_i) = \prod_{\begin{smallmatrix}0\le j\le n\\ j\neq i\end{smallmatrix}} \frac{(x_i - x_j)}{(x_i - x_j)} = 1
+\]
+In order for the polynomial to satsify cond. no. 1, all we have to do is 
+multiply it by \( y_i \)
+\[
+	w_i(x) = y_i \prod_{\begin{smallmatrix}0\le j\le n\\ j\neq i\end{smallmatrix}} \frac{(x - x_j)}{(x_i - x_j)}
+\]
+Condition no. 1 is satisfied,
+\[
+	w_i(x_i) = y_i \prod_{\begin{smallmatrix}0\le j\le n\\ j\neq i\end{smallmatrix}} \frac{(x_i - x_j)}{(x_i - x_j)} = y_i \cdot 1 = y_i
+\]
+
+Since both of the conditions are satisfied, \( w_i(x) \) interpolates one point
+-- \( (x_i, y_i) \) and is equal to 0 for all the other points in the dataset. 
+
+Below is a sample dataset comprising three points 
+\( (x_1, y_1), (x_2, y_2), (x_3, y_3) \) and the values that polynomials \(w_i\)
+take for each of them.
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{c|ccc}
+			      & \( x_1 \) & \( x_2 \) & \( x_3 \)\\ \hline
+        \( w_1 \) & \( y_1 \) & \(  0  \) & \(  0  \)\\ 
+        \( w_2 \) & \(  0  \) & \( y_2 \) & \(  0  \)\\ 
+        \( w_3 \) & \(  0  \) & \(  0  \) & \( y_3 \)\\ 
+    \end{tabular}
+\end{table}
+
+To find a polynomial that interpolates all of the points, we simply create
+\( w_i(x) \) for every point and take their sum.
+
+\[
+	w(x) = \sum_{i = 0}^n w_i(x)
+\]
+
+Which expands to	
+\[
+	w(x) = \sum_{i=0}^n y_i \cdot \prod_{\begin{smallmatrix}0\le j\le n\\ j\neq i\end{smallmatrix}}
+	 \frac{x-x_j}{x_i-x_j}
+\]
+
+We have arrived at the exact formula for Lagrange polynomials.
+
+
+\subsection{Examples}
+Let us consider a very simple set of four points
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/lagrange_example1.png}
+\end{figure}
+
+Now, let's use the \texttt{Langrage} module that we have written, and create 
+a Lagrange polynomial interpolating the above-mentioned set of points.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/lagrange_example2.png}
+\end{figure}
+
+As was previously mentioned, the Lagrange interpolating polynomial is a 
+polynomial the of lowest degree that interpolates a given set of data. Thus,
+feeding two points into our module will yield a linear function that 
+interpolates these points.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/lagrange_example3.png}
+\end{figure}
+
+Similarly, three points will yield a quadratic (parabolic) function.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/lagrange_example4.png}
+\end{figure}
+
+
+\subsection{Pros and cons of using Lagrange polynomials for approximation}
+
+\textsc{Pros}
+\begin{itemize}
+	\item The function goes exactly through the set of points given as the input,
+	\item The formula is quite easy to understand, as I tried to demonstrate in
+		section 2.2,
+	\item Even when the points are not evenly spaced, it can be used to find the 
+		interpolating function.
+\end{itemize}
+
+\textsc{Cons}
+\begin{itemize}
+	\item As new points are added to the dataset, the function quickly becomes
+		computationally complex,
+	\item Unsuitable for cases where the general shape of the function is known
+		e.g. when we know the function we are looking for should be roughly
+		logarithmic, it's better to use the least-squares function approximation
+\end{itemize}
+
+\subsection{Usage of Lagrange interpolation in practice}
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Numerical Analysis:}
+    \begin{itemize}
+        \item \textbf{Root Finding:} Lagrange interpolation can be utilized to approximate the roots of a function by interpolating a set of points around the root region.
+        \item \textbf{Differential Equations:} It is employed in the numerical solution of differential equations, where interpolated points aid in approximating the solutions.
+    \end{itemize}
+    
+    \item \textbf{Computer Graphics:}
+    \begin{itemize}
+        \item \textbf{Curve Fitting:} Lagrange interpolation is often used for curve fitting in computer graphics to smoothly connect a set of control points, resulting in aesthetically pleasing curves.
+        \item \textbf{Geometric Modeling:} In 3D computer graphics, Lagrange interpolation can be applied for surface representation by interpolating points on a mesh.
+    \end{itemize}
+    
+    \item \textbf{Signal Processing:}
+    \begin{itemize}
+        \item \textbf{Audio Processing:} Lagrange interpolation plays a role in audio signal processing for tasks such as resampling and interpolation to achieve a smoother representation of the signal.
+        \item \textbf{Image Processing:} In image processing, Lagrange interpolation is employed for resizing images, where it helps in estimating pixel values between known data points.
+    \end{itemize}
+    
+\end{enumerate}
+
+\section{Fourier series}
+Fourier series is a powerful mathematical tool used to represent periodic
+functions as a sum of sine and cosine functions. Named after the French
+mathematician Joseph Fourier, who introduced the concept in the 19th century,
+Fourier series find applications in various scientific and engineering domains,
+particularly in the analysis of periodic signals such as sound waves and
+electrical signals. \\
+
+For a periodic function \(f(t)\) with period \(L\), the Fourier series is given
+by:
+
+\begin{equation*}
+f(t) = a_0 + \sum_{n=1}^{\infty} \left( a_n \cos\left(\frac{2\pi nt}{L}\right) + b_n \sin\left(\frac{2\pi nt}{L}\right) \right)
+\end{equation*}
+
+The coefficients \(a_0\), \(a_n\), and \(b_n\) are determined by the following integrals:
+
+\begin{equation*}
+a_0 = \frac{1}{L} \int_{0}^{L} f(t) \, dt
+\end{equation*}
+
+\begin{equation*}
+a_n = \frac{2}{L} \int_{0}^{L} f(t) \cos\left(\frac{2\pi nt}{L}\right) \, dt
+\end{equation*}
+
+\begin{equation*}
+b_n = \frac{2}{L} \int_{0}^{L} f(t) \sin\left(\frac{2\pi nt}{L}\right) \, dt
+\end{equation*}
+
+These coefficients represent the amplitudes of the different sine and cosine
+components in the Fourier series. The term \(\frac{2\pi nt}{L}\) in the
+trigonometric functions ensures that the series captures the periodic nature of
+the function.
+
+\textbf{Example of using Fourier Series to approximate a function:}
+
+What will be the Fourier series of the function $f(x)=1-x^2$ in the interval $[-1,1]$? \\
+
+Given,
+\[ f(x) = 1 - x^2, \quad [-1, 1] \]
+
+The Fourier series of the function \( f(x) \) in the interval \([-L, L]\), i.e. \(-L \leq x \leq L\), is written as:
+\[ f(x) = A_0 + \sum_{n=1}^{\infty} A_n \cos\left(\frac{n\pi x}{L}\right) + \sum_{n=1}^{\infty} B_n \sin\left(\frac{n\pi x}{L}\right) \]
+
+Here,
+\[ A_0 = \frac{1}{2L} \int_{-L}^{L} f(x) \,dx \]
+\[ A_n = \frac{1}{L} \int_{-L}^{L} f(x) \cos\left(\frac{n\pi x}{L}\right) \,dx, \quad n > 0 \]
+\[ B_n = \frac{1}{L} \int_{-L}^{L} f(x) \sin\left(\frac{n\pi x}{L}\right) \,dx, \quad n > 0 \]
+
+Now, by applying the formula for \( f(x) \) in the interval \([-1, 1]\):
+\[ f(x) = \frac{1}{2} \cdot 1 \cdot \int_{-1}^{1} (1 - x^2) \,dx + \sum_{n=1}^{\infty} \frac{1}{1} \int_{-1}^{1} (1 - x^2) \cos(n\pi x) \,dx \cdot \cos(n\pi x) \]
+\[ + \sum_{n=1}^{\infty} \frac{1}{1} \int_{-1}^{1} (1 - x^2) \sin(n\pi x) \,dx \cdot \sin(n\pi x) \]
+
+Now simplifying the definite integrals,
+\[ = \frac{1}{2} \cdot \frac{4}{3} + \sum_{n=1}^{\infty} \frac{-4(-1)^n\pi^2n^2}{n^2\pi^2} \cos(n\pi x) + \sum_{n=1}^{\infty} 0 \cdot \sin(n\pi x) \]
+\[ = \frac{2}{3} + \sum_{n=1}^{\infty} \frac{4(-1)^n}{n^2} \cos(n\pi x) \]
+
+Thus, the Fourier series of the function $f(x)=1-x^2$ in the interval 
+$[-1,1]$ is: $\frac{2}{3} + \sum_{n=1}^{\infty} \frac{4(-1)^n}{n^2} \cos(n\pi x)$
+
+\subsection{Real-life Applications of Fourier Series}
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Audio Processing:}
+    \begin{itemize}
+	\item \textbf{Music Compression:} Fourier series is used in audio
+	compression algorithms (like MP3) for efficient representation and
+	compression of audio signals.
+    \end{itemize}
+    
+    \item \textbf{Telecommunications:}
+    \begin{itemize}
+	\item \textbf{Signal Transmission:} Fourier series is used in techniques
+	like Frequency Division Multiplexing (FDM) to transmit multiple signals
+	simultaneously over a communication channel.
+    \end{itemize}
+    
+    \item \textbf{Electrical Engineering:}
+    \begin{itemize}
+	\item \textbf{Power Systems:} Fourier series is employed in power
+	systems analysis to study periodic waveforms and analyze harmonic
+	content in AC circuits.
+    \end{itemize}
+    
+    \item \textbf{Image Processing:}
+    \begin{itemize}
+	\item \textbf{Image Compression:} Fourier series is used in image
+	compression algorithms (like JPEG) for efficient representation and
+	compression of images.
+    \end{itemize}
+    
+    \item \textbf{Physics:}
+    \begin{itemize}
+	\item \textbf{Wave Analysis:} Fourier series is used in physics to
+	analyze and describe periodic phenomena, such as the vibration of
+	strings or the behavior of waves.
+    \end{itemize}
+    
+    \item \textbf{Medical Imaging:}
+    \begin{itemize}
+	\item \textbf{MRI (Magnetic Resonance Imaging):} Fourier Transform
+	techniques, related to Fourier series, are fundamental in MRI for data
+	transformation and image reconstruction.
+    \end{itemize}
+    
+    \item \textbf{Chemistry:}
+    \begin{itemize}
+	\item \textbf{Spectroscopy:} Fourier Transform Infrared (FTIR)
+	spectroscopy uses techniques related to Fourier series for the analysis
+	of molecular absorption and emission of light.
+    \end{itemize}
+\end{enumerate}
+
+
+\section{The least squares method}
+\textbf{The least squares fitting method} is a widely used technique in statistical
+analysis and regression modeling. It aims to find the best-fitting line or curve
+for a set of data points by minimizing the sum of the squares of the
+vertical distances (residuals) between the data points in the set and the
+corresponding points on the fitted line or curve. 
+
+\subsection{How to fit a line to a set of points?}
+When trying to find the line of best fit for a given data set, we will be using
+a linear function \( f(x) = ax + b \)  as a basis for the least squares method.
+
+Let's imagine that we are looking for a line \( f(x) = ax + b \) that best fits 
+a set of points : \( \{(x_1,y_1), (x_2,y_2),\ldots,(x_n,y_n)\} \). 
+In order to measure how much the line deviates from the points, we can introduce
+residuals (vertical distances) \( \xi_i = | f(x_i) - y_i |  \). 
+
+The problem of finding that line boils down to minimizing the sum of the 
+squares of the residuals.
+
+\subsection{Geometric interpretation}
+Let's imagine that we are looking for a line \( f(x) = ax + b \) that best fits 
+a set of points : \( \{(0,1), (3,1), (4,5)\} \). In order to find this line,
+we have to find a formula for the squares of the residuals and minimize it.
+
+Geometrically, it presents as follows:
+\begin{center}
+	\input{illustrations/tikz_least_squares.tex}
+\end{center}
+The distance in the vertical direction between the point and the line is the 
+residual \( \xi \) of that point. The squares represent \( \xi^2 \) -- which is
+the parameter that we're trying to minimize.
+
+\subsection{The optimization problem}
+The parameter that we're trying to minimize (optimize) is the sum of the squares
+of the residuals \( R^2 = \sum_{i=1}^{n} \xi_i^2 \) with respect to the parameters of 
+the linear function \( a, b \).
+
+\[
+	R^2 = \sum_{i=1}^{n} \xi_i^2 = \sum_{i=1}^{n} \left[ y_i - (ax_i + b) \right]^2
+\]
+
+The condition for \( R^2 \) to be a minimum is that the derivatives of \( R^2 \)
+with respect to \( a \) and \( b \) are both equal to zero.
+\begin{equation*}
+	\begin{aligned}
+		\frac{\partial R^2}{\partial a} & = -2\sum_{i=1}^n x_i[y_i-(ax_i+b)] = 0 \\
+		\frac{\partial R^2}{\partial b} & = -2\sum_{i=1}^n [y_i-(ax_i+b)] = 0 \\
+	\end{aligned}
+\end{equation*}
+
+Which we can quickly verify with Wolfram Mathematica
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{images/least_squares_derivatives.png}
+\end{figure}
+
+This leads to the equations
+\begin{equation*}
+	\begin{aligned}
+		na + b \sum_{i=1}^{n} x_i	= & \sum_{i=1}^{n} y_i \\
+		a \sum_{i=1}^{n} x_i + b \sum_{i=1}^{n} x_i^2 = & \sum_{i=1}^{n} x_i y_i
+	\end{aligned}
+\end{equation*}
+
+Which ultimately leads to the solution for \( a \) and \( b \)
+\begin{equation*}
+	\begin{aligned}
+	a & = \frac{\sum_{i=1}^{n}y_i\sum_{i=1}^{n}x_i^2-\sum_{i=1}^{n}x_i\sum_{i=1}^{n}x_iy_i}{n\sum_{i=1}^{n}x_i^2-(\sum_{i=1}^{n}x_i)^2} \\
+	b & = \frac{n\sum_{i=1}^{n}x_iy_i-\sum_{i=1}^{n}x_i\sum_{i=1}^{n}y_i}{n\sum_{i=1}^{n}x_i^2-(\sum_{i=1}^{n}x_i)^2}
+	\end{aligned}
+\end{equation*}
+
+\subsection{Examples}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/least_squares_example1.png}
+\caption{A linear function fit to the dataset}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{images/least_squares_example2.png}
+\caption{A parabolic function fit to the dataset}
+\end{figure}
+
+\newpage
+\subsection{Usage of method of least squares in practice}
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Regression Analysis:}
+    \begin{itemize}
+        \item \textbf{Linear Regression:} The method of least squares is widely used in regression analysis to fit a linear model to observed data, minimizing the sum of squared differences between observed and predicted values.
+        \item \textbf{Nonlinear Regression:} It is also applied in nonlinear regression, where the relationship between variables is modeled with a nonlinear function, and the least squares method minimizes the residuals.
+    \end{itemize}
+    
+    \item \textbf{Curve Fitting:}
+    \begin{itemize}
+        \item \textbf{Polynomial Curve Fitting:} The method of least squares is employed to fit polynomial curves to data points, providing a flexible approach to approximate complex relationships.
+        \item \textbf{Exponential and Power Curve Fitting:} It is used for fitting exponential and power-law curves to experimental data in various scientific disciplines.
+    \end{itemize}
+    
+    \item \textbf{Signal Processing:}
+    \begin{itemize}
+        \item \textbf{Filter Design:} In signal processing, the least squares method is utilized for designing digital filters that minimize the difference between the desired and actual frequency responses.
+        \item \textbf{System Identification:} It plays a crucial role in system identification, where mathematical models are fitted to observed input-output data of dynamic systems.
+    \end{itemize}
+    
+    \item \textbf{Financial Modeling:}
+    \begin{itemize}
+        \item \textbf{Portfolio Optimization:} The method of least squares is applied in finance for optimizing investment portfolios by minimizing the difference between expected and actual returns.
+        \item \textbf{Option Pricing:} It is used in option pricing models to fit volatility surfaces based on market data.
+    \end{itemize}
+    
+\end{enumerate}
+
+\section{Summary}
+
+The comparative analysis provides insights into the strengths and weaknesses of each method. Lagrange polynomials offer exact interpolation, Fourier series excel in periodic function representation, and the least squares method provides versatility for fitting lines or curves to data points. We have summarized all pros and cons of each method in details in above sections, helping practitioners make informed decisions based on their specific requirements. The documentation includes a file with the program for further exploration.
+
+
+\section*{Enclosures} 
+\begin{itemize}
+	\item File with the program (\texttt{Pietrasik\_Lewandowicz\_Hankus.nb})
+\end{itemize}
+
+
+
+
+\end{document}

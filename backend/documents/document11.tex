@@ -1,0 +1,495 @@
+\documentclass{article}
+
+\usepackage{hyperref} 
+\usepackage{polski}
+\usepackage[utf8]{inputenc} 
+\usepackage{amsmath}
+
+\title{AED Notatki}
+\author{3 Rok Analiza Danych}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents 
+
+
+
+\section*{Kowariancja dwóch zmiennych losowych:}
+Dla dwóch zmiennych losowych \(X\) i \(Y\), kowariancja (\(Cov(X, Y)\)) jest zdefiniowana jako:
+\[
+Cov(X, Y) = \frac{1}{n} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})
+\]
+gdzie:
+\begin{itemize}
+    \item \(n\) to liczba obserwacji,
+    \item \(X_i\) i \(Y_i\) to kolejne wartości zmiennych \(X\) i \(Y\),
+    \item \(\bar{X}\) i \(\bar{Y}\) to średnie wartości zmiennych \(X\) i \(Y\).
+\end{itemize}
+
+\section*{Przykład liczbowy:}
+Dla dwóch zmiennych \(X\) i \(Y\) o wartościach:
+\[ X = \{1, 2, 3, 4, 5\} \]
+\[ Y = \{2, 4, 5, 4, 5\} \]
+możemy obliczyć kowariancję:
+\[
+Cov(X, Y) = \frac{1}{5} \sum_{i=1}^{5} (X_i - \bar{X})(Y_i - \bar{Y})
+\]
+gdzie \(\bar{X} = 3\) i \(\bar{Y} = 4\).
+
+Wartości \(Cov(X, Y)\) wyniosą:
+\[ Cov(X, Y) = \frac{1}{5} ((1-3)(2-4) + (2-3)(4-4) + (3-3)(5-4) +\]
+
+\[ (4-3)(4-4) + (5-3)(5-4)) = \frac{1}{5} \cdot (4 + 0 + 0 + 0 + 2) = \frac{6}{5} \]
+
+
+Odległości $D(X_i, X_j)$ mogą być różnie definiowane. Jeżeli obiekty są opisane za pomocą atrybutów mierzalnych (ilościowych), ale nie binarnych, np. za pomocą $p$ atrybutów, czyli w postaci $X_i = (X_{i,1}, \ldots, X_{i,p})$, $X_j = (X_{j,1}, \ldots, X_{j,p})$, wówczas stosuje się następujące miary (wzory podamy od razu z przykładem policzenia odpowiednich odległości dla wektorów $X_i=(2,4,7)$, $X_j=(5,1,3)$):
+
+\begin{itemize}
+    \item Odległość euklidesowa:
+    \[
+    D(X_i, X_j) = \sqrt{\sum_{k=1}^{p}(X_{i,k} - X_{j,k})^2}
+    \]
+
+    Przykład:
+    \[
+    D(X_i, X_j) = \sqrt{(2-5)^2 + (4-1)^2 + (7-3)^2} = \sqrt{34}
+    \]
+    
+    \item Kwadrat odległości euklidesowej: jest wybierany jako miara odległości wówczas, gdy obiektom bardziej oddalonym od siebie chcemy przypisać większą wagę.
+    
+    \item Odległość Czebyszewa:
+    \[
+    D(X_i, X_j) = \max_{1 \leq k \leq p} |X_{i,k} - X_{j,k}|
+    \]
+
+    Przykład:
+    \[
+    D(X_i, X_j) = \max\{|2-5|, |4-1|, |7-3|\} = 4
+    \]
+    
+    \item Odległość miejska (Manhattan):
+    \[
+    D(X_i, X_j) = \sum_{k=1}^{p}|X_{i,k} - X_{j,k}|
+    \]
+    Przykład:
+    \[
+    D(X_i, X_j) = |2-5| + |4-1| + |7-3| = 10
+    \]
+
+    \item Odległość Minkowskiego:
+    \[
+    D(X_i, X_j) = \left(\sum_{k=1}^{p}|X_{i,k} - X_{j,k}|^p\right)^{1/p}, \quad \text{gdzie } p \geq 1
+    \]
+
+    Przykład: \\
+    Odległość Minkowskiego dla \( p = 3 \):
+    \[
+    D(X_i, X_j) = \left(\sum_{k=1}^{p} |X_{i,k} - X_{j,k}|^3\right)^{1/3}
+    \]
+    Obliczenia:
+    \[
+    D(X_i, X_j) = \sqrt[3]{|2-5|^3 + |4-1|^3 + |7-3|^3} = \sqrt[3]{27 + 27 + 64} = \sqrt[3]{118}
+    \]
+
+    \item Odległość Mahalanobisa: definiowana jako
+    \[
+    D(X_i, X_j) = \sqrt{\sum_{k=1}^{p}\sum_{l=1}^{p}(X_{i,k} - X_{j,k}) \cdot (X_{i,l} - X_{j,l}) \cdot s_{i,j,k,l}},
+    \]
+    gdzie $s_{i,j,k,l}$ to kowariancja obiektu $X_i$ oraz $X_j$ dla atrybutów $k$ i $l$.
+
+\end{itemize}
+
+\begin{itemize}
+    \item Odległość Euklidesowa:
+    \[
+    D(X_i, X_j) = \sqrt{(2-5)^2 + (4-1)^2 + (7-3)^2} = \sqrt{34}
+    \]
+
+    \item Kwadrat odległości Euklidesowej:
+    \[
+    D(X_i, X_j) = (2-5)^2 + (4-1)^2 + (7-3)^2 = 34
+    \]
+
+    \item Odległość Czebyszewa:
+    \[
+    D(X_i, X_j) = \max\{|2-5|, |4-1|, |7-3|\} = 4
+    \]
+
+    \item Odległość Miejska (Manhattan):
+    \[
+    D(X_i, X_j) = |2-5| + |4-1| + |7-3| = 10
+    \]
+
+    \item Odległość Minkowskiego (dla \(p=2\), czyli odległości euklidesowej):
+    \[
+    D(X_i, X_j) = \left(\sum_{k=1}^{3} |X_{i,k} - X_{j,k}|^2\right)^{\frac{1}{2}} = \sqrt{34}
+    \]
+
+    \item Odległość Mahalanobisa (przy założeniu pewnych wartości dla macierzy kowariancji \(S\)):
+    \[
+    D(X_i, X_j) = \sqrt{\sum_{k=1}^{3} \sum_{l=1}^{3} (X_{i,k} - X_{j,k}) \cdot (X_{i,l} - X_{j,l}) \cdot s_{k,l}}
+    \]
+\end{itemize}
+
+
+
+Zauważmy, że odległość euklidesowa oraz odległość miejska są szczególnymi przypadkami odległości Minkowskiego (odpowiednio, \(p = 2\) oraz \(p = 1\)). Odległość Mahalanobisa stosuje się w sytuacji dużego skorelowania obiektów \(X_i\) i \(X_j\) (traktowanych jako wektory współrzędnych). W takiej sytuacji metryka euklidesowa może dawać wyniki mylące. \\
+
+W przypadku dużych różnic pomiędzy wartościami poszczególnych atrybutów dla różnych obiektów, powstaje problem skalowalności (np. obiekty (0, 3) oraz (1000, 1003)). Stosuje się wówczas standaryzację zmiennych (odejmujemy od wartości atrybutów ich średnią arytmetyczną i dzielimy przez odchylenie standardowe). \\
+
+Czasem stosuje się także tzw. unitaryzację. Przyjmujemy wówczas nowe wartości atrybutu w próbie, dzieląc wartości dotychczasowe przez ich rozstęp (różnicę pomiędzy wartością maksymalną a minimalną). \\
+
+W przypadku atrybutów binarnych (przyjmujących wyłącznie wartości 0 lub 1) stosuje się następującą miarę odległości:
+\[
+D(X_i, X_j) = \frac{\text{liczba atrybutów o różnych wartościach w obiektach } X_i \text{ i } X_j}{\text{liczba wszystkich atrybutów}}. \quad (8)
+\]
+
+Powyższą miarę odległości stosuje się w przypadku atrybutów binarnych, które mają w populacji podobne wagi (np. cechy płciowe). Atrybuty takie nazywamy symetrycznymi. \\
+
+W przypadku, gdy wagi są różne (atrybuty asymetryczne), stosuje się modyfikację powyższej miary, zdefiniowaną w następujący sposób:
+\[
+D(X_i, X_j) = \frac{\text{liczba atrybutów o różnych wartościach w obiektach } X_i \text{ i } X_j}{\text{liczba atrybutów, które w co najmniej jednym z obiektów mają wartość } 1}.
+\]
+
+
+W sytuacji, gdy atrybuty dane są w skali nominalnej lub porządkowej, sposób postępowania opisano poniżej. Dla atrybutów danych w skali nominalnej stosuje się miarę postaci
+\[
+D(X_i, X_j) = \frac{\text{liczba atrybutów o różnych kategoriach}}{\text{liczba wszystkich atrybutów}}.
+\]
+
+W sytuacji, gdy atrybuty dane są w skali nominalnej lub porządkowej, sposób postępowania opisano poniżej. Dla atrybutów danych w skali nominalnej stosuje się miarę postaci
+\[
+D(X_i, X_j) = \frac{\text{liczba atrybutów o różnych kategoriach}}{\text{liczba wszystkich atrybutów}}. \quad (10)
+\]
+Dla atrybutów danych w skali porządkowej przyporzadkowuje się im wartości równe \(\frac{i-1}{M-1}\), gdzie \(i = 1, \ldots, M\), przy czym \(M\) oznacza liczbę różnych kategorii danego atrybutu. Następnie stosuje się jedną ze zwykłych miar stosowanych w przypadku atrybutów o charakterze ilościowym.
+
+
+
+\subsection {Miary podobieństwa dokumentów tekstowych}
+
+Oceniając podobieństwo dokumentów tekstowych lub też stron www, wykorzystuje się następujące trzy miary niepodobieństwa:
+
+\textbf{Miara cosinusowa:} dla obiektów $X_i$ i $X_j$ definiuje się ją jako
+\begin{equation}
+    D(X_i, X_j) = 1 - \frac{X_i \cdot X_j}{\lVert X_i \rVert \cdot \lVert X_j \rVert}, \tag{1}
+\end{equation}
+gdzie symbol $\cdot$ oznacza iloczyn skalarny, a $\lVert \cdot \rVert$ jest długością wektora.
+
+Zauważmy, że odjemnikiem w powyższej równicy jest wartość cosinusa kąta pomiędzy obiektami $X_i$ i $X_j$, traktowanymi jako wektory. Im większa wartość miary (przyjmuje ona wartości z przedziału $[0, 1]$), tym większe niepodobieństwo obiektów.
+
+\textbf{Odległość Tanimoto:} jest pewną modyfikacją odległości cosinusowej i ma postać
+\begin{equation}
+    D(X_i, X_j) = 1 - \frac{X_i \cdot X_j}{|X_i|^2 + |X_j|^2 - X_i \cdot X_j}. \tag{2}
+\end{equation}
+
+\textbf{Odległość Levenshteina (zwana także odległością edycyjną):} jest równa minimalnej liczbie operacji prostych (takich jak wstawienie nowego symbolu, usunięcie symbolu, zamiana jednego symbolu na inny), które przeprowadzają jeden obiekt w drugi.
+
+\section{Metody grupowania obiektów}
+
+Ogólna klasyfikacja metod grupowania obiektów, których celem jest ich podział na pewną liczbę rozłącznych skupień (grup, klastrów itp.), zawierających obiekty "podobne" do siebie, jest następująca:
+
+\textbf{Metody hierarchiczne:} w wyniku których otrzymujemy tzw. dendrogram, który stanowi wizualizację procesu grupowania.
+
+\begin{itemize}
+    \item \textbf{Metody aglomeracyjne:} gdzie kierunek przeprowadzania grupowania przebiega od maksymalnego rozproszenia obiektów do jednego skupienia, obejmującego wszystkie badane obiekty.
+    \item \textbf{Metody podziałowe:} gdzie proces grupowania przebiega w odwrotnym kierunku: od jednego skupienia do maksymalnego rozproszenia obiektów; techniki podziałowe są stosowane dużo rzadziej niż techniki aglomeracyjne.
+\end{itemize}
+
+\textbf{Metoda k-średnich:} której istota polega na określeniu a priori docelowej liczby \(k\) skupień; proces grupowania w metodzie k-średnich przebiega iteracyjnie: w każdym kroku iteracji możliwa jest zmiana "lokalizacji" obiektu. \\
+
+Metody pomiaru odległości pomiędzy skupieniami są scharakteryzowane poniżej:
+
+\begin{itemize}
+    \item \textbf{Metoda pojedynczego wiązania (zwana także metodą najbliższego sąsiedztwa):} W myśl tej metody odległość między dwoma skupieniami jest równa odległości pomiędzy ich elementami najbliżej siebie położonymi.
+    
+    \item \textbf{Metoda pełnego wiązania (zwana również metodą najdalszego sąsiedztwa):} W tej metodzie odległość między dwoma skupieniami jest równa odległości pomiędzy ich elementami najbardziej od siebie odległymi.
+    
+    \item \textbf{Metoda średnich połączeń:} W myśl tej metody odległość pomiędzy skupieniami jest definiowana jako średnia arytmetyczna odległości pomiędzy elementami należącymi do jednego i drugiego skupienia.
+    
+    \item \textbf{Metoda ważonych średnich połączeń:} Jest pewną modyfikacją metody średnich połączeń. Wprowadza się w niej wagi poszczególnych skupień, które są ich liczebnościami. Jeżeli na danym etapie doszło do połączenia dwóch skupień $S_i$ i $S_j$ (często o różnej liczebności obiektów), to odległość tak powstałego większego skupienia od dowolnego innego skupienia $S_k$ jest równa $\frac{1}{2}(D(S_i, S_k) + D(S_j, S_k))$, czyli osobno obliczana jest odległość pomiędzy $S_k$ a każdym z skupień $S_i$ i $S_j$ tworzących nowe skupienie, co nie ma miejsca w przypadku metody nieważonej.
+    
+    \item \textbf{Metoda środków ciężkości:} Jej idea opiera się na przyjęciu jako miary odległości pomiędzy skupieniami odległości środków ciężkości tych skupień, czyli wielowymiarowych średnich arytmetycznych współrzędnych obiektów.
+    
+    \item \textbf{Metoda ważonych środków ciężkości:} Jest modyfikacją metody środków ciężkości, analogiczną do ważonej metody średnich połączeń.
+    
+    \item \textbf{Metoda Warda:} Wykorzystuje podejście analizy wariancji do oszacowania odległości pomiędzy dwoma skupieniami.
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Metoda Warda:} Uchodzi za bardzo efektywną, choć w praktyce jej zastosowanie może skutkować tworzeniem na kolejnych etapach aglomeracji relatywnie dużej liczby skupień o niewielkich liczebnościach. Oczywiście, z tego właśnie powodu może być ona w niektórych sytuacjach rekomendowana. Kluczowy w metodzie Warda jest specyficzny sposób wyznaczania odległości pomiędzy skupieniami.
+    
+    Utworzenie pierwszego skupienia następuje w zwykły sposób: łączymy dwa obiekty najbliżej siebie położone.
+    
+    W kolejnym etapie (i wszystkich następnych) musimy oszacować odległość pomiędzy pojedynczym obiektem a skupieniem obiektów lub też pomiędzy dwoma skupieniami. Załóżmy zatem, że $S = S_i \cup S_j$, gdzie $S_i$ i $S_j$ są pojedynczymi obiektami lub skupieniami.
+    
+    Odległość $D(S, S_k)$ pomiędzy skupieniem $S$ a skupieniem $S_k$ obliczamy ze wzoru
+    \begin{equation}
+        D(S, S_k) = a_1 \cdot D(S_i, S_k) + a_2 \cdot D(S_j , S_k) + b \cdot D(S_i, S_j), \tag{3}
+    \end{equation}
+    gdzie $a_1$, $a_2$ oraz $b$ są współczynnikami zależnymi od liczebności skupień $S_i$, $S_j$ oraz $S_k$ i są zdefiniowane następująco:
+    \[ a_1 = \frac{|S_i| + |S_k|}{|S_i| + |S_j| + |S_k|}, \]
+    \[ a_2 = \frac{|S_j| + |S_k|}{|S_i| + |S_j| + |S_k|}, \]
+    \[ b = \frac{-|S_k|}{|S_i| + |S_j| + |S_k|}. \]
+    
+    Zauważmy zatem, że odległość pomiędzy skupieniem $S$ a skupieniem $S_k$ zależy od odległości pomiędzy skupieniami $S_i$ i $S_j$, które utworzyły $S$ w poprzednim etapie aglomeracji.
+\end{itemize}
+
+\subsection{Analiza dendrogramu}
+
+Poniżej przedstawiamy najważniejsze trzy metody "przecinania" dendrogramu.
+
+\textbf{Metoda 1:} Dendrogram "przecinamy" w miejscu, w którym odległość pomiędzy dwoma kolejnymi wiązaniami jest maksymalna.
+
+W analizowanym wcześniej Przykładzie 1 kolejne odległości pomiędzy wiązaniami wynoszą $6 - 2 = 4$ oraz $7 - 6 = 1$. Metoda rekomenduje zatem "przecięcie" dendrogramu pomiędzy wiązaniem pierwszym a drugim. Optymalny wynik grupowania to zatem jedno skupienie $S_1 = \{O_1, O_3\}$ oraz dwa izolowane obiekty (można je traktować jako skupienia jednoelementowe) $O_2$ i $O_4$.
+
+\textbf{Metoda 2:} Miernik Grabińskiego, zaproponowany przez niego w 1992 roku, definiuje wielkość $q_i$ jako $q_i = \frac{d_i}{d_{i-1}}$, gdzie $d_i$ oznacza odległość, przy której dochodzi do i-tego z kolei wiązania. Dendrogram "przecinamy" pomiędzy wiązaniem numer $i_0 - 1$ a $i_0$, gdzie $i_0$ jest wartością i, dla której $q_i$ jest maksymalne. Podstawową wadą tej metody jest fakt, że często w praktyce zdarza się, że $q_i$ przyjmuje wartość maksymalną już dla jednych z pierwszych wiązań dendrogramu.
+
+\textbf{Metoda 3:} Reguła Mojeny, sformułowana w 1977 roku, stanowi, że dendrogram "przecinamy" pomiędzy wiązaniem numer $i$ a wiązaniem numer $i + 1$, gdzie $d_{i+1} > d + k \cdot sd$, przy czym $d$ oznacza średnią odległość wiązania, natomiast $sd$ jest odchyleniem standardowym odległości wiązania. Wielkość $k$ jest stałą. Twórca metody zaproponował, by $k \in (2.75, 3.50)$. Później (Milligan, Cooper, 1985) zaproponowano jako optymalną wartość $k = 1.25$.
+
+\subsection{Metoda k-średnich}
+
+Istotą metody k-średnich jest ustalenie na samym początku procesu grupowania docelowej liczby skupień $k$. Proces wygląda w następujący sposób: 
+
+\begin{itemize}
+    \item \textbf{Wybór wstępnych centrów skupień:}
+    \begin{itemize}
+        \item Na tym etapie wybiera się tzw. wstępne centra skupień (centroidy), czyli punkty, które będą decydować o pierwszej przynależności obiektów (w praktyce stosuje się różne metody wyznaczania takich centrów).
+    \end{itemize}
+    
+    \item \textbf{Przyporządkowanie obiektów do skupień:}
+    \begin{itemize}
+        \item Mając wybrane wstępne centra skupień, obliczamy odległości każdego z obiektów od każdego z centrów.
+        \item Przyporządkowujemy obiekt do tego skupienia, do którego centrum jest mu "najbliżej".
+    \end{itemize}
+    
+    \item \textbf{Aktualizacja centrów skupień:}
+    \begin{itemize}
+        \item W kolejnym etapie wyznaczamy już rzeczywiste centra utworzonych skupień i odległości każdego z obiektów od nich.
+        \item Może zdarzyć się, że obiekt znajduje się w skupieniu, którego centrum jest od niego bardziej odległe niż centrum innego skupienia.
+    \end{itemize}
+    
+    \item \textbf{Przeniesienie obiektów w razie konieczności:}
+    \begin{itemize}
+        \item W takiej sytuacji dokonujemy odpowiedniego przeniesienia obiektu (lub obiektów, gdy jest ich więcej).
+        \item Następnie ponownie wyznaczamy nowe centra skupień i powtarzamy całą procedurę.
+    \end{itemize}
+    
+    \item \textbf{Zakończenie procesu grupowania:}
+    \begin{itemize}
+        \item W pewnym momencie obiekty przestaną już być przenoszone, ponieważ znajdą się w skupieniach, do których jest im "najbliżej".
+        \item W tym momencie proces grupowania się kończy.
+    \end{itemize}
+\end{itemize}
+
+\section{Wprowadzenie do klasyfikacji}
+
+Załóżmy, że dysponujemy pewnym zbiorem obiektów, opisanych za pomocą wielu atrybutów, których elementy zostały przyporządkowane do pewnej liczby klas. Do której z tych klas należy przyporządkować nowy obiekt, opisany za pomocą tych samych atrybutów? Jak sprawdzić, czy stworzona w ten sposób reguła klasyfikacyjna jest dokładna i czy sprawdzi się w przyszłości w przypadku większej liczby obiektów? \\
+
+Odpowiedzi na te i podobne pytania są domeną jednej z dziedzin eksploracji danych zwanej klasyfikacją. Zasadniczym celem jest tu zbudowanie ogólnego modelu klasyfikacyjnego zbioru obiektów na podstawie danych historycznych, a następnie zastosowanie go do predykcji klasy nowego obiektu. \\
+
+Atrybuty warunkowe i atrybut decyzyjny są kluczowymi pojęciami w analizie danych. Dane wejściowe stanowią pewien zbiór obiektów (obserwacji itp.) $D$, zwany zbiorem treningowym, którego elementy (obiekty) są opisane za pomocą pewnej skończonej liczby tzw. atrybutów warunkowych $A_1, A_2, \ldots, A_s$ oraz jednego tzw. atrybutu decyzyjnego $C$, określającego przyporządkowanie obiektu do danej klasy. \\
+
+Atrybut decyzyjny jest atrybutem kategorycznym, jego wartości $C_1, \ldots, C_m$, gdzie $m \geq 2$, to tzw. klasy decyzyjne. \\
+
+Atrybuty warunkowe mogą być atrybutami ilościowymi, binarnymi lub jakościowymi, określonymi za pomocą skali porządkowej lub nominalnej. \\
+
+\subsection{Klasyfikator}
+
+Celem procesu klasyfikacji jest znalezienie funkcji klasyfikującej (klasyfikatora), która pozwoli na jednoznaczne przyporządkowanie nowego obiektu $X = (A_1 = x_1, \ldots, A_s = x_s)$ do jednej z $m$ klas decyzyjnych $C_1, \ldots, C_m$.
+
+Konstrukcja klasyfikatora odbywa się z istotnym wykorzystaniem zbioru treningowego, czyli zbioru obiektów, które już są przyporządkowane do odpowiednich klas decyzyjnych.
+
+\subsection{Konstrukcja modelu klasyfikacyjnego}
+
+\begin{document}
+
+Konstrukcja modelu klasyfikacyjnego przebiega dwuetapowo. Na początku, w praktyce, całą dostępną bazę danych dzielimy na zbiór treningowy, na podstawie którego konstruowany będzie klasyfikator, oraz zbiór testowy, który posłuży do weryfikacji jakości zbudowanego klasyfikatora.
+
+\begin{enumerate}
+    \item \textbf{Krok uczenia (treningu):} W tym etapie, z wykorzystaniem zbioru treningowego, konstruowany jest odpowiedni klasyfikator przy użyciu tzw. algorytmu uczącego.
+    
+    \item \textbf{Krok testowania:} W tym etapie weryfikowana jest jakość zbudowanego modelu na bazie danych stanowiących zbiór testowy.
+\end{enumerate}
+
+W praktyce istnieje wiele różnych metod (algorytmów uczących) konstruowania klasyfikatorów. Najważniejsze z nich to m.in.:
+\begin{itemize}
+    \item Drzewa klasyfikacyjne (decyzyjne),
+    \item Klasyfikatory bayesowskie,
+    \item Reguły klasyfikacyjne typu \texttt{if-then-else},
+    \item Sztuczne sieci neuronowe.
+\end{itemize}
+
+Wśród metod wykorzystywanych w klasyfikacji wyróżnia się także takie, w których klasyfikacja przebiega \textit{na bieżąco}, tzn. bez konstruowania modelu klasyfikacyjnego. Najważniejszą z takich metod jest metoda k-najbliższych sąsiadów, oznaczana w skrócie jako metoda k-NN (ang. k-Nearest Neighbors).
+
+\subsection{Drzewa decyzyjne}
+
+Indukcja tzw. drzewa decyzyjnego to jedna z najważniejszych technik stosowanych w klasyfikacji. Znajduje ona bardzo wiele zastosowań w naukach technicznych (np. w modelowaniu ryzyka awarii i systemach zabezpieczeń), ekonomicznych (modelowanie ryzyka inwestycyjnego, ubezpieczeniowego), ale także w naukach przyrodniczych i medycznych (konstrukcja tzw. szybkiej ścieżki diagnostycznej dla konkretnego schorzenia). \\
+
+Drzewo decyzyjne to graf bez cykli (pętli), w którym istnieje tylko jedna ścieżka między dwoma różnymi węzłami. Reprezentuje pewien proces danego podziału zbioru obiektów na rozłączne klasy względem atrybutu decyzyjnego. Tworzenie drzewa rozpoczynamy od jego korzenia (wierzchołka), z którego wychodzą krawędzie (gałęzie) reprezentujące wartości cech, na podstawie których dokonujemy podziału zbioru obiektów. \\
+
+Wewnętrzne węzły drzewa opisują sposób dokonania tego podziału. Zakończenia krawędzi, czyli liście drzewa, odpowiadają klasom, do których należą obiekty. Pierwsze algorytmy indukowania drzew klasyfikacyjnych pojawiły się w latach 70. dwudziestego wieku. Jedne z pierwszych to algorytm CHAID (ang. Chi-squared Automatic Interaction Detection), oryginalnie zaproponowany tylko dla atrybutów danych w skali nominalnej, oraz algorytm Id3 (Quinlan, 1986). Modyfikacja algorytmu Id3, czyli algorytm C4.5 (Quinlan, 1993) oraz, zaproponowany przez Breimana w 1984 roku, algorytm CART stanowią swoistą bazę, na podstawie której w późniejszych latach powstało bardzo wiele innych algorytmów, m.in. algorytm SPRINT, wykorzystywany w komercyjnym systemie IBM Intelligent Miner. \\
+
+\subsection{Algorytmy wyboru atrybutu "podziałowego"}
+
+Absolutnie kluczową kwestią w przypadku konstrukcji drzewa decyzyjnego jest określenie sposobu wyboru atrybutu "podziałowego" na każdym etapie konstrukcji drzewa, czyli atrybutu, który będzie generować podział drzewa na gałęzie: początkowo w korzeniu drzewa, a później na etapie węzłów pośrednich. W praktyce stosuje się w tym celu trzy różne podejścia, a co za tym idzie różne miary ilościowe: entropię (algorytmy Id3, C4.5); tzw. indeks Gini (Giniego) (algorytmy CART, SPRINT); statystykę χ² (algorytm CHAID). \\
+
+Zanim omówimy w szczegóły i na przykładach każdą z wyżej wymienionych miar, przedstawmy ogólny schemat konstrukcji drzewa decyzyjnego. Obejmuje on następujące etapy:
+1. Tworzymy korzeń drzewa, reprezentujący dany zbiór treningowy D. Jeżeli wszystkie obiekty zbioru D reprezentują jedną i tę samą klasę Ci atrybutu decyzyjnego C, to przypisujemy mu etykietę Ci (korzeń staje się liściem drzewa) i procedura się kończy.
+2. Jeżeli obiekty zbioru D reprezentują różne klasy atrybutu decyzyjnego, analizowany jest zbiór atrybutów warunkowych Ai, spośród których wybierany jest atrybut "podziałowy". Jeśli zbiór atrybutów warunkowych jest pusty, korzeniowi przyporzadkowujemy etykietę klasy Ci dominującej w zbiorze D i procedura się kończy (korzeń staje się liściem drzewa). \\
+
+3. Po przeprowadzeniu podziału w korzeniu drzewa, analizujemy zbiór atrybutów warunkowych w każdym z nowo powstałych węzłów (oczywiście nie bierzemy już pod uwagę atrybutu, który był atrybutem "podziałowym" w pierwszym etapie). Jeżeli zbiór atrybutów jest pusty, to bieżący węzeł staje się liściem drzewa z etykietą klasy dominującej. Jeżeli zbiór atrybutów jest niepusty, dokonujemy kolejnego wyboru atrybutu "podziałowego" itd.\\
+
+4. Podczas podziału w węźle drzewa dla każdej wartości (kategorii) atrybutu "podziałowego" tworzona jest krawędź (gałąź) drzewa o etykiecie odpowiadającej tej wartości. Gałąź kończy się nowym węzłem drzewa.\\
+
+\subsection{Algorytm oparty na entropii}
+
+Jeśli \(X\) jest zmienną losową typu dyskretnego, przyjmującą wartości \(x_1, \ldots, x_m\) z prawdopodobieństwami odpowiednio \(p_1, \ldots, p_m\), wówczas entropię zmiennej \(X\) definiujemy w następujący sposób:
+\[ H(X) = -\sum_{i=1}^{m} p_i \log_2 p_i. \]
+Entropia jest miarą nieuporządkowania, rozproszenia zbioru danych. Rzeczywiście, przy równomiernym rozkładzie prawdopodobieństwa (maksymalnym rozproszeniu), tj. gdy \(p_i = \frac{1}{m}\), jej wartość jest maksymalna i wynosi \(\log_2 m\).
+
+W teorii informacji, entropia wyraża średnią ważoną ilość informacji dostarczaną przez pojedynczą wiadomość generowaną przez źródło informacji, przy czym wagami są prawdopodobieństwa nadania (wygenerowania) poszczególnych wiadomości. \\
+
+W praktyce można spotkać się z definicją entropii, w której logarytmy obliczane są przy podstawie innej niż 2. Jeśli podstawa logarytmu wynosi 2, wówczas jednostką entropii jest bit. \\
+
+Zastosowanie pojęcia entropii w procedurze indukowania drzewa decyzyjnego przebiega w następujący sposób. Podzielmy cały n-elementowy zbiór treningowy $D$ na $m$ rozłącznych partycji $D_1, \ldots, D_m$, związanych z wartościami (kategoriami) atrybutu decyzyjnego $C$. Oznaczmy przez $n_i$ liczbę elementów partycji $D_i$, dla $i = 1, \ldots, m$. Entropia zbioru treningowego jest wówczas równa
+\[
+H(D) = -\sum_{i=1}^{m} p_i \log_2 p_i = -\sum_{i=1}^{m} \frac{n_i}{n} \log_2 \frac{n_i}{n},
+\]
+ponieważ prawdopodobieństwa $p_i$ estymujemy za pomocą częstości empirycznych $\frac{n_i}{n}$. Jeśli któraś z kategorii atrybutu decyzyjnego nie występuje w zbiorze treningowym (odpowiednie $n_i = 0$), wówczas przyjmujemy $\log_2 p_i = 0$. \\
+
+Załóżmy, że atrybut warunkowy $A$ przyjmuje $r$ różnych wartości (występuje w $r$ różnych kategoriach) $a_1, \ldots, a_r$, gdzie $n_{i,j}$ oznacza liczbę elementów partycji $D_i$, w których $A = a_j$, dla $i = 1, \ldots, m$, $j = 1, \ldots, r$. Entropię kategorii $a_j$ atrybutu $A$ w zbiorze treningowym możemy zdefiniować w następujący sposób:
+\[
+H(a_j) = -\sum_{i=1}^{m} p_{i,j} \log_2 p_{i,j} = -\sum_{i=1}^{m} \frac{n_{i,j}}{n_j} \log_2 \frac{n_{i,j}}{n_j},
+\]
+gdzie $n_{i,j}$ jest estymatorem częstościowym prawdopodobieństwa $p_{i,j}$ równoczesnego wystąpienia w populacji $C = C_i$ oraz $A = a_j$ ($n_{i,j}$ jest liczbą elementów partycji $D_i$, dla których $A = a_j$). \\
+
+Entropię atrybutu $A$ definiujemy jako następującą ważoną sumę:
+\[
+H(A) = \sum_{j=1}^{r} n_j H(a_j) = \frac{1}{n} \sum_{j=1}^{r} (n_{1,j} + \ldots + n_{m,j})H(a_j).
+\]
+Iloraz $\frac{n_j}{n} = \frac{n_{1,j} + \ldots + n_{m,j}}{n}$ jest częstością względną wystąpienia kategorii $a_j$ w zbiorze treningowym $D$. \\
+
+Mając zdefiniowaną entropię atrybutu $A$, definiujemy teraz tzw. zysk informacyjny dla atrybutu $A$ w następujący sposób:
+\[
+\text{{Gain}}(A) = H(D) - H(A).
+\]
+Zysk informacyjny wyraża różnicę pomiędzy ilością informacji niezbędnej do sklasyfikowania dowolnego obiektu ze zbioru $D$ przed podziałem tego zbioru a po jego podziale, wykorzystując atrybut $A$ jako atrybut podziałowy.
+
+W praktyce, na każdym etapie konstrukcji drzewa klasyfikacyjnego, obliczamy zysk informacyjny dla każdego z dostępnych jeszcze atrybutów warunkowych. Wybieramy jako atrybut podziałowy ten, dla którego zysk informacyjny jest największy (czyli równoważnie, entropia jest minimalna). \\
+
+\section {Indeks Gini}
+
+Inną często wykorzystywaną miarą nieuporządkowania zbiorów jest tzw. indeks Gini (Giniego) (Corrado Gini (1884-1965) był włoskim statystykiem i demografem). Indeks Gini jest wykorzystywany m.in. przez algorytmy klasyfikacyjne CART i SPRINT.
+
+Miara ta definiowana jest dla zbioru treningowego $D$ w następujący sposób:
+\[
+\text{{Gini}}(D) = 1 - \sum_{i=1}^{m} p_i^2,
+\]
+gdzie $p_i$ oznacza prawdopodobieństwo, że wybrany element należy do klasy $C_i$ atrybutu decyzyjnego. Prawdopodobieństwo $p_i$ estymujemy za pomocą częstości względnej $n_i/n$, gdzie $n$ jest liczbą obiektów w bazie danych $D$, a $n_i$ oznacza liczbę obiektów $D$ reprezentujących klasę $C_i$. \\
+
+Sposób wykorzystania indeksu Gini do wyboru atrybutu podziałowego jest następujący. Załóżmy, że atrybut warunkowy $A$ dzieli zbiór treningowy na dwie partycje: $D_1$ i $D_2$. Indeks podziału Gini zbioru treningowego $D$, uwzględniający podział na partycje względem atrybutu $A$, ma postać:
+\[
+\text{{Gini}}_A\text{{split}}(D_1, D_2) = \frac{|D_1|}{|D|} \text{{Gini}}(D_1) + \frac{|D_2|}{|D|} \text{{Gini}}(D_2),
+\]
+a zatem jest średnią ważoną indeksów Gini poszczególnych partycji. \\
+
+Widać zatem, że w algorytmach klasyfikacyjnych opartych na indeksie Gini wybór atrybutu podziałowego na danym etapie klasyfikacji to za mało. Konieczny jest także wybór optymalnego podziału zbioru treningowego względem tego atrybutu (tzn. takiego, który maksymalizuje zysk informacyjny lub, równoważnie, minimalizuje indeks podziału Gini). Drzewo klasyfikacyjne, którego konstrukcja oparta będzie na wykorzystaniu indeksu Gini, będzie zatem drzewem binarnym (z każdego węzła wychodzić będą tylko dwie gałęzie drzewa, odpowiadające partycjom $D_1$ i $D_2$).
+
+\subsection{Algorytm SPRINT}
+
+Ogólny schemat algorytmu klasyfikacyjnego opartego na indeksie Gini przedstawimy na przykładzie algorytmu SPRINT:
+\begin{enumerate}
+    \item Określamy początkowy zbiór treningowy.
+    \item Dla każdego atrybutu warunkowego $A$ i dla wszystkich możliwych punktów podziału wartości tego atrybutu obliczamy indeks podziału Gini. W przypadku atrybutu ciągłego partycje tworzone są przez warunki postaci $A \leq a$ oraz $A > a$, gdzie $a$ jest punktem podziału. Dla pozostałych typów atrybutów partycje tworzą warunki $A = a$ oraz $A \neq a$.
+\end{enumerate} \\
+
+Wybieramy punkt podziału o najmniejszej wartości indeksu $Gini_{A\,split}(D_1, D_2)$ lub równoważnie o największej wartości indeksu $GainGini(A)$.
+\begin{enumerate}
+
+\item Wybrany punkt podziału włączamy do konstruowanego drzewa decyzyjnego: dzieli on zbiór $D$ na partycje $D_1$ i $D_2$.
+\item Powtarzamy procedurę poszukiwania punktu podziału i obliczania indeksu podziału Gini dla partycji $D_1$ i $D_2$. Znalezione punkty podziału przyłączamy do drzewa decyzyjnego itd. \\
+\end{enumerate}
+\subsection{Optymalizacja drzewa decyzyjnego}
+
+W praktyce podczas konstrukcji drzewa klasyfikacyjnego na podstawie zbioru treningowego dochodzi czasem do zjawiska tzw. przeuczenia klasyfikatora (\textit{ang. overfitting}), czyli zbyt silnego dopasowania otrzymanego drzewa decyzyjnego do zbioru treningowego (uczacego). Ma to miejsce np. wówczas, gdy zbiór treningowy niezbyt dobrze reprezentuje całą populację lub też jest zbyt mało liczny. W efekcie otrzymane drzewo decyzyjne może błędnie klasyfikować nowe obiekty (głównie takie, które są mało "podobne" do obiektów zbioru treningowego). Poziom ryzyka błędnej klasyfikacji można zmniejszyć, wykorzystując jedną z technik tzw. przycinania drzewa. \\
+
+Stosowanych w praktyce technik jest kilka. Jedna z nich bazuje na wykorzystaniu tzw. zasady minimalizacji długości kodu (\textit{ang. Minimum Description Length}), w myśli której optymalne drzewo powinno charakteryzować się najmniejszym możliwym "kosztem" (liczbą bitów) jego zakodowania. Inna z metod opiera się na wykorzystaniu tzw. funkcji kary.\\
+
+Koszt $e(D)$ klasyfikatora w postaci drzewa decyzyjnego uzyskanego dla zbioru treningowego $D$ szacuje się wówczas z następującego wzoru (jest to tzw. błąd generalizacji drzewa):
+\begin{equation}
+e(D) \defeq \frac{1}{\lvert D \rvert} \sum_{i=1}^{k} [e(N_i) + \Omega(N_i)],
+\end{equation}
+gdzie $e(N_i)$ oznacza liczbę błędnie sklasyfikowanych obiektów w liściu (wierzchołku) $N_i$ drzewa decyzyjnego, $\Omega(N_i)$ oznacza wartość funkcji kary $\Omega(\cdot)$ dla liścia (wierzchołka) $N_i$, $k$ oznacza liczbę liści drzewa, a $\lvert D \rvert$ to moc zbioru treningowego. Jeśli wartość $e(D)$ drzewa przyciętego jest mniejsza od analogicznej wartości obliczonej dla drzewa oryginalnego, drzewo opłaca się przyciąć.
+
+\section{Klasyfikacja Bayesowska}
+
+Zupełnie inną techniką klasyfikacyjną w porównaniu do konstrukcji drzew decyzyjnych jest tzw. klasyfikacja bayesowska. Opiera się ona na zastosowaniu wzoru Bayesa znanego z rachunku prawdopodobieństwa. Jeżeli $X$ i $Y$ są zdarzeniami losowymi, przy czym $P(X) > 0$, wówczas prawdziwa jest równość
+\begin{equation}
+    P(Y | X) = \frac{P(Y \cap X)}{P(X)} = \frac{P(X | Y)P(Y)}{P(X)}.
+\end{equation}
+Załóżmy teraz, że $X$ jest pewnym obiektem o znanych wartościach atrybutów warunkowych, którego klasyfikacji należy dokonać. Interesuje nas zatem oszacowanie prawdopodobieństwa a posteriori $P(C = C_i | X)$, $i = 1, ..., m$, gdzie $C$ jest atrybutem decyzyjnym. \\
+
+Oczywiście, logika podpowiada, aby obiekt $X$ zakwalifikować do tej spośród klas $C_i$ atrybutu decyzyjnego, dla której prawdopodobieństwo to jest największe. Jest to tzw. zasada maksymalizacji prawdopodobieństwa a posteriori (MAP).
+
+Mamy zatem ze wzoru Bayesa:
+\begin{equation}
+    P(C = C_i | X) = \frac{P(X | C = C_i)P(C = C_i)}{P(X)},
+\end{equation}
+gdzie $i = 1, ..., m$. Mianownik prawej strony wzoru (6) jest identyczny dla każdego $i$. Wartości $P(C = C_i)$ możemy oszacować za pomocą częstości względnych $\frac{n_i}{n}$. \\
+
+
+\subsection{"Naiwny" klasyfikator bayesowski}
+
+Istotą "naiwnego" klasyfikatora bayesowskiego jest przyjęcie założenia o tzw. warunkowej niezależności atrybutów. Niech $X$, $Y$ oraz $Z$ będą zdarzeniami losowymi. Mówimy, że zdarzenie $X$ jest warunkowo niezależne od zdarzenia $Y$ względem zdarzenia $Z$, jeśli zachodzi następująca równość:
+\[
+P(X | Y \cap Z) = P(X | Z). \tag{7}
+\]
+Zauważmy, że
+\[
+P(X \cap Y | Z) = \frac{P(X \cap Y \cap Z)}{P(Z)} = \frac{P(X \cap Y \cap Z)}{P(Y \cap Z)} \cdot \frac{P(Y \cap Z)}{P(Z)} = P(X | Y \cap Z)P(Y | Z),
+\]
+a stąd, wykorzystując (7),
+\[
+P(X \cap Y | Z) = P(X | Z)P(Y | Z).
+\]
+
+Naiwny klasyfikator bayesowski zakłada prawdopodobieństwo a priori
+\[
+P(X | C = C_i) = P(A_1 = x_1, \ldots, A_s = x_s | C = C_i).
+\]
+Zakładając, że atrybuty warunkowe $A_1, \ldots, A_s$ są warunkowo
+niezależne względem zdarzenia $C = C_i$, mamy
+\[
+P(X | C = C_i) = \prod_{j=1}^{s} P(A_j = x_j | C = C_i), \tag{9}
+\]
+gdzie $j = 1, \ldots, m$.
+Powyższa równość jest podstawą "naiwnej" klasyfikacji bayesowskiej. \\
+
+Obiekt $X$ przyporządkowujemy do tej klasy $C^*$ atrybutu decyzyjnego,
+która maksymalizuje prawdopodobieństwo:
+\[
+P(C = C_i) \prod_{j=1}^{s} P(A_j = x_j | C = C_i), \tag{10}
+\]
+a zatem
+\[
+C^* = \arg \max P(C = C_i) \prod_{j=1}^{s} P(A_j = x_j | C = C_i). \tag{11}
+\]
+Prawdopodobieństwo $P(C = C_i)$ szacujemy za pomocą częstości
+względnej $n_i / n$, gdzie $n_i$ oznacza liczbę obiektów zbioru
+treningowego o liczności $n$, dla których $C = C_i$. Podobnie postępujemy
+z poszczególnymi prawdopodobieństwami $P(A_j = x_j | C = C_i)$,
+przyporządkowując im wartości $n_{i,j} / n$, gdzie $n_{i,j}$ to liczba
+elementów zbioru treningowego, dla których jednocześnie $A_j = x_j$ oraz $C = C_i$. \\
+
+Określenie "naiwny" odnosi się do założenia, że atrybuty warunkowe są warunkowo niezależne, co może być uproszczeniem w rzeczywistych danych. Pomimo tego ograniczenia, "naiwny" klasyfikator bayesowski jest szeroko stosowany i często daje satysfakcjonujące wyniki w praktyce.
+
+Warto zauważyć, że choć założenie o warunkowej niezależności może być rzadko spełnione w rzeczywistych danych, klasyfikator bayesowski ma wiele zastosowań i jest łatwy w implementacji. Działa dobrze w wielu przypadkach, szczególnie gdy dane są względnie dobrze rozdzielone i niezawierają silnych zależności między atrybutami warunkowymi.
+
+Termin "naiwny" w nazwie klasyfikatora odzwierciedla to uproszczenie, co oznacza, że mimo pewnych założeń, klasyfikator ten może być nadal skuteczny w wielu przypadkach.
+
+
+
+
+\end{document}

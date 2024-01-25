@@ -1,18 +1,17 @@
-from typing import Union
-from fastapi import FastAPI, Request, Response
-from fastapi.middleware.cors import CORSMiddleware
-from algorithms.levenshtein import L_FormulaComparer
-from algorithms.tokenizer import LatexTokenizer
-from algorithms.jt_algorithm import JT_LatexSimilarityAnalyser
-from read_tex_files import ReadTexFiles
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.staticfiles import StaticFiles
-
-
 import os
+from typing import Union
 
-app = FastAPI()
+import uvicorn
+from algorithms.cosine_similarity import CosineSimilarity
+from algorithms.levenshtein import L_FormulaComparer
+from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from read_tex_files import ReadTexFiles
+
+app = FastAPI(debug=True)
 app.mount("/templates", StaticFiles(directory="templates"), name="templates")
 templates = Jinja2Templates(directory="templates")
 
@@ -80,8 +79,11 @@ async def check_similarity_base(request: Request):
             if result != "":
                 report += f"<h2> Wyniki dla algorytmu jaccarda-tanimoto dla pliku {index}: </h2> <p> {result}</p>"
     if "algorithm3" in algorithms:
-        # TODO: add Cosine similarity to the html report
-        pass
+        cosine_similarity = CosineSimilarity()
+        for index, content in enumerate(tex_contents, start=1):
+            result = cosine_similarity.generate_report(text1, content, index, threshold)
+            if result != "":
+                report += f"<h2> Wyniki dla algorytmu podobieństwa cosinusowego dla pliku {index}: </h2> <p> {result}</p>"
     report += "</body></html>"
     report = report.replace("$", "")
     return {"message": "Report generated successfully"}
@@ -129,8 +131,9 @@ async def check_similarity(request: Request):
         result = jaccard_tanimoto.generate_report(text1, text2)
         report += f"<h2> Wyniki dla algorytmu jaccarda-tanimoto: </h2> <p> {result}</p>"
     if "algorithm3" in algorithms:
-        # TODO: add Cosine similarity to the html report
-        pass
+        cosine_similarity = CosineSimilarity()
+        result = cosine_similarity.generate_report_two_files(text1, text2, threshold)
+        report += f"<h2> Wyniki dla algorytmu podobieństwa cosinusowego: </h2> <p> {result}</p>"
     report += "</body></html>"
     report = report.replace("$", "")
     return {"message": "Report generated successfully"}
@@ -142,3 +145,7 @@ def get_report(request: Request):
     return templates.TemplateResponse(
         "report_template.html", {"request": request, "report": report}
     )
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
   <meta charset="UTF-8" />
@@ -10,93 +10,105 @@
 
 </head>
 
-<body class="bg-gray-900 p-8 flex items-center justify-center h-screen">
-  <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md">
-    <h2 class="text-2xl font-semibold mb-4">Skradzione wzory</h2>
-    <p class="mb-4 font-semibold">
-      Prześlij dokument w formacie .tex w celu sprawdzenia podobieństwa wzorów, które się w
-      nim znajdują, z innymi wzorami z dokumentów w naszej bazie.
-    </p>
-    <form id="fileUploadForm" class="mb-4">
+<body class="bg-gray-900 px-8">
+  <div class="flex items-center justify-center h-screen py-5">
+    <div class="max-w-md mx-auto bg-white p-8 rounded shadow-md my-auto">
+      <h2 class="text-2xl font-semibold mb-4">Skradzione wzory</h2>
+      <p class="mb-4 font-semibold">
+        Prześlij dokument w formacie .tex w celu sprawdzenia podobieństwa wzorów, które się w
+        nim znajdują, z innymi wzorami z dokumentów w naszej bazie, aby sprawdzić czy nie zostały one skradzione.
+        Możesz również porównać dwa dokumenty, aby sprawdzić czy wzory w nich zawarte nie są podobne do siebie.
+      </p>
+      <form id="fileUploadForm" class="mb-4">
 
-      <div class="mb-4">
-        <h3 class="text-l font-semibold mb-2">Wybierz jedną z opcji analizy dokumentu:</h3>
-        <div>
-          <input type="radio" id="option1" name="option" value="option1" checked>
-          <label for="option1">Porównanie i analiza w odniesieniu do całej bazy</label>
-        </div>
-        <div>
-          <input type="radio" id="option2" name="option" value="option2">
-          <label for="option2">Porównanie i analiza w odniesieniu do drugiego dokumentu przesłanego przez
-            użytkownika</label>
-        </div>
-      </div>
-
-      <div class="mb-2">
-        <label for="fileInput1" class="block text-sm font-medium text-gray-600">Wybierz dokument do analizy:</label>
-        <input type="file" id="fileInput1" name="file1" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
-      </div>
-
-      <label id="document1-warning" class="hidden text-sm font-medium text-black-700"> Prześlij dokument .tex do
-        analizy, aby
-        móc kontynuować
-      </label>
-
-      <div class="1" id="fileInput2Div">
-        <label for="fileInput2" class="block text-sm font-medium text-gray-600">Wybierz drugi dokument:</label>
-        <input type="file" id="fileInput2" name="file2" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
-      </div>
-
-      <label id="document2-warning" class="hidden text-sm font-medium text-black-700"> Prześlij drugi dokument .tex, aby
-        kontynuować</label>
-
-      <div class="mb-4">
-        <h3 class="text-l font-semibold"> Opcje zaawansowane (w celu regularnej analizy dokumentów, pozostaw poniższe
-          opcje
-          bez zmian)
-          <h3>
-      </div>
-
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-black-700">Wybierz algorytmy, którymi chcesz przebadać
-          pliki</label>
-        <div id="algorithm" name="algorithm" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+        <div class="mb-4">
+          <h3 class="text-l font-semibold mb-2">Wybierz jedną z opcji analizy dokumentu:</h3>
           <div>
-            <input type="checkbox" id="algorithm1" name="algorithm1" value="algorithm1" checked>
-            <label for="algorithm1">Levenshtein</label>
+            <input type="radio" id="option1" name="option" value="option1" checked>
+            <label for="option1">Porównanie i analiza w odniesieniu do całej bazy</label>
           </div>
           <div>
-            <input type="checkbox" id="algorithm2" name="algorithm2" value="algorithm2" checked>
-            <label for="algorithm2">Jaccard-Tanimoto</label>
-          </div>
-          <div>
-            <input type="checkbox" id="algorithm3" name="algorithm3" value="algorithm3" checked>
-            <label for="algorithm3">Podobieństwo Cosinusowe</label>
+            <input type="radio" id="option2" name="option" value="option2">
+            <label for="option2">Porównanie i analiza w odniesieniu do drugiego dokumentu przesłanego przez
+              użytkownika</label>
           </div>
         </div>
-        <label id="warning-algorithms" class="hidden text-sm font-medium text-black-700"> Wybierz przynajmniej jeden
-          algorytm do analizy</label>
-      </div>
 
-      <div class="mb-4">
-        <label for="valueInput" class="block text-sm font-medium text-black-700">Wprowadź próg procentowy akceptowalnego
-          podobieństwa 0-100%, gdzie: 0% każde, nawet najmniejsze, podobieństwo zostanie wykryte; 100% tylko identyczne
-          wzory zostaną wykryte.</label>
-        <input type="number" id="valueInput" name="value" class="mt-1 p-2 border border-gray-300 rounded-md w-full"
-          min="0" max="100" value="30" />
-        <label id="warning-treshold" class="hidden text-sm font-medium text-black-700"> Wprowadź wartość progu
-          procentowego z zakresu
-          0-100.</label>
-      </div>
+        <div class="mb-2">
+          <label for="fileInput1" class="block text-sm font-medium text-gray-600">Wybierz dokument do analizy:</label>
+          <input type="file" id="fileInput1" name="file1" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+        </div>
 
-      <button type="button" onclick="submitForm()" class="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
-        Porównaj
-      </button>
-    </form>
-    <div id="resultContainer" class="mt-8"></div>
+        <label id="document1-warning" class="hidden text-sm font-medium text-black-700"> Prześlij dokument .tex do
+          analizy, aby móc kontynuować</label>
+
+        <div class="1" id="fileInput2Div">
+          <label for="fileInput2" class="block text-sm font-medium text-gray-600">Wybierz drugi dokument:</label>
+          <input type="file" id="fileInput2" name="file2" class="mt-1 p-2 border border-gray-300 rounded-md w-full" />
+        </div>
+
+        <label id="document2-warning" class="hidden text-sm font-medium text-black-700"> Prześlij drugi dokument .tex,
+          aby kontynuować</label>
+
+        <div class="">
+          <h3 class="text-l font-semibold" id="toggleAdvancedOptions"> Opcje zaawansowane (naciśnij aby rozwinąć)</h3>
+        </div>
+
+        <div class="advancedSettings">
+          <label class="text-sm text-gray-600">* W celu regularnej analizy dokumentów, pozostaw poniższe opcje bez
+            zmian</label>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-black-700">Wybierz algorytmy, którymi chcesz przebadać
+              pliki</label>
+            <div id="algorithm" name="algorithm" class="mt-1 p-2 border border-gray-300 rounded-md w-full">
+              <div>
+                <input type="checkbox" id="algorithm1" name="algorithm1" value="algorithm1" checked>
+                <label for="algorithm1">Levenshtein</label>
+              </div>
+              <div>
+                <input type="checkbox" id="algorithm2" name="algorithm2" value="algorithm2" checked>
+                <label for="algorithm2">Jaccard-Tanimoto</label>
+              </div>
+              <div>
+                <input type="checkbox" id="algorithm3" name="algorithm3" value="algorithm3" checked>
+                <label for="algorithm3">Podobieństwo Cosinusowe</label>
+              </div>
+            </div>
+            <label id="warning-algorithms" class="hidden text-sm font-medium text-black-700"> Wybierz przynajmniej jeden
+              algorytm do analizy</label>
+          </div>
+
+          <div class="mb-4">
+            <label for="valueInput" class="block text-sm font-medium text-black-700">Wprowadź próg procentowy
+              akceptowalnego
+              podobieństwa 0-100%, gdzie: 0% każde, nawet najmniejsze, podobieństwo zostanie wykryte; 100% tylko
+              identyczne
+              wzory zostaną wykryte.</label>
+            <input type="number" id="valueInput" name="value" class="mt-1 p-2 border border-gray-300 rounded-md w-full"
+              min="0" max="100" value="60" />
+            <label id="warning-treshold" class="hidden text-sm font-medium text-black-700"> Wprowadź wartość progu
+              procentowego z zakresu
+              0-100.</label>
+          </div>
+        </div>
+
+        <button id="submitButton" type="button" onclick="submitForm()"
+          class="bg-blue-500 text-white px-4 py-2 mt-4 rounded-md w-full">
+          Porównaj
+        </button>
+      </form>
+      <div id="resultContainer" class="mt-8"></div>
+    </div>
   </div>
 
-  <script>
+  <script defer>
+
+    const advancedOptions = document.querySelector('.advancedSettings')
+    const toggleAdvancedOptions = document.querySelector('#toggleAdvancedOptions');
+
+    toggleAdvancedOptions.addEventListener('click', function () {
+      advancedOptions.classList.toggle('active', !advancedOptions.classList.contains('active'));
+    });
 
     //showing fileInput2Div if option2 is checked
     document.addEventListener('DOMContentLoaded', function () {
@@ -126,7 +138,9 @@
       const warningTreshold = document.getElementById("warning-treshold");
       const warningDocument1 = document.getElementById("document1-warning");
       const warningDocument2 = document.getElementById("document2-warning");
-
+      const submitButton = document.getElementById("submitButton");
+      submitButton.textContent = 'Obliczam...';
+      submitButton.disabled = true;
       //selecting algorithms from checkboxes
       let checkboxes = document.querySelectorAll('input[type=checkbox][name^="algorithm"]');
       let selectedAlgorithms = [];
@@ -222,11 +236,15 @@
 
       if (response.ok) {
         const result = await response.json();
+        submitButton.textContent = 'Porównaj';
+        submitButton.disabled = false;
         console.log(result)
         window.location.href = `${baseURL}/report-base`;
         displayResult(result);
       } else {
         console.error("Error:", response.statusText);
+        submitButton.textContent = 'Porównaj';
+        submitButton.disabled = false;
       }
     }
 

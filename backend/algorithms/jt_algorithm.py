@@ -1,4 +1,4 @@
-from tokenizer import LatexTokenizer
+from backend.algorithms.tokenizer import LatexTokenizer
 
 
 class JT_LatexSimilarityAnalyser:
@@ -39,6 +39,8 @@ class JT_LatexSimilarityAnalyser:
                 for expr2 in math_expression2:
                     tokens1 = set(expr1)
                     tokens2 = set(expr2)
-                    similarity.append(self.jaccard_tanimoto_similarity(tokens1, tokens2))
+                    similarity.append(
+                        self.jaccard_tanimoto_similarity(tokens1, tokens2)
+                    )
             average_similarity = sum(similarity) / len(similarity) if similarity else 0
             report_file.write(f"\nAverage Similarity: {average_similarity}")
