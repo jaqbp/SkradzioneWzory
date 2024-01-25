@@ -4,6 +4,7 @@ from typing import Union
 import uvicorn
 from algorithms.cosine_similarity import CosineSimilarity
 from algorithms.levenshtein import L_FormulaComparer
+from algorithms.jt_algorithm import JT_LatexSimilarityAnalyser
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
