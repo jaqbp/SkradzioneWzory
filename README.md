@@ -1,7 +1,6 @@
 # SkradzioneWzory
 
-Detekcja plagiatów w tekstach matematycznych: skanowanie katalogu z plikami źródłowymi w formacie LaTeX, podział dokumentu na tekst i wzory, wywołanie zewnętrznego programu oceniającego podobieństwo (implementacja min. 2 algorytmów porównujących), raportowanie w LaTeX, budowa opisanej bazy testowej dokumentów dla algorytmu uczenia maszynowego do rozpoznawania plagiatu w notacji matematycznej (min. 50 dokumentów zawierających 10 wzorów).
-Raportowanie w HTML z wizualizacją wzorów
+Projekt ma na celu stworzenie narzędzia do detekcji plagiatów w tekstach matematycznych. Narzędzie to skanuje katalog z plikami źródłowymi w formacie LaTeX, wyłuskuje z dokumentów wzory matematyczne, a następnie wywołuje zewnętrzny program oceniający podobieństwo, używając trzech algorytmów porównujących:  algorytmu Levenshteina, indeksu Jaccarda-Tanimoto oraz podobieństwa kosinusowego. Porówananie można dokonać pomiędzy plikami .tex znadującymi się w bazie dokumentów lub dwoma plikami wysłanymi przez użytkownika. Wyniki detekcji plagiatów są raportowane w formie HTML z wizualizacją wzorów.
 
 ## Set up project for development
 
